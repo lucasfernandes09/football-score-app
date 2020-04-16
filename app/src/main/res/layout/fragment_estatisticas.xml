@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/NestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_1"
+        tools:context=".fragments.jogo.EstatisticasFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lEstatisticas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="210dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/background_1"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb1"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pb2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcMax="100"
+                app:rcProgress="55"
+                app:rcProgressColor="@android:color/holo_blue_bright"
+                app:rcRadius="7dp"
+                app:rcReverse="true" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb2"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pb1"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcMax="100"
+                app:rcProgress="45"
+                app:rcProgressColor="@android:color/holo_blue_bright"
+                app:rcRadius="7dp"
+                app:rcReverse="false" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="0dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="POSSE DE BOLA"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv2"
+                app:layout_constraintStart_toEndOf="@+id/tv1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="50%"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="50%"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="0dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="CHUTES"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv4"
+                app:layout_constraintStart_toEndOf="@+id/tv3"
+                app:layout_constraintTop_toBottomOf="@+id/pb1" />
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView24"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb3"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pb4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_green_light"
+                app:rcRadius="7dp"
+                app:rcReverse="true">
+
+            </com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb4"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pb3"
+                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_green_light"
+                app:rcRadius="7dp"
+                app:rcReverse="false" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb5"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pb6"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView27"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_orange_light"
+                app:rcRadius="7dp"
+                app:rcReverse="true">
+
+            </com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb6"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pb5"
+                app:layout_constraintTop_toBottomOf="@+id/textView27"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_orange_light"
+                app:rcRadius="7dp"
+                app:rcReverse="false" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb7"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pb8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView30"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_orange_dark"
+                app:rcRadius="7dp"
+                app:rcReverse="true">
+
+            </com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb8"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pb7"
+                app:layout_constraintTop_toBottomOf="@+id/textView30"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_orange_dark"
+                app:rcRadius="7dp"
+                app:rcReverse="false" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb9"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pb10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView33"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_red_light"
+                app:rcRadius="7dp"
+                app:rcReverse="true">
+
+            </com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb10"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pb9"
+                app:layout_constraintTop_toBottomOf="@+id/textView33"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_red_light"
+                app:rcRadius="7dp"
+                app:rcReverse="false" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb11"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pb12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView36"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_red_dark"
+                app:rcRadius="7dp"
+                app:rcReverse="true" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pb12"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/pb11"
+                app:layout_constraintTop_toBottomOf="@+id/textView36"
+                app:rcBackgroundColor="@color/mdtp_ampm_text_color"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="@android:color/holo_red_dark"
+                app:rcRadius="7dp"
+                app:rcReverse="false" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="CHUTES NO GOL"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv6"
+                app:layout_constraintStart_toEndOf="@+id/tv5"
+                app:layout_constraintTop_toBottomOf="@+id/pb3" />
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView27"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView27"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="ESCANTEIOS"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv8"
+                app:layout_constraintStart_toEndOf="@+id/tv7"
+                app:layout_constraintTop_toBottomOf="@+id/pb5" />
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="DEFESAS DO GOLEIRO"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv10"
+                app:layout_constraintStart_toEndOf="@+id/tv9"
+                app:layout_constraintTop_toBottomOf="@+id/pb7" />
+
+            <TextView
+                android:id="@+id/tv9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/textView36"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="ATAQUES PERIGOSOS"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tv12"
+                app:layout_constraintStart_toEndOf="@+id/tv11"
+                app:layout_constraintTop_toBottomOf="@+id/pb9" />
+
+            <TextView
+                android:id="@+id/tv11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView36"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="10"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView36"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
