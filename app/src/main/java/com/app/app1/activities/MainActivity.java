@@ -1,22 +1,18 @@
 package com.app.app1.activities;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Matrix;
 import android.os.Bundle;
 
 import com.app.app1.R;
 import com.app.app1.RetrofitService;
 import com.app.app1.config.ConfiguracaoFirebase;
-import com.app.app1.fragments.CompeticoesFragment;
-import com.app.app1.fragments.JogosAoVivoFragment;
-import com.app.app1.fragments.JogosFragment;
-import com.app.app1.fragments.SemEventosFragment;
+import com.app.app1.fragments.main.CompeticoesFragment;
+import com.app.app1.fragments.main.JogosAoVivoFragment;
+import com.app.app1.fragments.main.JogosFragment;
 import com.app.app1.helper.JogosSalvos;
 import com.app.app1.helper.UsuarioFirebase;
 import com.app.app1.model.Jogos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.os.Handler;
 import android.util.Log;
@@ -39,7 +35,6 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,10 +42,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
-import android.view.animation.OvershootInterpolator;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;

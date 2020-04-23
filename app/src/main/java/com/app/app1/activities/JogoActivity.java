@@ -67,13 +67,11 @@ public class JogoActivity extends AppCompatActivity {
         //chamada tabela
         TabelaAsyncTask tabelaAsyncTask = new TabelaAsyncTask();
         tabelaAsyncTask.execute();
+
         JogosDaCompeticaoAsyncTask jogosDaCompeticaoAsyncTask = new JogosDaCompeticaoAsyncTask();
         jogosDaCompeticaoAsyncTask.execute();
 
-
         tabs();
-
-
     }
 
 
@@ -81,7 +79,6 @@ public class JogoActivity extends AppCompatActivity {
         //enviar para os fragments
         bundle.putParcelable("jogo", jogo);
 
-        /** tabs */
         FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
                 .add("resumo", ResumoFragment.class, bundle)
                 .add("estatisticas", EstatisticasFragment.class, bundle)
@@ -101,8 +98,6 @@ public class JogoActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
-            /** retrofit */
             RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
             Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data1MesAtras(), dataHoje(),
                     jogo.getMatch_hometeam_id());
@@ -131,8 +126,6 @@ public class JogoActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
-            /** retrofit */
             RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
             Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data1MesAtras(), dataHoje(),
                     jogo.getMatch_awayteam_id());
@@ -162,7 +155,6 @@ public class JogoActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            /** retrofit */
             RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
             Call<List<Tabela>> requestTabela = service.listarTabela(jogo.getLeague_id());
 
@@ -191,8 +183,6 @@ public class JogoActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
-
-            /** retrofit */
             RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
             Call<List<Jogos>> requestJogosDaCompeticao = service.listarJogosDaCompeticao(dataHoje(), dataHoje(),
                     jogo.getLeague_id());

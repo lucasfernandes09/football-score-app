@@ -1,6 +1,5 @@
 package com.app.app1.fragments.jogo;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,9 +24,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoListener {
     private List<Jogos> listaDeJogos, listaDeUltimosJogosCasa, listaDeUltimosJogosVis;
     private Jogos jogo = new Jogos();
@@ -36,7 +32,6 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
     private RecyclerView rvRetrospecto;
     private AdapterJogos adapterJogos;
     private ConstraintLayout clRestrospectoCasa, clRestrospectoVis;
-
 
     public RetrospectoFragment() {
         // Required empty public constructor
@@ -58,7 +53,7 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         tvUJCasa.setText(jogo.getMatch_hometeam_name());
         tvUJVis.setText(jogo.getMatch_awayteam_name());
 
-        //recuperar retrospecto
+        //receber retrospecto
         RetrospectoAsyncTask retrospecto = new RetrospectoAsyncTask();
         retrospecto.execute();
 
@@ -73,7 +68,7 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         @Override
         protected Void doInBackground(Void... voids) {
             int c = 0;
-            //receber lista até chegar
+            //receber lista e verificar até chegar
             while(c < 1) {
                 listaDeUltimosJogosCasa = getArguments().getParcelableArrayList("listaDeUltimosJogosCasa");
                 listaDeUltimosJogosVis = getArguments().getParcelableArrayList("listaDeUltimosJogosVis");

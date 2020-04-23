@@ -115,6 +115,165 @@
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lAtkDef"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_1"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider">
+
+            <TextView
+                android:id="@+id/tvDef2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="50%"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvDef" />
+
+            <TextView
+                android:id="@+id/tvDef1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="50%"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
+                app:layout_constraintEnd_toStartOf="@+id/tvDef"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAtk2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="50%"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvAtk" />
+
+            <TextView
+                android:id="@+id/tvAtk1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="50%"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
+                app:layout_constraintEnd_toStartOf="@+id/tvAtk"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAtk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="Ataque"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvAtk2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvAtk1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDef"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="Defesa"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/tvDef2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvDef1"
+                app:layout_constraintTop_toBottomOf="@+id/pbAtk2" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pbAtk1"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toStartOf="@+id/pbAtk2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvAtk"
+                app:rcBackgroundColor="@android:color/black"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="#D50000"
+                app:rcRadius="7dp"
+                app:rcReverse="true"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pbAtk2"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/pbAtk1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/pbAtk1"
+                app:rcBackgroundColor="@android:color/black"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="#304FFE"
+                app:rcRadius="7dp"
+                app:rcReverse="false"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pbDef1"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/pbDef2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDef"
+                app:rcBackgroundColor="@android:color/black"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="#D50000"
+                app:rcRadius="7dp"
+                app:rcReverse="true"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pbDef2"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/pbDef1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/pbDef1"
+                app:rcBackgroundColor="@android:color/black"
+                app:rcBackgroundPadding="1dp"
+                app:rcProgressColor="#304FFE"
+                app:rcRadius="7dp"
+                app:rcReverse="false"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline6"
             android:layout_width="wrap_content"
@@ -161,27 +320,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/background_1"
-            android:elevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider" >
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lAcoesDeJogo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -195,7 +333,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/lAtkDef">
 
             <FrameLayout
                 android:id="@+id/frameLayout"

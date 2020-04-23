@@ -1,14 +1,15 @@
 package com.app.app1.fragments.jogo;
 
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.app.app1.AcoesDoJogo;
 import com.app.app1.R;
 import com.app.app1.activities.EquipeActivity;
 import com.app.app1.adapters.AdapterAcoesDeJogo;
+import com.app.app1.helper.AtkDef;
 import com.app.app1.model.Cartoes;
 import com.app.app1.model.Jogos;
 import com.app.app1.model.Marcadores;
@@ -27,47 +30,29 @@ import com.app.app1.model.lineup.LineupJogador;
 import com.app.app1.model.substituicoes.Substituicao;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ResumoFragment extends Fragment {
 
     private Jogos jogo = new Jogos();
     private ArrayList<Marcadores> listaMarcadores;
     private ArrayList<Cartoes> listaCartoes;
-    private ArrayList<Substituicao> listaSubsHome;
-    private ArrayList<Substituicao> listaSubsAway;
+    private ArrayList<Substituicao> listaSubsHome, listaSubsAway;
     private List<AcoesDoJogo> listaAcoesDeJogo = new ArrayList<>();
-    private ImageView ivBadgeCasa;
-    private ImageView ivBadgeVis;
-    private TextView tvNomeLiga;
-    private TextView tvHoraPartida;
-    private TextView tvX;
-    private TextView tvScoreCasa;
-    private TextView tvScoreVis;
-    private TextView tvNomeCasa;
-    private TextView tvNomeVis;
-    private View divider;
-    private TextView tvFormacaoCasa;
-    private TextView tvFormacaoVis;
-    private ImageView ivCampo;
+    private ImageView ivBadgeCasa, ivBadgeVis, ivCampo;
+    private TextView tvNomeLiga, tvHoraPartida, getTvNomeLiga, tvScoreCasa, tvScoreVis, tvNomeCasa, tvNomeVis, tvFormacaoCasa, tvFormacaoVis;
+    private TextView tvTitularesCasa, tvTitularesVis, tvSubstitutosCasa, tvSubstitutosVis, tvForaDoJogoCasa, tvForaDoJogoVis;
     private RecyclerView rvAcoesDeJogo;
-    private TextView tvTitularesCasa;
-    private TextView tvTitularesVis;
-    private TextView tvSubstitutosCasa;
-    private TextView tvSubstitutosVis;
-    private TextView tvForaDoJogoCasa;
-    private TextView tvForaDoJogoVis;
-    private View lAcoesDeJogo;
-    private View lFormacoes;
+    private View lAcoesDeJogo, lFormacoes;
+    private ConstraintLayout lAtkDef;
     private Boolean home;
-    Button button2;
     private List<Jogos> listaDeJogosSalvos = new ArrayList<>();
+    private TextView tvAtk1, tvAtk2, tvDef1, tvDef2;
+    private RoundCornerProgressBar pbAtk1, pbAtk2, pbDef1, pbDef2;
 
 
     public ResumoFragment() {
@@ -78,43 +63,25 @@ public class ResumoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_resumo, container, false);
-
         //referenciação
-        ivBadgeCasa = view.findViewById(R.id.ivBadgeCasa);
-        ivBadgeVis = view.findViewById(R.id.ivBadgeVis);
-        tvNomeLiga = view.findViewById(R.id.tvNomeLiga);
-        tvHoraPartida = view.findViewById(R.id.tvHoraPartida);
-        tvX = view.findViewById(R.id.tvX);
-        tvScoreCasa = view.findViewById(R.id.tvScoreCasa);
-        tvScoreVis = view.findViewById(R.id.tvScoreVis);
-        tvNomeCasa = view.findViewById(R.id.tvNomeCasa);
-        tvNomeVis = view.findViewById(R.id.tvNomeVis);
-        divider = view.findViewById(R.id.divider);
-        tvFormacaoCasa = view.findViewById(R.id.tvFormacaoCasa);
-        tvFormacaoVis = view.findViewById(R.id.tvFormacaoVis);
-        ivCampo = view.findViewById(R.id.ivCampo);
+        ivBadgeCasa = view.findViewById(R.id.ivBadgeCasa); ivBadgeVis = view.findViewById(R.id.ivBadgeVis);
+        tvNomeLiga = view.findViewById(R.id.tvNomeLiga); tvHoraPartida = view.findViewById(R.id.tvHoraPartida);
+        tvScoreCasa = view.findViewById(R.id.tvScoreCasa); tvScoreVis = view.findViewById(R.id.tvScoreVis);
+        tvNomeCasa = view.findViewById(R.id.tvNomeCasa); tvNomeVis = view.findViewById(R.id.tvNomeVis);
+        tvFormacaoCasa = view.findViewById(R.id.tvFormacaoCasa); tvFormacaoVis = view.findViewById(R.id.tvFormacaoVis);
         rvAcoesDeJogo = view.findViewById(R.id.rvAcoesDeJogo);
-        tvTitularesCasa = view.findViewById(R.id.tvTitularesCasa);
-        tvTitularesVis = view.findViewById(R.id.tvTitularesVis);
-        tvSubstitutosCasa = view.findViewById(R.id.tvSubstitutosCasa);
-        tvSubstitutosVis = view.findViewById(R.id.tvSubstitutosVis);
-        tvForaDoJogoCasa = view.findViewById(R.id.tvForaDoJogoCasa);
-        tvForaDoJogoVis = view.findViewById(R.id.tvForaDoJogoVis);
+        ivCampo = view.findViewById(R.id.ivCampo);
+        tvTitularesCasa = view.findViewById(R.id.tvTitularesCasa); tvTitularesVis = view.findViewById(R.id.tvTitularesVis);
+        tvSubstitutosCasa = view.findViewById(R.id.tvSubstitutosCasa); tvSubstitutosVis = view.findViewById(R.id.tvSubstitutosVis);
+        tvForaDoJogoCasa = view.findViewById(R.id.tvForaDoJogoCasa); tvForaDoJogoVis = view.findViewById(R.id.tvForaDoJogoVis);
         lAcoesDeJogo = view.findViewById(R.id.lAcoesDeJogo);
         lFormacoes = view.findViewById(R.id.lFormacoes);
-        button2 = view.findViewById(R.id.button2);
+        tvAtk1 = view.findViewById(R.id.tvAtk1); tvAtk2 = view.findViewById(R.id.tvAtk2); tvDef1 = view.findViewById(R.id.tvDef1); tvDef2 = view.findViewById(R.id.tvDef2);
+        pbAtk1 = view.findViewById(R.id.pbAtk1); pbAtk2 = view.findViewById(R.id.pbAtk2); pbDef1 = view.findViewById(R.id.pbDef1); pbDef2 = view.findViewById(R.id.pbDef2);
+        lAtkDef = view.findViewById(R.id.lAtkDef);
 
         //objetos recebidos de JogoActivity
         jogo = getArguments().getParcelable("jogo");
-
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                jogo.salvarJogo();
-            }
-        });
-
 
         //badges (Picasso)
         Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa);
@@ -141,7 +108,6 @@ public class ResumoFragment extends Fragment {
 
         return view;
     }
-
 
 
     public void marcadores() {
@@ -214,11 +180,40 @@ public class ResumoFragment extends Fragment {
     }
 
     public void eventoRealizado() {
-        if(jogo.getMatch_status().equals("")) {  //ainda nao realizado
+        if(jogo.getMatch_status().equals("") || jogo.getMatch_status().equals("Postponed")) {  //ainda não realizado
             lAcoesDeJogo.setVisibility(View.GONE);
+            lAtkDef.setVisibility(View.GONE);
         }else {
             lAcoesDeJogo.setVisibility(View.VISIBLE);
+            lAtkDef.setVisibility(View.VISIBLE);
+            exibirAtkDef();
         }
+    }
+
+    public void exibirAtkDef() {
+        //progressBars
+        ArrayList<Float> listaDeTermos = AtkDef.getAtkDef(jogo);
+        Float atk1 = listaDeTermos.get(0);
+        Float atk2 = listaDeTermos.get(1);
+        Float def1 = listaDeTermos.get(2);
+        Float def2 = listaDeTermos.get(3);
+
+        pbAtk1.setMax(100); pbAtk1.setProgress(atk1);
+        pbAtk2.setMax(100); pbAtk2.setProgress(atk2);
+        pbDef1.setMax(100); pbDef1.setProgress(def1);
+        pbDef2.setMax(100); pbDef2.setProgress(def2);
+
+        //textViews
+        DecimalFormat df = new DecimalFormat("#00");
+        String a1 = df.format(atk1) + "%";
+        String a2 = df.format(atk2) + "%";
+        String d1 = df.format(def1) + "%";
+        String d2 = df.format(def2) + "%";
+
+        tvAtk1.setText(a1);
+        tvAtk2.setText(a2);
+        tvDef1.setText(d1);
+        tvDef2.setText(d2);
     }
 
     public void acoesDeJogo() {
@@ -235,10 +230,8 @@ public class ResumoFragment extends Fragment {
         };
         Collections.sort(listaAcoesDeJogo, comparator);
 
-        /** RecyclerView */
-        //        //criar/configurar adapter
+        //recycler
         AdapterAcoesDeJogo adapterAcoes = new AdapterAcoesDeJogo(listaAcoesDeJogo);
-        //configurar recyler
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvAcoesDeJogo.setLayoutManager(layoutManager);
         rvAcoesDeJogo.setHasFixedSize(true);

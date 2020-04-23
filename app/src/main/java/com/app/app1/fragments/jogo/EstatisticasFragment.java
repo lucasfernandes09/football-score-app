@@ -1,6 +1,5 @@
 package com.app.app1.fragments.jogo;
 
-
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,9 +14,6 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import com.app.app1.R;
 import com.app.app1.model.Jogos;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EstatisticasFragment extends Fragment {
     private Jogos jogo = new Jogos();
 
@@ -29,7 +25,6 @@ public class EstatisticasFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,16 +32,15 @@ public class EstatisticasFragment extends Fragment {
         //referenciação
         lEstatisticas = view.findViewById(R.id.lEstatisticas);
 
-        pb1 = view.findViewById(R.id.pb1);pb2 = view.findViewById(R.id.pb2);pb3 = view.findViewById(R.id.pb3);
-        pb4 = view.findViewById(R.id.pb4);pb5 = view.findViewById(R.id.pb5);pb6 = view.findViewById(R.id.pb6);
-        pb7 = view.findViewById(R.id.pb7);pb8 = view.findViewById(R.id.pb8);pb9 = view.findViewById(R.id.pb9);
-        pb10 = view.findViewById(R.id.pb10);pb11 = view.findViewById(R.id.pb11);pb12 = view.findViewById(R.id.pb12);
+        pb1 = view.findViewById(R.id.pb1); pb2 = view.findViewById(R.id.pb2); pb3 = view.findViewById(R.id.pb3);
+        pb4 = view.findViewById(R.id.pb4); pb5 = view.findViewById(R.id.pb5); pb6 = view.findViewById(R.id.pb6);
+        pb7 = view.findViewById(R.id.pb7); pb8 = view.findViewById(R.id.pb8); pb9 = view.findViewById(R.id.pb9);
+        pb10 = view.findViewById(R.id.pb10); pb11 = view.findViewById(R.id.pb11); pb12 = view.findViewById(R.id.pb12);
 
-        tv1 = view.findViewById(R.id.tv1);tv2 = view.findViewById(R.id.tv2);tv3 = view.findViewById(R.id.tv3);
-        tv4 = view.findViewById(R.id.tv4);tv5 = view.findViewById(R.id.tv5);tv6 = view.findViewById(R.id.tv6);
-        tv7 = view.findViewById(R.id.tv7);tv8 = view.findViewById(R.id.tv8);tv9 = view.findViewById(R.id.tv9);
-        tv10 = view.findViewById(R.id.tv10);tv11 = view.findViewById(R.id.tv11);tv12 = view.findViewById(R.id.tv12);
-
+        tv1 = view.findViewById(R.id.tv1); tv2 = view.findViewById(R.id.tv2); tv3 = view.findViewById(R.id.tv3);
+        tv4 = view.findViewById(R.id.tv4); tv5 = view.findViewById(R.id.tv5); tv6 = view.findViewById(R.id.tv6);
+        tv7 = view.findViewById(R.id.tv7); tv8 = view.findViewById(R.id.tv8); tv9 = view.findViewById(R.id.tv9);
+        tv10 = view.findViewById(R.id.tv10); tv11 = view.findViewById(R.id.tv11); tv12 = view.findViewById(R.id.tv12);
 
         //objeto recebido de JogoActivity
         jogo = getArguments().getParcelable("jogo");
@@ -56,7 +50,7 @@ public class EstatisticasFragment extends Fragment {
         return view;
     }
 
-    private void estatisticas() {
+    public void estatisticas() {
         for (int i=0; i<jogo.getStatistics().size(); i++) {
             float statsHome;
             float statsAway;
