@@ -58,7 +58,6 @@ public class Jogos implements Parcelable {
 
     public Jogos(){}
 
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
     protected Jogos(Parcel in) {
         match_id = in.readInt();

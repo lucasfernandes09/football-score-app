@@ -21,9 +21,6 @@ import com.app.app1.model.Tabela;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TabelaFragment extends Fragment {
     private List<Tabela> listaTabela = new ArrayList<>();
     private List<Jogos> listaDeJogosDaCompeticao = new ArrayList<>();
@@ -62,7 +59,6 @@ public class TabelaFragment extends Fragment {
                     Log.i("info", listaTabela.get(0).getTeam_name());
                     i = 600000;
                 }
-                //Log.i("info", "nao chegou tabela");
             }
 
             for(int i=0; i<600000; i++) {
@@ -71,7 +67,6 @@ public class TabelaFragment extends Fragment {
                     Log.i("info", listaDeJogosDaCompeticao.get(0).getMatch_time());
                     i = 600000;
                 }
-                //Log.i("info", "nao chegou jogos da competiçao");
             }
             return null;
         }
@@ -86,10 +81,7 @@ public class TabelaFragment extends Fragment {
 
 
     public void tabelaAoVivo() {
-        /** RecyclerView */
-        //criar/configurar adapter
         AdapterTabela adapterTabela = new AdapterTabela(listaTabela, listaDeJogosDaCompeticao);
-        //configurar recyler
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvTabela.setLayoutManager(layoutManager);
         rvTabela.setHasFixedSize(true);

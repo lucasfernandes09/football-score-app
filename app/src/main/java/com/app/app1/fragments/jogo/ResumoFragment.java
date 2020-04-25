@@ -45,7 +45,7 @@ public class ResumoFragment extends Fragment {
     private List<AcoesDoJogo> listaAcoesDeJogo = new ArrayList<>();
     private ImageView ivBadgeCasa, ivBadgeVis, ivCampo;
     private TextView tvNomeLiga, tvHoraPartida, getTvNomeLiga, tvScoreCasa, tvScoreVis, tvNomeCasa, tvNomeVis, tvFormacaoCasa, tvFormacaoVis;
-    private TextView tvTitularesCasa, tvTitularesVis, tvSubstitutosCasa, tvSubstitutosVis, tvForaDoJogoCasa, tvForaDoJogoVis;
+    private TextView tvTitularesCasa, tvTitularesVis, tvSubstitutosCasa, tvSubstitutosVis, tvForaDoJogoCasa, tvForaDoJogoVis, tvDataR, tvRodada, tvArbitro, tvEstadio;
     private RecyclerView rvAcoesDeJogo;
     private View lAcoesDeJogo, lFormacoes;
     private ConstraintLayout lAtkDef;
@@ -79,6 +79,7 @@ public class ResumoFragment extends Fragment {
         tvAtk1 = view.findViewById(R.id.tvAtk1); tvAtk2 = view.findViewById(R.id.tvAtk2); tvDef1 = view.findViewById(R.id.tvDef1); tvDef2 = view.findViewById(R.id.tvDef2);
         pbAtk1 = view.findViewById(R.id.pbAtk1); pbAtk2 = view.findViewById(R.id.pbAtk2); pbDef1 = view.findViewById(R.id.pbDef1); pbDef2 = view.findViewById(R.id.pbDef2);
         lAtkDef = view.findViewById(R.id.lAtkDef);
+        tvDataR = view.findViewById(R.id.tvDataR); tvRodada = view.findViewById(R.id.tvRodada); tvArbitro = view.findViewById(R.id.tvArbitro); tvEstadio = view.findViewById(R.id.tvEstadio);
 
         //objetos recebidos de JogoActivity
         jogo = getArguments().getParcelable("jogo");
@@ -105,6 +106,12 @@ public class ResumoFragment extends Fragment {
         ivBadgeVis.setOnClickListener(listenerVis);
         tvNomeCasa.setOnClickListener(listenerCasa);
         tvNomeVis.setOnClickListener(listenerVis);
+
+        //infos da partida
+        tvDataR.setText(jogo.getMatch_date());
+        tvRodada.setText(jogo.getMatch_round().replace("Round", ""));
+        tvArbitro.setText(jogo.getMatch_referee());
+        tvEstadio.setText(jogo.getMatch_stadium());
 
         return view;
     }
