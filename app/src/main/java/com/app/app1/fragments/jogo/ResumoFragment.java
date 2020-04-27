@@ -2,6 +2,7 @@ package com.app.app1.fragments.jogo;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,6 +27,7 @@ import com.app.app1.helper.AtkDef;
 import com.app.app1.model.Cartoes;
 import com.app.app1.model.Jogos;
 import com.app.app1.model.Marcadores;
+import com.app.app1.model.Predicoes;
 import com.app.app1.model.lineup.LineupJogador;
 import com.app.app1.model.substituicoes.Substituicao;
 import com.squareup.picasso.Picasso;
@@ -51,8 +53,9 @@ public class ResumoFragment extends Fragment {
     private ConstraintLayout lAtkDef;
     private Boolean home;
     private List<Jogos> listaDeJogosSalvos = new ArrayList<>();
-    private TextView tvAtk1, tvAtk2, tvDef1, tvDef2;
+    private TextView tvAtk1, tvAtk2, tvDef1, tvDef2, tvPc, tvPe, tvPv, tvP3, tvPmais3, tvPs, tvPn;
     private RoundCornerProgressBar pbAtk1, pbAtk2, pbDef1, pbDef2;
+    private List<Predicoes> listaDePredicao;
 
 
     public ResumoFragment() {
@@ -80,6 +83,8 @@ public class ResumoFragment extends Fragment {
         pbAtk1 = view.findViewById(R.id.pbAtk1); pbAtk2 = view.findViewById(R.id.pbAtk2); pbDef1 = view.findViewById(R.id.pbDef1); pbDef2 = view.findViewById(R.id.pbDef2);
         lAtkDef = view.findViewById(R.id.lAtkDef);
         tvDataR = view.findViewById(R.id.tvDataR); tvRodada = view.findViewById(R.id.tvRodada); tvArbitro = view.findViewById(R.id.tvArbitro); tvEstadio = view.findViewById(R.id.tvEstadio);
+        tvPc = view.findViewById(R.id.tvPc); tvPe = view.findViewById(R.id.tvPe); tvPv = view.findViewById(R.id.tvPv); tvP3 = view.findViewById(R.id.tvP3); tvPmais3 = view.findViewById(R.id.tvPmais3);
+        tvPs = view.findViewById(R.id.tvPs); tvPn = view.findViewById(R.id.tvPn);
 
         //objetos recebidos de JogoActivity
         jogo = getArguments().getParcelable("jogo");
@@ -112,6 +117,10 @@ public class ResumoFragment extends Fragment {
         tvRodada.setText(jogo.getMatch_round().replace("Round", ""));
         tvArbitro.setText(jogo.getMatch_referee());
         tvEstadio.setText(jogo.getMatch_stadium());
+
+        //probs pré-jogo
+        ProbPreJogoAsyncTask probPreJogo = new ProbPreJogoAsyncTask();
+        probPreJogo.execute();
 
         return view;
     }
@@ -316,6 +325,33 @@ public class ResumoFragment extends Fragment {
             }
         }
             return escalacaoFinal;
+    }
+
+    public class ProbPreJogoAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            int c = 0;
+            //receber lista e verificar até chegar
+            while (c<1) {
+                listaDePredicao = getArguments().getParcelableArrayList("listaDePredicao");
+                if(listaDePredicao != null) {
+                    c =1;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            tvPc.setText(listaDePredicao.get(0).getProb_HW() + "%");
+            tvPe.setText(listaDePredicao.get(0).getProb_D() + "%");
+            tvPv.setText(listaDePredicao.get(0).getProb_AW() + "%");
+            tvP3.setText(listaDePredicao.get(0).getProb_U_3() + "%");
+            tvPmais3.setText(listaDePredicao.get(0).getProb_O_3() + "%");
+            tvPs.setText(listaDePredicao.get(0).getBts() + "%");
+            tvPn.setText(listaDePredicao.get(0).getOts() + "%");
+        }
     }
 
 

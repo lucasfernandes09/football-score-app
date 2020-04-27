@@ -17,6 +17,7 @@ import com.app.app1.fragments.jogo.RetrospectoFragment;
 import com.app.app1.fragments.jogo.TabelaFragment;
 import com.app.app1.model.Jogos;
 
+import com.app.app1.model.Predicoes;
 import com.app.app1.model.Tabela;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -38,6 +39,7 @@ public class JogoActivity extends AppCompatActivity {
     private List<Jogos> listaDeUltimosJogosCasa = new ArrayList<>();
     private List<Jogos> listaDeUltimosJogosVis = new ArrayList<>();
     private List<Tabela> listaTabela = new ArrayList<>();
+    private List<Predicoes> listaDePredicao = new ArrayList<>();
     private ViewPager vpJogo;
     private SmartTabLayout tabJogo;
     private Bundle bundle = new Bundle();
@@ -66,6 +68,8 @@ public class JogoActivity extends AppCompatActivity {
         tabela();
 
         jogosDaCompeticao();
+
+        predicoes();
 
         if(jogo.getMatch_status().equals("") || jogo.getMatch_status().equals("Postponed")) {  //ainda não realizado
             tabsSemEstatisticas();
@@ -122,6 +126,7 @@ public class JogoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
+                Log.i("info", "deu merda: " + t.getMessage());
             }
         });
     }
@@ -145,6 +150,7 @@ public class JogoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
+                Log.i("info", "deu merda: " + t.getMessage());
             }
         });
     }
@@ -190,6 +196,29 @@ public class JogoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
+                Log.i("info", "deu merda: " + t.getMessage());
+            }
+        });
+    }
+
+    public void predicoes() {
+        RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
+        Call<List<Predicoes>> chamadaPredicoes = service.listarPredicoes(jogo.getMatch_id());
+
+        chamadaPredicoes.enqueue(new Callback<List<Predicoes>>() {
+            @Override
+            public void onResponse(Call<List<Predicoes>> call, Response<List<Predicoes>> response) {
+                if(!response.isSuccessful()) {
+                    Log.i("info", "erro na resposta: " + response.message());
+                }else {
+                    listaDePredicao = response.body();
+                    bundle.putParcelableArrayList("listaDePredicao", (ArrayList<Predicoes>) listaDePredicao);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Predicoes>> call, Throwable t) {
+                Log.i("info", "deu merda: " + t.getMessage());
             }
         });
     }
@@ -215,7 +244,6 @@ public class JogoActivity extends AppCompatActivity {
         String dataHoje = ano + "-" + (mes) + "-" + dia;
         return  dataHoje;
     }
-
 
     //finalizar a activity ao pressionar btn back
     @Override

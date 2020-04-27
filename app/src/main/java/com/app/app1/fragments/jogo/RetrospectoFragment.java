@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,6 +83,7 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         @Override
         protected void onPostExecute(Void aVoid) {  //esse método executa na UI Thread
             super.onPostExecute(aVoid);
+            Log.i("info", "retrospecto chegou");
             listaDeJogos = listaDeUltimosJogosCasa;
             exibirJogos();
 

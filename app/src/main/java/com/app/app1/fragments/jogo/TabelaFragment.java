@@ -31,7 +31,6 @@ public class TabelaFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,33 +38,24 @@ public class TabelaFragment extends Fragment {
         //referenciação
         rvTabela = view.findViewById(R.id.rvTabela);
 
-        recuperarTabela();
+        //tabela
+        RecuperarTabelaAsyncTask recuperarTabelaAsyncTask = new RecuperarTabelaAsyncTask();
+        recuperarTabelaAsyncTask.execute();
 
         return view;
     }
 
-    private void recuperarTabela() {
-        RecuperarTabelaAsyncTask recuperarTabelaAsyncTask = new RecuperarTabelaAsyncTask();
-        recuperarTabelaAsyncTask.execute();
-    }
 
     public class RecuperarTabelaAsyncTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... voids) {
-            for(int i=0; i<600000; i++) {
-                if (getArguments().getParcelableArrayList("tabela") != null) {
-                    listaTabela = getArguments().getParcelableArrayList("tabela");
-                    Log.i("info", listaTabela.get(0).getTeam_name());
-                    i = 600000;
-                }
-            }
-
-            for(int i=0; i<600000; i++) {
-                if (getArguments().getParcelableArrayList("listaDeJogosDaCompeticao") != null) {
-                    listaDeJogosDaCompeticao = getArguments().getParcelableArrayList("listaDeJogosDaCompeticao");
-                    Log.i("info", listaDeJogosDaCompeticao.get(0).getMatch_time());
-                    i = 600000;
+            int c = 0;
+            //receber lista e verificar até chegar
+            while (c<1) {
+                listaTabela = getArguments().getParcelableArrayList("tabela");
+                listaDeJogosDaCompeticao = getArguments().getParcelableArrayList("listaDeJogosDaCompeticao");
+                if(listaTabela != null && listaDeJogosDaCompeticao != null) {
+                    c=1;
                 }
             }
             return null;
@@ -74,10 +64,10 @@ public class TabelaFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            Log.i("info", "tabela chegou");
             tabelaAoVivo();
         }
     }
-
 
 
     public void tabelaAoVivo() {

@@ -2,6 +2,7 @@ package com.app.app1;
 
 
 import com.app.app1.model.Jogos;
+import com.app.app1.model.Predicoes;
 import com.app.app1.model.Retrospecto;
 import com.app.app1.model.Tabela;
 import com.app.app1.model.Times;
@@ -44,6 +45,10 @@ public interface RetrofitService {
     Call<List<Jogos>> listarJogosDaCompeticao(@Query("from") String from,
                                           @Query("to") String to,
                                           @Query("league_id") int league_id);
+
+    @GET("?action=get_predictions&APIkey=" + API_KEY)
+    Call<List<Predicoes>> listarPredicoes(@Query("match_id") int match_id);
+
 
 
     Retrofit retrofit = new Retrofit.Builder()
