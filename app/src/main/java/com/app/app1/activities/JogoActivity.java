@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -109,7 +108,7 @@ public class JogoActivity extends AppCompatActivity {
 
     public void retrospectoCasa() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data1MesAtras(), dataHoje(),
+        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data2MesesAtras(), dataHoje(),
                 jogo.getMatch_hometeam_id());
 
         requestUltimosJogos.enqueue(new Callback<List<Jogos>>() {
@@ -121,19 +120,20 @@ public class JogoActivity extends AppCompatActivity {
                     listaDeUltimosJogosCasa = response.body();
                     Collections.reverse(listaDeUltimosJogosCasa);
                     bundle.putParcelableArrayList("listaDeUltimosJogosCasa", (ArrayList<Jogos>) listaDeUltimosJogosCasa);
+                    Log.i("info", "restrospecto casa" + listaDeUltimosJogosCasa.size());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
-                Log.i("info", "deu merda: " + t.getMessage());
+                Log.i("info", "falha RetrospCasa: " + t.getMessage());
             }
         });
     }
 
     public void retrospectoVis() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data1MesAtras(), dataHoje(),
+        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data2MesesAtras(), dataHoje(),
                 jogo.getMatch_awayteam_id());
 
         requestUltimosJogos.enqueue(new Callback<List<Jogos>>() {
@@ -145,12 +145,13 @@ public class JogoActivity extends AppCompatActivity {
                     listaDeUltimosJogosVis = response.body();
                     Collections.reverse(listaDeUltimosJogosVis);
                     bundle.putParcelableArrayList("listaDeUltimosJogosVis", (ArrayList<Jogos>) listaDeUltimosJogosVis);
+                    Log.i("info", "restrospecto vis" + listaDeUltimosJogosVis.size());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
-                Log.i("info", "deu merda: " + t.getMessage());
+                Log.i("info", "falha RetrospVis: " + t.getMessage());
             }
         });
     }
@@ -173,7 +174,7 @@ public class JogoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Tabela>> call, Throwable t) {
-                Log.i("info", "deu merda: " + t.getMessage());
+                Log.i("info", "falha tabela: " + t.getMessage());
             }
         });
     }
@@ -196,7 +197,7 @@ public class JogoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
-                Log.i("info", "deu merda: " + t.getMessage());
+                Log.i("info", "falha jogosDaCompetição: " + t.getMessage());
             }
         });
     }
@@ -213,12 +214,13 @@ public class JogoActivity extends AppCompatActivity {
                 }else {
                     listaDePredicao = response.body();
                     bundle.putParcelableArrayList("listaDePredicao", (ArrayList<Predicoes>) listaDePredicao);
+                    Log.i("info", "lista de predição!" + listaDePredicao.get(0).getProb_HW());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Predicoes>> call, Throwable t) {
-                Log.i("info", "deu merda: " + t.getMessage());
+                Log.i("info", "falha predições: " + t.getMessage());
             }
         });
     }
@@ -233,7 +235,7 @@ public class JogoActivity extends AppCompatActivity {
         return  dataHoje;
     }
 
-    public String data1MesAtras() {
+    public String data2MesesAtras() {
         Calendar calendar = Calendar.getInstance();
         int dia = calendar.get(Calendar.DAY_OF_MONTH);
         int mes = calendar.get(Calendar.MONTH);
@@ -241,7 +243,7 @@ public class JogoActivity extends AppCompatActivity {
         if(mes==0) { //janeiro
             ano -=1;
         }
-        String dataHoje = ano + "-" + (mes) + "-" + dia;
+        String dataHoje = ano + "-" + (mes-1) + "-" + dia;
         return  dataHoje;
     }
 

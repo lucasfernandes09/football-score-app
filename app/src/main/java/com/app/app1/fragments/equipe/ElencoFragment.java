@@ -20,9 +20,7 @@ import com.app.app1.model.Times;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ElencoFragment extends Fragment {
 
     private List<Times> listaDeElenco = new ArrayList<>();
@@ -77,11 +75,10 @@ public class ElencoFragment extends Fragment {
     public void recyclerJogadores() {
         listaDeJogadores = listaDeElenco.get(0).getPlayers();
 
-        /** RecyclerView */
         AdapterJogadores adapterJogadores = new AdapterJogadores(listaDeJogadores);
-        //configurar recyler
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvElenco.setLayoutManager(layoutManager);
+        rvElenco.setNestedScrollingEnabled(false);
         rvElenco.setHasFixedSize(true);
         rvElenco.setAdapter(adapterJogadores);
     }

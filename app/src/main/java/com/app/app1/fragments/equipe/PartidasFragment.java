@@ -23,9 +23,7 @@ import com.app.app1.model.Jogos;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class PartidasFragment extends Fragment implements AdapterJogos.JogoListener {
     private List<Jogos> listaDeJogos, listaDeUltimosJogos, listaDeProximosJogos;
     private RecyclerView rvPartidas;
@@ -104,6 +102,7 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
         adapterJogos = new AdapterJogos(listaDeUltimosJogos, this, nomeEquipe);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvPartidas.setLayoutManager(layoutManager);
+        rvPartidas.setNestedScrollingEnabled(false);
         rvPartidas.setHasFixedSize(true);
         rvPartidas.setAdapter(adapterJogos);
     }

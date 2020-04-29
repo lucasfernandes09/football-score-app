@@ -34,6 +34,8 @@ public class Tabela implements Parcelable {
     private String away_league_GA;
     private String away_league_PTS;
     private String league_round;
+    private String overall_promotion;
+    private String team_badge;
 
     public Tabela() {
     }
@@ -69,6 +71,8 @@ public class Tabela implements Parcelable {
         away_league_GA = in.readString();
         away_league_PTS = in.readString();
         league_round = in.readString();
+        overall_promotion = in.readString();
+        team_badge = in.readString();
     }
 
     public String getCountry_name() {
@@ -311,6 +315,22 @@ public class Tabela implements Parcelable {
         this.league_round = league_round;
     }
 
+    public String getOverall_promotion() {
+        return overall_promotion;
+    }
+
+    public void setOverall_promotion(String overall_promotion) {
+        this.overall_promotion = overall_promotion;
+    }
+
+    public String getTeam_badge() {
+        return team_badge;
+    }
+
+    public void setTeam_badge(String team_badge) {
+        this.team_badge = team_badge;
+    }
+
     public static final Creator<Tabela> CREATOR = new Creator<Tabela>() {
         @Override
         public Tabela createFromParcel(Parcel in) {
@@ -360,5 +380,7 @@ public class Tabela implements Parcelable {
         parcel.writeString(away_league_GA);
         parcel.writeString(away_league_PTS);
         parcel.writeString(league_round);
+        parcel.writeString(overall_promotion);
+        parcel.writeString(team_badge);
     }
 }

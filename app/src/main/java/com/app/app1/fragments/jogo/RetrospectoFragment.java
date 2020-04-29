@@ -83,7 +83,6 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         @Override
         protected void onPostExecute(Void aVoid) {  //esse método executa na UI Thread
             super.onPostExecute(aVoid);
-            Log.i("info", "retrospecto chegou");
             listaDeJogos = listaDeUltimosJogosCasa;
             exibirJogos();
 
@@ -118,6 +117,7 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvRetrospecto.setLayoutManager(layoutManager);
         rvRetrospecto.setHasFixedSize(true);
+        rvRetrospecto.setNestedScrollingEnabled(false);
         rvRetrospecto.setAdapter(adapterJogos);
     }
 

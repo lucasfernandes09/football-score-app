@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -335,7 +334,7 @@ public class ResumoFragment extends Fragment {
             while (c<1) {
                 listaDePredicao = getArguments().getParcelableArrayList("listaDePredicao");
                 if(listaDePredicao != null) {
-                    c =1;
+                    c = 1;
                 }
             }
             return null;
@@ -349,8 +348,8 @@ public class ResumoFragment extends Fragment {
             tvPv.setText(listaDePredicao.get(0).getProb_AW() + "%");
             tvP3.setText(listaDePredicao.get(0).getProb_U_3() + "%");
             tvPmais3.setText(listaDePredicao.get(0).getProb_O_3() + "%");
-            tvPs.setText(listaDePredicao.get(0).getBts() + "%");
-            tvPn.setText(listaDePredicao.get(0).getOts() + "%");
+            tvPs.setText(listaDePredicao.get(0).getProb_bts() + "%");
+            tvPn.setText(listaDePredicao.get(0).getProb_ots() + "%");
         }
     }
 

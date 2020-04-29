@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +26,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class EquipeFragment extends Fragment {
-    private List<Times> listaDeElenco = new ArrayList<>();
-    private List<Jogador> listaDeJogadores = new ArrayList<>();
+    private List<Times> listaDeElenco;
+    private List<Jogador> listaDeJogadores;
     private Jogos jogo = new Jogos();
     private Boolean home;
-    private ImageView ivBageEquipeFrag;
+    private ImageView ivBageEquipeFrag, ivBadgePaisEquipe;
     private TextView tvNomeEquipe;
     private RecyclerView rvGoleadores;
-    private RecyclerView rvPartidasJogadas;
 
 
     public EquipeFragment() {
@@ -50,34 +45,33 @@ public class EquipeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_equipe, container, false);
         //referenciação
-        ivBageEquipeFrag = view.findViewById(R.id.ivBadgeEquipeFrag);
+        ivBageEquipeFrag = view.findViewById(R.id.ivBadgeEquipeFrag); ivBadgePaisEquipe = view.findViewById(R.id.ivBadgePaisEquipe);
         tvNomeEquipe = view.findViewById(R.id.tvNomeEquipe);
         rvGoleadores = view.findViewById(R.id.rvGoleadores);
-        rvPartidasJogadas = view.findViewById(R.id.rvPartidasJogadas);
 
         //recuperar objetos enviados de EquipeActivity
         jogo = getArguments().getParcelable("jogo");
         home = getArguments().getBoolean("home");
 
-        config(home);
+        configBasicas(home);
 
         //receber Elenco
-        ElencoAsyncTask elencoAsyncTask = new ElencoAsyncTask();
-        elencoAsyncTask.execute();
+        ElencoAsyncTask elenco = new ElencoAsyncTask();
+        elenco.execute();
 
         return view;
     }
 
     public class ElencoAsyncTask extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected Void doInBackground(Void... voids) {
-            for(int i=0; i<600000; i++) {
-                if (getArguments().getParcelableArrayList("listaDeElenco") != null) {
-                    listaDeElenco = getArguments().getParcelableArrayList("listaDeElenco");
-                    i = 600000;
+            int c = 0;
+            //verificar lista até chegar
+            while(c<1) {
+                listaDeElenco = getArguments().getParcelableArrayList("listaDeElenco");
+                if (listaDeElenco != null) {
+                    c = 1;
                 }
-                Log.i("info", "nao chegou em EquipeFragment");
             }
             return null;
         }
@@ -85,29 +79,29 @@ public class EquipeFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Goleadores();
+            artilheiros();
+            exibirArtilheiros();
         }
     }
 
-
-    public void Goleadores() {
+    public void artilheiros() {
         listaDeJogadores = listaDeElenco.get(0).getPlayers();
 
+        //comparar gols
         Comparator<Jogador> comparator = new Comparator<Jogador>() {
             @Override
             public int compare(Jogador j1, Jogador j2) {
-                    Integer g1 = Integer.parseInt(j1.getPlayer_goals());
-                    Integer g2 = Integer.parseInt(j2.getPlayer_goals());
+                Integer g1 = Integer.parseInt(j1.getPlayer_goals());
+                Integer g2 = Integer.parseInt(j2.getPlayer_goals());
                 return g1.compareTo(g2);     //compareTo é método das WrapperClasses
             }
-
         };
         Collections.sort(listaDeJogadores, comparator);
         Collections.reverse(listaDeJogadores);
+    }
 
-        /** RecyclerView */
+    public void exibirArtilheiros() {
         AdapterJogadores adapterJogadores = new AdapterJogadores(listaDeJogadores);
-        //configurar recyler
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvGoleadores.setLayoutManager(layoutManager);
         rvGoleadores.setHasFixedSize(true);
@@ -115,7 +109,9 @@ public class EquipeFragment extends Fragment {
         rvGoleadores.setAdapter(adapterJogadores);
     }
 
-    public void config(Boolean home) {
+    public void configBasicas(Boolean home) {
+        Picasso.get().load(jogo.getCountry_logo()).into(ivBadgePaisEquipe); //só funciona para camps nacionais
+
         if(home) {
             Picasso.get().load(jogo.getTeam_home_badge()).into(ivBageEquipeFrag);
             tvNomeEquipe.setText(jogo.getMatch_hometeam_name());
@@ -124,7 +120,5 @@ public class EquipeFragment extends Fragment {
             tvNomeEquipe.setText(jogo.getMatch_awayteam_name());
         }
     }
-
-
 
 }

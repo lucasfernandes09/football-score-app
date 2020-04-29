@@ -25,44 +25,30 @@
         android:id="@+id/tvPosicaoJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNomeJogador" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvNomeJogador"
+        app:layout_constraintStart_toEndOf="@+id/tvNomeJogador" />
 
     <TextView
         android:id="@+id/tvNumeroJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
         android:text="TextView"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPosicaoJogador" />
-
-    <TextView
-        android:id="@+id/tvNacionalidadeJogador"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="TextView"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvNumeroJogador" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNomeJogador" />
 
     <TextView
         android:id="@+id/tvIdadeJogador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         android:text="TextView"
         android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvNumeroJogador"
-        app:layout_constraintStart_toEndOf="@+id/tvNumeroJogador" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNumeroJogador" />
 
     <TextView
         android:id="@+id/tvPartidasJogadadas"

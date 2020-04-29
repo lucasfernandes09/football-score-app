@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,19 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.app1.R;
 import com.app.app1.model.Jogos;
 import com.app.app1.model.Tabela;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHolder> {
     private List<Tabela> listaTabela;
-    private List<Jogos> listaDeJogos;
+    //private List<Jogos> listaDeJogos;
 
-    public AdapterTabela(List<Tabela> listaTabela, List<Jogos> listaDeJogos) {
+    public AdapterTabela(List<Tabela> listaTabela/*, List<Jogos> listaDeJogos*/) {
         this.listaTabela = listaTabela;
-        this.listaDeJogos = listaDeJogos;
+        //this.listaDeJogos = listaDeJogos;
     }
 
-    //cria a visualização inicial(layout)
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -34,13 +35,12 @@ public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHold
         return new AdapterTabela.MyViewHolder(itemDaLista);
     }
 
-    //exibe a lista um por um
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Tabela tabela = this.listaTabela.get(position);
 
-        tabelaAoVivo(holder, tabela);
-
+        //tabelaAoVivo(holder, tabela);
+        zonas(holder, tabela);
         holder.overall_league_position.setText(tabela.getOverall_league_position());
         holder.overall_league_payed.setText(tabela.getOverall_league_payed());
         holder.team_name.setText(tabela.getTeam_name());
@@ -50,16 +50,24 @@ public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHold
         holder.overall_league_L.setText(tabela.getOverall_league_L());
         holder.overall_league_Gols.setText(tabela.getOverall_league_GF() + "-" +
                 tabela.getOverall_league_GA());
+        Picasso.get().load(tabela.getTeam_badge()).into(holder.ivBadgeTabela);
 
     }
 
-    //qtd de itens exibidos
     @Override
     public int getItemCount() {
         return this.listaTabela.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView overall_league_position;
@@ -70,6 +78,7 @@ public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHold
         TextView overall_league_D;
         TextView overall_league_L;
         TextView overall_league_Gols;
+        ImageView ivBadgeTabela;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,11 +90,11 @@ public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHold
             overall_league_D = itemView.findViewById(R.id.tvE);
             overall_league_L = itemView.findViewById(R.id.tvD);
             overall_league_Gols = itemView.findViewById(R.id.tvSaldoGols);
+            ivBadgeTabela = itemView.findViewById(R.id.ivBadgeTabela);
         }
     }
 
-    private void tabelaAoVivo(MyViewHolder holder, Tabela tabela) {
-        //jogos ao vivo da tebela
+    /*private void tabelaAoVivo(MyViewHolder holder, Tabela tabela) {
         for(int i=0; i<listaDeJogos.size(); i++){
             if(listaDeJogos.get(i).getMatch_live().equals("1")) { //verificar partidas ao vivo
 
@@ -98,5 +107,27 @@ public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHold
                 holder.team_name.setTextColor(Color.BLACK);
             }
         }
+    }*/
+
+    public void zonas(MyViewHolder holder, Tabela tabela) {
+        String promocao = tabela.getOverall_promotion();
+        if(promocao.contains("Promotion") && !promocao.contains("(")) {    //classificação
+            holder.overall_league_position.setBackgroundColor(Color.GREEN);
+        }else {
+            if(promocao.contains("Promotion") && promocao.contains("(")) {  //disputa de classificação
+                holder.overall_league_position.setBackgroundColor(Color.YELLOW);
+            }
+        }
+
+        if(promocao.contains("(Relegation)")) {
+            Log.i("info", "disputa de rebaixamento");
+            holder.overall_league_position.setBackgroundColor(Color.BLUE);  //disputa de rebaixamento
+        }else {
+            if(promocao.contains("Relegation") && !promocao.contains("(")) {   //rebaixamento
+                Log.i("info", "rebaixamento");
+                holder.overall_league_position.setBackgroundColor(Color.RED);
+            }
+        }
+
     }
 }

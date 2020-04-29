@@ -25,156 +25,198 @@
             android:background="@drawable/background_1"
             android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lFormacoes">
 
-            <TextView
-                android:id="@+id/textView45"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:id="@+id/tableBts"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="Sim"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/textView46"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/divider8"
-                app:layout_constraintTop_toBottomOf="@+id/tvP3" />
-
-            <TextView
-                android:id="@+id/tvPs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="10%"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView45"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView45"
-                app:layout_constraintTop_toBottomOf="@+id/textView45"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/tvPn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10%"
-                android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvPs"
-                app:layout_constraintEnd_toEndOf="@+id/textView46"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textView46" />
-
-            <TextView
-                android:id="@+id/textView46"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Não"
-                android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView45"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView45" />
+                app:layout_constraintStart_toStartOf="@id/divider8"
+                app:layout_constraintTop_toBottomOf="@id/tableGols">
 
-            <TextView
-                android:id="@+id/textView40"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="+ de 3"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView41"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView41" />
+                <TableRow
+                    android:id="@+id/TableRow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
-            <TextView
-                android:id="@+id/textView41"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView45"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="Sim"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView46"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="Não"
+                        android:textAlignment="center" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvPs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/tvPn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableGols"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="Até 3"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/textView40"
-                app:layout_constraintHorizontal_bias="0.5"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider7"
-                app:layout_constraintTop_toBottomOf="@+id/tvPc" />
+                app:layout_constraintTop_toBottomOf="@id/tableVitoria">
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Probabilidades pré-jogo:"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="+ de 3"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/textView41"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:text="Até 3"
+                        android:textAlignment="center" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvPmais3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/tvP3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:id="@+id/tableVitoria"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="Casa"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toStartOf="@+id/textView28"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/divider6"
-                app:layout_constraintTop_toBottomOf="@+id/divider5" />
-
-            <TextView
-                android:id="@+id/tvPc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="10%"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/textView26"
-                app:layout_constraintStart_toStartOf="@+id/textView26"
-                app:layout_constraintTop_toBottomOf="@+id/textView26" />
-
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Empate"
-                android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView26"
-                app:layout_constraintEnd_toStartOf="@+id/textView29"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView26" />
-
-            <TextView
-                android:id="@+id/textView29"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Visitante"
-                android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView28"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/textView28" />
+                app:layout_constraintStart_toEndOf="@+id/divider6"
+                app:layout_constraintTop_toBottomOf="@id/textView17">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:measureWithLargestChild="false">
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Casa" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Visitante" />
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Empate" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/tvPc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/tvPe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/tvPv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10%"
+                        android:textAlignment="center" />
+
+                </TableRow>
+
+            </TableLayout>
 
             <TextView
-                android:id="@+id/tvPv"
+                android:id="@+id/textView37"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10%"
+                android:layout_marginStart="20dp"
+                android:text="Gols:"
                 android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvPe"
-                app:layout_constraintEnd_toEndOf="@+id/textView29"
-                app:layout_constraintHorizontal_bias="0.466"
-                app:layout_constraintStart_toStartOf="@+id/textView29" />
-
-            <TextView
-                android:id="@+id/tvPe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10%"
-                android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvPc"
-                app:layout_constraintEnd_toEndOf="@+id/textView28"
-                app:layout_constraintHorizontal_bias="0.347"
-                app:layout_constraintStart_toStartOf="@+id/textView28" />
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/divider7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/divider7" />
 
             <TextView
                 android:id="@+id/textView35"
@@ -189,37 +231,13 @@
                 app:layout_constraintTop_toTopOf="@+id/divider6" />
 
             <TextView
-                android:id="@+id/textView37"
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Gols:"
-                android:textAlignment="center"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/divider7"
+                android:text="Probabilidades pré-jogo:"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/divider7" />
-
-            <TextView
-                android:id="@+id/tvP3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="10%"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/textView41"
-                app:layout_constraintStart_toStartOf="@+id/textView41"
-                app:layout_constraintTop_toBottomOf="@+id/textView41" />
-
-            <TextView
-                android:id="@+id/tvPmais3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10%"
-                android:textAlignment="center"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvP3"
-                app:layout_constraintEnd_toEndOf="@+id/textView40"
-                app:layout_constraintStart_toStartOf="@+id/textView40" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView42"
@@ -249,9 +267,9 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="70dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPs"
+                app:layout_constraintBottom_toBottomOf="@+id/tableBts"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView45"
+                app:layout_constraintTop_toTopOf="@+id/tableBts"
                 app:layout_constraintVertical_bias="0.0" />
 
             <View
@@ -260,9 +278,9 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="70dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toBottomOf="@+id/tvP3"
+                app:layout_constraintBottom_toBottomOf="@+id/tableGols"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView41" />
+                app:layout_constraintTop_toTopOf="@+id/tableGols" />
 
             <View
                 android:id="@+id/divider6"
@@ -270,9 +288,9 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="70dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toBottomOf="@+id/tvPc"
+                app:layout_constraintBottom_toBottomOf="@+id/tableVitoria"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView26"
+                app:layout_constraintTop_toTopOf="@+id/tableVitoria"
                 app:layout_constraintVertical_bias="0.0" />
 
             <View
@@ -755,7 +773,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lProbPreJogo">
+            app:layout_constraintTop_toBottomOf="@+id/lProbPreJogo">
 
             <TextView
                 android:id="@+id/tvInfoPartida"

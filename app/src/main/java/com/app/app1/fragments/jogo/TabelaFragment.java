@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TabelaFragment extends Fragment {
-    private List<Tabela> listaTabela = new ArrayList<>();
-    private List<Jogos> listaDeJogosDaCompeticao = new ArrayList<>();
+    private List<Tabela> listaTabela;
+    private List<Jogos> listaDeJogosDaCompeticao;
     private RecyclerView rvTabela;
 
 
@@ -39,8 +39,8 @@ public class TabelaFragment extends Fragment {
         rvTabela = view.findViewById(R.id.rvTabela);
 
         //tabela
-        RecuperarTabelaAsyncTask recuperarTabelaAsyncTask = new RecuperarTabelaAsyncTask();
-        recuperarTabelaAsyncTask.execute();
+        RecuperarTabelaAsyncTask recuperarTabela = new RecuperarTabelaAsyncTask();
+        recuperarTabela.execute();
 
         return view;
     }
@@ -53,8 +53,8 @@ public class TabelaFragment extends Fragment {
             //receber lista e verificar até chegar
             while (c<1) {
                 listaTabela = getArguments().getParcelableArrayList("tabela");
-                listaDeJogosDaCompeticao = getArguments().getParcelableArrayList("listaDeJogosDaCompeticao");
-                if(listaTabela != null && listaDeJogosDaCompeticao != null) {
+                //listaDeJogosDaCompeticao = getArguments().getParcelableArrayList("listaDeJogosDaCompeticao");
+                if(listaTabela != null /*&& listaDeJogosDaCompeticao != null*/) {
                     c=1;
                 }
             }
@@ -71,7 +71,7 @@ public class TabelaFragment extends Fragment {
 
 
     public void tabelaAoVivo() {
-        AdapterTabela adapterTabela = new AdapterTabela(listaTabela, listaDeJogosDaCompeticao);
+        AdapterTabela adapterTabela = new AdapterTabela(listaTabela/*, listaDeJogosDaCompeticao*/);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvTabela.setLayoutManager(layoutManager);
         rvTabela.setHasFixedSize(true);

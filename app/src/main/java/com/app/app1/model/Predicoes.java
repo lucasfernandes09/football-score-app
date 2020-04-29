@@ -10,8 +10,8 @@ public class Predicoes implements Parcelable {
     private int prob_AW;
     private int prob_O_3;
     private int prob_U_3;
-    private int bts;
-    private int ots;
+    private int prob_bts;
+    private int prob_ots;
 
     protected Predicoes(Parcel in) {
         prob_HW = in.readInt();
@@ -19,8 +19,8 @@ public class Predicoes implements Parcelable {
         prob_AW = in.readInt();
         prob_O_3 = in.readInt();
         prob_U_3 = in.readInt();
-        bts = in.readInt();
-        ots = in.readInt();
+        prob_bts = in.readInt();
+        prob_ots = in.readInt();
     }
 
     public static final Creator<Predicoes> CREATOR = new Creator<Predicoes>() {
@@ -75,20 +75,20 @@ public class Predicoes implements Parcelable {
         this.prob_U_3 = prob_U_3;
     }
 
-    public int getBts() {
-        return bts;
+    public int getProb_bts() {
+        return prob_bts;
     }
 
-    public void setBts(int bts) {
-        this.bts = bts;
+    public void setProb_bts(int prob_bts) {
+        this.prob_bts = prob_bts;
     }
 
-    public int getOts() {
-        return ots;
+    public int getProb_ots() {
+        return prob_ots;
     }
 
-    public void setOts(int ots) {
-        this.ots = ots;
+    public void setProb_ots(int prob_ots) {
+        this.prob_ots = prob_ots;
     }
 
     @Override
@@ -103,8 +103,8 @@ public class Predicoes implements Parcelable {
         parcel.writeInt(prob_AW);
         parcel.writeInt(prob_O_3);
         parcel.writeInt(prob_U_3);
-        parcel.writeInt(bts);
-        parcel.writeInt(ots);
+        parcel.writeInt(prob_bts);
+        parcel.writeInt(prob_ots);
     }
 }
 
