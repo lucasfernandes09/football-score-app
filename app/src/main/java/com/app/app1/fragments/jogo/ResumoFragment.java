@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.app.app1.AcoesDoJogo;
+import com.app.app1.helper.AcoesDoJogo;
 import com.app.app1.R;
 import com.app.app1.activities.EquipeActivity;
 import com.app.app1.adapters.AdapterAcoesDeJogo;

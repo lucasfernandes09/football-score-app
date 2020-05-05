@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ElencoFragment extends Fragment {
 
-    private List<Times> listaDeElenco = new ArrayList<>();
+    private List<Times> listaDeElenco;
     private List<Jogador> listaDeJogadores = new ArrayList<>();
     private RecyclerView rvElenco;
 
@@ -32,7 +32,6 @@ public class ElencoFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,27 +39,21 @@ public class ElencoFragment extends Fragment {
         //referenciação
         rvElenco = view.findViewById(R.id.rvElenco);
 
-        recebeElenco();
+        ElencoAsyncTask elenco = new ElencoAsyncTask();
+        elenco.execute();
 
         return view;
     }
 
-    private void recebeElenco() {
-        ElencoAsyncTask elencoAsyncTask = new ElencoAsyncTask();
-        elencoAsyncTask.execute();
-    }
-
     public class ElencoAsyncTask extends AsyncTask<Void, Void, Void> {
-
-
         @Override
         protected Void doInBackground(Void... voids) {
-            for(int i=0; i<600000; i++) {
-                if (getArguments().getParcelableArrayList("listaDeElenco") != null) {
-                    listaDeElenco = getArguments().getParcelableArrayList("listaDeElenco");
-                    i = 600000;
+            int c = 0;
+            while (c<1) {
+                listaDeElenco = getArguments().getParcelableArrayList("listaDeElenco");
+                if (listaDeElenco != null) {
+                    c = 1;
                 }
-                //Log.i("info", "nao chegou em ElencoFragment");
             }
             return null;
         }
@@ -68,13 +61,12 @@ public class ElencoFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            recyclerJogadores();
+            listaDeJogadores = listaDeElenco.get(0).getPlayers();
+            exibirJogadores();
         }
     }
 
-    public void recyclerJogadores() {
-        listaDeJogadores = listaDeElenco.get(0).getPlayers();
-
+    public void exibirJogadores() {
         AdapterJogadores adapterJogadores = new AdapterJogadores(listaDeJogadores);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvElenco.setLayoutManager(layoutManager);

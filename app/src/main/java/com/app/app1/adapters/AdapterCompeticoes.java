@@ -37,8 +37,7 @@ public class AdapterCompeticoes extends RecyclerView.Adapter<AdapterCompeticoes.
         Jogos competicao = this.listaDeCompeticoes.get(position);
         holder.tvNomeCompeticao.setText(competicao.getLeague_name());
         holder.tvQtdCompeticao.setText(String.valueOf(competicao.getQtdCompeticao()));
-        Picasso.get().load(competicao.getCountry_logo()).resize(70, 50).into(holder.ivCountry);
-        Picasso.get().load(competicao.getLeague_logo()).resize(50, 50).into(holder.ivLeague);
+        Picasso.get().load(competicao.getCountry_logo()).into(holder.ivCountry);
     }
 
     @Override
@@ -50,7 +49,6 @@ public class AdapterCompeticoes extends RecyclerView.Adapter<AdapterCompeticoes.
         TextView tvNomeCompeticao;
         TextView tvQtdCompeticao;
         ImageView ivCountry;
-        ImageView ivLeague;
         JogoListener jogoListener;
 
         public MyViewHolder(@NonNull View itemView, JogoListener jogoListener) {
@@ -58,7 +56,6 @@ public class AdapterCompeticoes extends RecyclerView.Adapter<AdapterCompeticoes.
             tvNomeCompeticao = itemView.findViewById(R.id.tvNomeCompeticao);
             tvQtdCompeticao = itemView.findViewById(R.id.tvQtdCompeticao);
             ivCountry = itemView.findViewById(R.id.ivCountry);
-            ivLeague = itemView.findViewById(R.id.ivLeague);
             this.jogoListener = jogoListener;
 
             itemView.setOnClickListener(this);

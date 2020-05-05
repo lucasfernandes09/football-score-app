@@ -5,17 +5,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.app.app1.R;
-import com.app.app1.activities.UsuarioLogadoActivity;
+import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -28,11 +26,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String corpo = remoteMessage.getNotification().getBody();
 
             //mostra a notificação independente se app estiver aberto ou não
-            enviarNotificacao(titulo, corpo);
+            //enviarNotificacao(titulo, corpo);
         }
     }
 
-    public void enviarNotificacao(String titulo, String corpo) {
+  /*  public void enviarNotificacao(String titulo, String corpo) {
         //configuração para notificação
         String canal = getString(R.string.default_notification_channel_id);
         Uri uriSom = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -60,7 +58,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         //enviar notificação
         notificationManager.notify(0, notificacao.build());
     }
-
+*/
     @Override
     public void onNewToken(@NonNull String s) {
         super.onNewToken(s);

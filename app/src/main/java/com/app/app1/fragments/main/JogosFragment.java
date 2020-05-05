@@ -5,47 +5,28 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.app1.R;
-import com.app.app1.RecyclerItemClickListener;
-import com.app.app1.RetrofitService;
 import com.app.app1.activities.JogoActivity;
+import com.app.app1.activities.MainActivity;
 import com.app.app1.adapters.AdapterJogos;
-import com.app.app1.model.Cartoes;
 import com.app.app1.model.Jogos;
-import com.app.app1.model.Marcadores;
-import com.app.app1.model.substituicoes.Substituicao;
+import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.MonthDay;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class JogosFragment extends Fragment implements AdapterJogos.JogoListener {
 
@@ -108,7 +89,6 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         }
     }
 
-
     public void comparator() {
         Comparator<Jogos> comparator = new Comparator<Jogos>() {
             @Override
@@ -123,6 +103,7 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         adapterJogos = new AdapterJogos(listaDeJogos, JogosFragment.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvJogos.setLayoutManager(layoutManager);
+        //rvJogos.addItemDecoration(new DividerItemDecoration(rvJogos.getContext(), LinearLayoutManager.VERTICAL));
         rvJogos.setHasFixedSize(true);
         rvJogos.setAdapter(adapterJogos);
     }

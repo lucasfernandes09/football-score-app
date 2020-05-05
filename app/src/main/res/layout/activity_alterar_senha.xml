@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".activities.AlterarSenhaActivity">
+    android:background="@color/colorMain"
+    tools:context=".activities.user.AlterarSenhaActivity">
 
     <Button
         android:id="@+id/btnEnviar"
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_email"
-            android:drawablePadding="3dp"
+            android:drawablePadding="5dp"
             android:hint="Email" />
     </com.google.android.material.textfield.TextInputLayout>
 

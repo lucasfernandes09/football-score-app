@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.app.app1.R;
 import com.app.app1.RetrofitService;
+import com.app.app1.activities.user.LoginActivity;
+import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.app.app1.config.ConfiguracaoFirebase;
 import com.app.app1.fragments.main.CompeticoesFragment;
 import com.app.app1.fragments.main.JogosAoVivoFragment;
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setElevation(0);
+
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

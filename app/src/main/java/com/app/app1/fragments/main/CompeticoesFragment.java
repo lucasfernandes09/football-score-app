@@ -9,33 +9,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.app.app1.R;
-import com.app.app1.RecyclerItemClickListener;
-import com.app.app1.RetrofitService;
-import com.app.app1.activities.ListaDeJogosActivity;
+import com.app.app1.activities.JogosCompeticaoActivity;
 import com.app.app1.adapters.AdapterCompeticoes;
-import com.app.app1.adapters.AdapterJogos;
 import com.app.app1.model.Jogos;
-import com.app.app1.model.Marcadores;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.JogoListener {
     private RecyclerView rvCompeticoes;
     private ArrayList<Jogos> listaDeCompeticoes = new ArrayList<>();
@@ -130,7 +116,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
             }
         }
         //intent
-        Intent intent = new Intent(getContext(), ListaDeJogosActivity.class);
+        Intent intent = new Intent(getContext(), JogosCompeticaoActivity.class);
         intent.putParcelableArrayListExtra("listaDeJogosDeUmaCompeticao", listaDeJogosDeUmaCompeticao);
         startActivity(intent);
     }

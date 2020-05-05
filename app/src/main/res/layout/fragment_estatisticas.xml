@@ -11,7 +11,7 @@
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_1"
+        android:background="@color/colorMain"
         tools:context=".fragments.jogo.EstatisticasFragment">
 
 
@@ -429,6 +429,8 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/pb11"
                 app:layout_constraintTop_toBottomOf="@+id/textView36"
@@ -449,28 +451,9 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_1"
-            android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/pbEC1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ivBadgeE1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivBadgeE1"
-                app:layout_constraintTop_toTopOf="@+id/ivBadgeE1"
-                app:rcBackgroundColor="@android:color/black"
-                app:rcBackgroundPadding="1dp"
-                app:rcMax="100"
-                app:rcProgress="55"
-                app:rcProgressColor="#304FFE"
-                app:rcRadius="5dp"
-                app:rcReverse="false" />
 
             <ImageView
                 android:id="@+id/ivBadgeE1"
@@ -495,24 +478,6 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@android:drawable/btn_dialog" />
 
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/pbEC2"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/ivBadgeE2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivBadgeE2"
-                app:layout_constraintTop_toTopOf="@+id/ivBadgeE2"
-                app:rcBackgroundColor="@android:color/black"
-                app:rcBackgroundPadding="1dp"
-                app:rcMax="100"
-                app:rcProgress="55"
-                app:rcProgressColor="#D50000"
-                app:rcRadius="5dp"
-                app:rcReverse="false" />
-
             <TextView
                 android:id="@+id/tvEficienciaChutes"
                 android:layout_width="wrap_content"
@@ -522,17 +487,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvEficienciaChutes" />
 
             <TextView
                 android:id="@+id/tvEC1"
@@ -551,6 +505,53 @@
                 android:text="50%"
                 app:layout_constraintBottom_toTopOf="@+id/pbEC2"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEficienciaChutes" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pbEC1"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBadgeE1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBadgeE1"
+                app:layout_constraintTop_toTopOf="@+id/ivBadgeE1"
+                app:rcBackgroundColor="@android:color/black"
+                app:rcBackgroundPadding="1dp"
+                app:rcMax="100"
+                app:rcProgress="55"
+                app:rcProgressColor="#304FFE"
+                app:rcRadius="5dp"
+                app:rcReverse="false" />
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/pbEC2"
+                android:layout_width="0dp"
+                android:layout_height="10dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBadgeE2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivBadgeE2"
+                app:layout_constraintTop_toTopOf="@+id/ivBadgeE2"
+                app:rcBackgroundColor="@android:color/black"
+                app:rcBackgroundPadding="1dp"
+                app:rcMax="100"
+                app:rcProgress="55"
+                app:rcProgressColor="#D50000"
+                app:rcRadius="5dp"
+                app:rcReverse="false" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

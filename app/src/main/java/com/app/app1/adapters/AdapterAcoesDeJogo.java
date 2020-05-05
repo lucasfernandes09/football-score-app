@@ -1,7 +1,6 @@
 package com.app.app1.adapters;
 
 import android.graphics.Color;
-import android.graphics.ColorMatrixColorFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.app.app1.AcoesDoJogo;
+import com.app.app1.helper.AcoesDoJogo;
 import com.app.app1.R;
 
 import java.util.List;
@@ -26,7 +25,6 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
         this.listaAcoesDeJogo = listaAcoesDeJogo;
     }
 
-    //cria a visualização inicial(layout)
     @NonNull
     @Override
     public AdapterAcoesDeJogo.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
@@ -36,7 +34,6 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
     }
 
 
-    //exibe a lista
     @Override
     public void onBindViewHolder(@NonNull AdapterAcoesDeJogo.MyViewHolder holder, int position) {
         AcoesDoJogo acoesDoJogo = this.listaAcoesDeJogo.get(position);
@@ -66,7 +63,6 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
         holder.tvNomeAcoesDeJogo.setText(nomeAcoes);
     }
 
-    //qtd de itens exibidos
     @Override
     public int getItemCount() {
         return this.listaAcoesDeJogo.size();
@@ -81,8 +77,6 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
             tvNomeAcoesDeJogo = itemView.findViewById(R.id.tvNomeAcoesDeJogo);
         }
     }
-
-
 
 }
 
