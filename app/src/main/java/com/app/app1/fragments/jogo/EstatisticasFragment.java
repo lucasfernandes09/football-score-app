@@ -1,5 +1,6 @@
 package com.app.app1.fragments.jogo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

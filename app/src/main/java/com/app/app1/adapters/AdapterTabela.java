@@ -112,20 +112,20 @@ public class AdapterTabela extends RecyclerView.Adapter<AdapterTabela.MyViewHold
     public void zonas(MyViewHolder holder, Tabela tabela) {
         String promocao = tabela.getOverall_promotion();
         if(promocao.contains("Promotion") && !promocao.contains("(")) {    //classificação
-            holder.overall_league_position.setBackgroundColor(Color.GREEN);
+            holder.overall_league_position.setBackgroundResource(R.drawable.bg_green);
         }else {
             if(promocao.contains("Promotion") && promocao.contains("(")) {  //disputa de classificação
-                holder.overall_league_position.setBackgroundColor(Color.YELLOW);
+                holder.overall_league_position.setBackgroundResource(R.drawable.bg_blue);
             }
         }
 
         if(promocao.contains("(Relegation)")) {
             Log.i("info", "disputa de rebaixamento");
-            holder.overall_league_position.setBackgroundColor(Color.BLUE);  //disputa de rebaixamento
+            holder.overall_league_position.setBackgroundResource(R.drawable.bg_orange);  //disputa de rebaixamento
         }else {
             if(promocao.contains("Relegation") && !promocao.contains("(")) {   //rebaixamento
                 Log.i("info", "rebaixamento");
-                holder.overall_league_position.setBackgroundColor(Color.RED);
+                holder.overall_league_position.setBackgroundResource(R.drawable.bg_red);
             }
         }
 

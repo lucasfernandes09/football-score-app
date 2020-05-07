@@ -7,9 +7,11 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +45,10 @@ public class ResumoFragment extends Fragment {
     private ArrayList<Cartoes> listaCartoes;
     private ArrayList<Substituicao> listaSubsHome, listaSubsAway;
     private List<AcoesDoJogo> listaAcoesDeJogo = new ArrayList<>();
-    private ImageView ivBadgeCasa, ivBadgeVis, ivCampo;
+    private ImageView ivBadgeCasa, ivBadgeVis, ivCampo, ivCompeticaoResumo;
     private TextView tvNomeLiga, tvHoraPartida, getTvNomeLiga, tvScoreCasa, tvScoreVis, tvNomeCasa, tvNomeVis, tvFormacaoCasa, tvFormacaoVis;
     private TextView tvTitularesCasa, tvTitularesVis, tvSubstitutosCasa, tvSubstitutosVis, tvForaDoJogoCasa, tvForaDoJogoVis, tvDataR, tvRodada, tvArbitro, tvEstadio;
+    private TextView tvGoleiroCasa, tvGoleiroVis;
     private RecyclerView rvAcoesDeJogo;
     private View lAcoesDeJogo, lFormacoes;
     private ConstraintLayout lAtkDef;
@@ -65,16 +68,17 @@ public class ResumoFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_resumo, container, false);
         //referenciação
-        ivBadgeCasa = view.findViewById(R.id.ivBadgeCasa); ivBadgeVis = view.findViewById(R.id.ivBadgeVis);
+        ivBadgeCasa = view.findViewById(R.id.ivBadgeCasa); ivBadgeVis = view.findViewById(R.id.ivBadgeVis); ivCompeticaoResumo = view.findViewById(R.id.ivCompeticaoResumo);
         tvNomeLiga = view.findViewById(R.id.tvNomeLiga); tvHoraPartida = view.findViewById(R.id.tvHoraPartida);
         tvScoreCasa = view.findViewById(R.id.tvScoreCasa); tvScoreVis = view.findViewById(R.id.tvScoreVis);
         tvNomeCasa = view.findViewById(R.id.tvNomeCasa); tvNomeVis = view.findViewById(R.id.tvNomeVis);
         tvFormacaoCasa = view.findViewById(R.id.tvFormacaoCasa); tvFormacaoVis = view.findViewById(R.id.tvFormacaoVis);
+        tvGoleiroCasa = view.findViewById(R.id.tvGoleiroCasa); tvGoleiroVis = view.findViewById(R.id.tvGoleiroVis);
         rvAcoesDeJogo = view.findViewById(R.id.rvAcoesDeJogo);
         ivCampo = view.findViewById(R.id.ivCampo);
         tvTitularesCasa = view.findViewById(R.id.tvTitularesCasa); tvTitularesVis = view.findViewById(R.id.tvTitularesVis);
-        tvSubstitutosCasa = view.findViewById(R.id.tvSubstitutosCasa); tvSubstitutosVis = view.findViewById(R.id.tvSubstitutosVis);
-        tvForaDoJogoCasa = view.findViewById(R.id.tvForaDoJogoCasa); tvForaDoJogoVis = view.findViewById(R.id.tvForaDoJogoVis);
+        //tvSubstitutosCasa = view.findViewById(R.id.tvSubstitutosCasa); tvSubstitutosVis = view.findViewById(R.id.tvSubstitutosVis);
+        //tvForaDoJogoCasa = view.findViewById(R.id.tvForaDoJogoCasa); tvForaDoJogoVis = view.findViewById(R.id.tvForaDoJogoVis);
         lAcoesDeJogo = view.findViewById(R.id.lAcoesDeJogo);
         lFormacoes = view.findViewById(R.id.lFormacoes);
         tvAtk1 = view.findViewById(R.id.tvAtk1); tvAtk2 = view.findViewById(R.id.tvAtk2); tvDef1 = view.findViewById(R.id.tvDef1); tvDef2 = view.findViewById(R.id.tvDef2);
@@ -88,14 +92,12 @@ public class ResumoFragment extends Fragment {
         jogo = getArguments().getParcelable("jogo");
 
         //badges (Picasso)
-        Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa);
-        Picasso.get().load(jogo.getTeam_away_badge()).into(ivBadgeVis);
+        Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa); Picasso.get().load(jogo.getTeam_away_badge()).into(ivBadgeVis);
+        Picasso.get().load(jogo.getLeague_logo()).into(ivCompeticaoResumo);
 
         seAoVivo();
 
         tvNomeLiga.setText(jogo.getLeague_name());
-        tvScoreCasa.setText(jogo.getMatch_hometeam_score());
-        tvScoreVis.setText(jogo.getMatch_awayteam_score());
         tvNomeCasa.setText(jogo.getMatch_hometeam_name());
         tvNomeVis.setText(jogo.getMatch_awayteam_name());
         tvFormacaoCasa.setText(jogo.getMatch_hometeam_system());
@@ -123,65 +125,6 @@ public class ResumoFragment extends Fragment {
         return view;
     }
 
-
-    public void marcadores() {
-        if(jogo.getGoalscorer() == null) {
-            return;
-        }else {
-            listaMarcadores = (ArrayList<Marcadores>) jogo.getGoalscorer();
-        }
-
-        for(int i=0; i<listaMarcadores.size(); i++) {
-            if(listaMarcadores.get(i).getHome_scorer().equals("")) {
-                listaAcoesDeJogo.add(new AcoesDoJogo(listaMarcadores.get(i).getAway_scorer(),
-                        listaMarcadores.get(i).getTime(), false, "marcadores"));
-
-            }else {
-                listaAcoesDeJogo.add(new AcoesDoJogo(listaMarcadores.get(i).getHome_scorer(),
-                        listaMarcadores.get(i).getTime(), true, "marcadores"));
-            }
-        }
-    }
-
-    public void cartoesVermelhos() {
-        if(jogo.getCards() == null) {
-            return;
-        }else {
-            listaCartoes = (ArrayList<Cartoes>) jogo.getCards();
-        }
-
-        for(int i=0; i<listaCartoes.size(); i++) {
-            Cartoes cartao = listaCartoes.get(i);
-            if(cartao.getCard().equals("red card") && !cartao.getHome_fault().equals("")) {
-                listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getHome_fault(), cartao.getTime(),
-                        true, "cartaoVermelho"));
-            }else {
-                if(cartao.getCard().equals("red card") && !cartao.getAway_fault().equals("")) {
-                    listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getAway_fault(), cartao.getTime(),
-                            false, "cartaoVermelho"));
-                }
-            }
-        }
-    }
-
-    public void substituicoes() {
-        if(jogo.getSubstitutions() == null) {
-            return;
-        }else {
-        listaSubsHome = (ArrayList<Substituicao>) jogo.getSubstitutions().getHome();
-        listaSubsAway = (ArrayList<Substituicao>) jogo.getSubstitutions().getAway();
-        }
-
-        for(int i=0; i<listaSubsHome.size(); i++) {
-            listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsHome.get(i).getSubstitution(), listaSubsHome.get(i).getTime(),
-                    true, "substituição"));
-        }
-        for(int i=0; i<listaSubsAway.size(); i++) {
-            listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsAway.get(i).getSubstitution(), listaSubsAway.get(i).getTime(),
-                    false, "substituição"));
-        }
-    }
-
     public void seAoVivo() {
         if(jogo.getMatch_live().equals("1")) {
             tvHoraPartida.setText(jogo.getMatch_status() + "'");
@@ -197,10 +140,14 @@ public class ResumoFragment extends Fragment {
         if(jogo.getMatch_status().equals("") || jogo.getMatch_status().equals("Postponed")) {  //ainda não realizado
             lAcoesDeJogo.setVisibility(View.GONE);
             lAtkDef.setVisibility(View.GONE);
+            tvScoreCasa.setText("V");
+            tvScoreVis.setText("S");
         }else {
             lAcoesDeJogo.setVisibility(View.VISIBLE);
             lAtkDef.setVisibility(View.VISIBLE);
             exibirAtkDef();
+            tvScoreCasa.setText(jogo.getMatch_hometeam_score());
+            tvScoreVis.setText(jogo.getMatch_awayteam_score());
         }
     }
 
@@ -244,29 +191,93 @@ public class ResumoFragment extends Fragment {
         };
         Collections.sort(listaAcoesDeJogo, comparator);
 
-        //recycler
+        //exebir ações de jogo
         AdapterAcoesDeJogo adapterAcoes = new AdapterAcoesDeJogo(listaAcoesDeJogo);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvAcoesDeJogo.setLayoutManager(layoutManager);
+        rvAcoesDeJogo.addItemDecoration(new DividerItemDecoration(rvAcoesDeJogo.getContext(), LinearLayoutManager.VERTICAL));
         rvAcoesDeJogo.setHasFixedSize(true);
         rvAcoesDeJogo.setAdapter(adapterAcoes);
-
     }
 
+    public void marcadores() {
+        if(jogo.getGoalscorer() == null) {
+            return;
+        }else {
+            listaMarcadores = (ArrayList<Marcadores>) jogo.getGoalscorer();
+            for(Marcadores marcador : listaMarcadores) {
+                if(marcador.getHome_scorer().equals("")) {
+                    listaAcoesDeJogo.add(new AcoesDoJogo(marcador.getAway_scorer(), marcador.getTime(), false, "marcadores"));
+                }else {
+                    listaAcoesDeJogo.add(new AcoesDoJogo(marcador.getHome_scorer(), marcador.getTime(), true, "marcadores"));
+                }
+            }
+        }
+    }
+
+    public void cartoesVermelhos() {
+        if(jogo.getCards() == null) {
+            return;
+        }else {
+            listaCartoes = (ArrayList<Cartoes>) jogo.getCards();
+        }
+
+        for(int i=0; i<listaCartoes.size(); i++) {
+            Cartoes cartao = listaCartoes.get(i);
+            if(cartao.getCard().equals("red card") && !cartao.getHome_fault().equals("")) {
+                listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getHome_fault(), cartao.getTime(),
+                        true, "cartaoVermelho"));
+            }else {
+                if(cartao.getCard().equals("red card") && !cartao.getAway_fault().equals("")) {
+                    listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getAway_fault(), cartao.getTime(),
+                            false, "cartaoVermelho"));
+                }
+            }
+        }
+    }
+
+    public void substituicoes() {
+        if(jogo.getSubstitutions() == null) {
+            return;
+        }else {
+        listaSubsHome = (ArrayList<Substituicao>) jogo.getSubstitutions().getHome();
+        listaSubsAway = (ArrayList<Substituicao>) jogo.getSubstitutions().getAway();
+        }
+
+        for(int i=0; i<listaSubsHome.size(); i++) {
+            listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsHome.get(i).getSubstitution(), listaSubsHome.get(i).getTime(),
+                    true, "substituição"));
+        }
+        for(int i=0; i<listaSubsAway.size(); i++) {
+            listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsAway.get(i).getSubstitution(), listaSubsAway.get(i).getTime(),
+                    false, "substituição"));
+        }
+    }
 
     public void formacoes() {
         if(jogo.getMatch_hometeam_system().isEmpty() || jogo.getMatch_awayteam_system().isEmpty()
                 || jogo.getLineup() == null) {
-            // escalaçao ou formaçao nao disponivel
             lFormacoes.setVisibility(View.GONE);
-
         }else {
+            //goleiros
+            for(LineupJogador jogador : jogo.getLineup().getHome().getStarting_lineups()) {
+                if(jogador.getLineup_position().equals("1")) {
+                    tvGoleiroCasa.setText(jogador.getLineup_player());
+                }
+            }
+            for(LineupJogador jogador : jogo.getLineup().getAway().getStarting_lineups()) {
+                if(jogador.getLineup_position().equals("1")) {
+                    tvGoleiroVis.setText(jogador.getLineup_player());
+                }
+            }
+
+            //titulares
             tvTitularesCasa.setText(titulares(true, jogo.getMatch_hometeam_system()));//cas
             tvTitularesVis.setText(titulares(false, jogo.getMatch_awayteam_system()));//vis
             //talvez seja melhor dividir em duas funçoes distintas
 
             //subs e fora do jogo
-            for(LineupJogador substitutosCasa : jogo.getLineup().getHome().getSubstitutes()) {
+            /*for(LineupJogador substitutosCasa : jogo.getLineup().getHome().getSubstitutes()) {
                 tvSubstitutosCasa.append(substitutosCasa.getLineup_number() + "  "
                 + substitutosCasa.getLineup_player() + "\n");
             }
@@ -280,7 +291,7 @@ public class ResumoFragment extends Fragment {
             }
             for(LineupJogador foraDoJogoVis : jogo.getLineup().getAway().getMissing_players()) {
                 tvForaDoJogoVis.append(foraDoJogoVis.getLineup_player() + "\n");
-            }
+            }*/
         }
 
     }
@@ -303,7 +314,7 @@ public class ResumoFragment extends Fragment {
         int c = 2;
         int v = 11;
         for (int k = 0; k < formacao.size(); k++) {
-            escalacaoFinal.append("\n\n");
+            escalacaoFinal.append("\n");
             for (int j = 0; j < Integer.valueOf(formacao.get(k)); j++) {
                 for (int i = 0; i<11; i++) {
                     if(casa) {
@@ -321,6 +332,7 @@ public class ResumoFragment extends Fragment {
                 c++;
                 v--;
             }
+            escalacaoFinal.append("\n");
         }
             return escalacaoFinal;
     }
@@ -351,7 +363,6 @@ public class ResumoFragment extends Fragment {
             tvPn.setText(listaDePredicao.get(0).getProb_ots() + "%");
         }
     }
-
 
     //listener casa
     private View.OnClickListener listenerCasa = new View.OnClickListener() {

@@ -33,7 +33,6 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
         return new AdapterAcoesDeJogo.MyViewHolder(itemDaLista);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull AdapterAcoesDeJogo.MyViewHolder holder, int position) {
         AcoesDoJogo acoesDoJogo = this.listaAcoesDeJogo.get(position);
@@ -45,15 +44,15 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
                 break;
             case "cartaoVermelho":
                 icon = R.drawable.ic_cartao_vermelho;
-                holder.tvNomeAcoesDeJogo.setTextColor(Color.RED);
                 break;
-            /*case "substituição":
-                icon = R.drawable.ic_menu_share;*/
+            case "substituição":
+                icon = R.drawable.ic_menu_share;
         }
 
         //separar casa/vis e definir icone
         if(acoesDoJogo.isHome()) {
             holder.tvNomeAcoesDeJogo.setCompoundDrawablesWithIntrinsicBounds(icon,0,0,0);
+            holder.tvNomeAcoesDeJogo.setGravity(Gravity.START);
             nomeAcoes = "   " + acoesDoJogo.getTime() + "'" + "  " + acoesDoJogo.getName();
         }else {
             holder.tvNomeAcoesDeJogo.setCompoundDrawablesWithIntrinsicBounds(0,0, icon,0);
@@ -68,6 +67,15 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
         return this.listaAcoesDeJogo.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvNomeAcoesDeJogo;

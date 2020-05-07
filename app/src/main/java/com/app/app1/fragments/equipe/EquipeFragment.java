@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class EquipeFragment extends Fragment {
     private Jogos jogo = new Jogos();
     private Boolean home;
     private ImageView ivBageEquipeFrag, ivBadgePaisEquipe;
-    private TextView tvNomeEquipe;
+    private TextView tvNomeEquipe, tvTreinador;
     private RecyclerView rvGoleadores;
 
 
@@ -46,18 +47,18 @@ public class EquipeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_equipe, container, false);
         //referenciação
         ivBageEquipeFrag = view.findViewById(R.id.ivBadgeEquipeFrag); ivBadgePaisEquipe = view.findViewById(R.id.ivBadgePaisEquipe);
-        tvNomeEquipe = view.findViewById(R.id.tvNomeEquipe);
+        tvNomeEquipe = view.findViewById(R.id.tvNomeEquipe); tvTreinador = view.findViewById(R.id.tvTreinador);
         rvGoleadores = view.findViewById(R.id.rvGoleadores);
+
+        //receber Elenco
+        ElencoAsyncTask elenco = new ElencoAsyncTask();
+        elenco.execute();
 
         //recuperar objetos enviados de EquipeActivity
         jogo = getArguments().getParcelable("jogo");
         home = getArguments().getBoolean("home");
 
         configBasicas(home);
-
-        //receber Elenco
-        ElencoAsyncTask elenco = new ElencoAsyncTask();
-        elenco.execute();
 
         return view;
     }
@@ -79,9 +80,16 @@ public class EquipeFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            Log.i("info", "elenco chegou");
+            exibirTreinador();
             artilheiros();
             exibirArtilheiros();
         }
+    }
+
+    public void exibirTreinador() {
+        String treinador = "Treinador: " + listaDeElenco.get(0).getCoaches().get(0).getCoach_name();
+        tvTreinador.setText(treinador);
     }
 
     public void artilheiros() {

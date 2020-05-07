@@ -4,24 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_1"
-    android:elevation="1dp"
+    android:background="@android:color/white"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvPosicao"
-        android:layout_width="16dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1.5"
-        android:gravity="center"
-        android:text="20"
-        android:textSize="12sp"
+    <ImageView
+        android:id="@+id/ivBadgeTabela"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/tvPosicao"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_escudo_transparente" />
 
     <TextView
         android:id="@+id/tvNomeTabela"
@@ -122,13 +116,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ivBadgeTabela"
+    <TextView
+        android:id="@+id/tvPosicao"
         android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="20"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvPosicao"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_escudo_transparente" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,7 +64,6 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
             while(c < 1) {
                 listaDeUltimosJogos = getArguments().getParcelableArrayList("listaDeUltimosJogos");
                 listaDeProximosJogos = getArguments().getParcelableArrayList("listaDeProximosJogos");
-
                 if(listaDeUltimosJogos != null && listaDeProximosJogos != null) {
                     c = 1;
                 }
@@ -84,6 +83,8 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
                 public void onClick(View view) {
                     listaDeJogos = listaDeUltimosJogos;
                     rvPartidas.setAdapter(new AdapterJogos(listaDeUltimosJogos, PartidasFragment.this, nomeEquipe));
+                    btnUltimas.setBackgroundResource(R.drawable.background_2);
+                    btnProximas.setBackgroundResource(R.drawable.background_click);
                 }
             });
 
@@ -93,6 +94,8 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
                 public void onClick(View view) {
                     listaDeJogos = listaDeProximosJogos;
                     rvPartidas.setAdapter(new AdapterJogos(listaDeProximosJogos, PartidasFragment.this, nomeEquipe));
+                    btnProximas.setBackgroundResource(R.drawable.background_2);
+                    btnUltimas.setBackgroundResource(R.drawable.background_click);
                 }
             });
         }

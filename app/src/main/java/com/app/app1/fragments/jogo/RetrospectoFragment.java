@@ -55,8 +55,10 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         tvUJVis.setText(jogo.getMatch_awayteam_name());
 
         //receber retrospecto
-        RetrospectoAsyncTask retrospecto = new RetrospectoAsyncTask();
-        retrospecto.execute();
+        if(listaDeUltimosJogosCasa == null && listaDeUltimosJogosVis == null) {
+            RetrospectoAsyncTask retrospecto = new RetrospectoAsyncTask();
+            retrospecto.execute();
+        }
 
         //badges
         Picasso.get().load(jogo.getTeam_home_badge()).into(ivUJBadgeCasa);
@@ -94,6 +96,9 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
                         listaDeJogos = listaDeUltimosJogosCasa;
                         adapterJogos = new AdapterJogos(listaDeUltimosJogosCasa, RetrospectoFragment.this, jogo.getMatch_hometeam_name());
                         rvRetrospecto.setAdapter(adapterJogos);
+                        //background
+                        clRestrospectoVis.setBackgroundResource(R.drawable.background_click);
+                        clRestrospectoCasa.setBackgroundResource(R.drawable.background_2);
                     }
                 }
             });
@@ -106,6 +111,9 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
                         listaDeJogos = listaDeUltimosJogosVis;
                         adapterJogos = new AdapterJogos(listaDeUltimosJogosVis, RetrospectoFragment.this, jogo.getMatch_awayteam_name());
                         rvRetrospecto.setAdapter(adapterJogos);
+                        //background
+                        clRestrospectoCasa.setBackgroundResource(R.drawable.background_click);
+                        clRestrospectoVis.setBackgroundResource(R.drawable.background_2);
                     }
                 }
             });

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -64,7 +65,6 @@ public class TabelaFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Log.i("info", "tabela chegou");
             tabelaAoVivo();
         }
     }
@@ -74,6 +74,7 @@ public class TabelaFragment extends Fragment {
         AdapterTabela adapterTabela = new AdapterTabela(listaTabela/*, listaDeJogosDaCompeticao*/);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvTabela.setLayoutManager(layoutManager);
+        rvTabela.addItemDecoration(new DividerItemDecoration(rvTabela.getContext(), DividerItemDecoration.VERTICAL));
         rvTabela.setHasFixedSize(true);
         rvTabela.setAdapter(adapterTabela);
     }

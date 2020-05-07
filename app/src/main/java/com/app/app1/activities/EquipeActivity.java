@@ -63,10 +63,6 @@ public class EquipeActivity extends AppCompatActivity {
         vpEquipe = findViewById(R.id.vpEquipe);
         tabEquipe = findViewById(R.id.tabEquipe);
 
-        //action bar
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setElevation(0);
-
         //recuperar objetos enviados de ResumoFragment(JogoActivity)
         jogo = getIntent().getExtras().getParcelable("jogo");
         home = getIntent().getExtras().getBoolean("home");
@@ -77,6 +73,11 @@ public class EquipeActivity extends AppCompatActivity {
             nomeEquipe = jogo.getMatch_awayteam_name();
             team_id = jogo.getMatch_awayteam_id();
         }
+
+        //action bar
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setTitle(nomeEquipe);
 
         chamadaUtimosJogos();
         chamadaProximosJogos();
@@ -92,9 +93,9 @@ public class EquipeActivity extends AppCompatActivity {
 
         //tabs
         FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
-                .add("equipe", EquipeFragment.class, bundle)
-                .add("partidas", PartidasFragment.class, bundle)
-                .add("elenco", ElencoFragment.class, bundle)
+                .add("Equipe", EquipeFragment.class, bundle)
+                .add("Partidas", PartidasFragment.class, bundle)
+                .add("Elenco", ElencoFragment.class, bundle)
                 .create();
 
         statePagerItemAdapter = new FragmentStatePagerItemAdapter(
@@ -123,7 +124,7 @@ public class EquipeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
-                Log.i("info", "onFailure " + t.getMessage());
+                Log.i("info", "falha últimos jogos: " + t.getMessage());
             }
         });
     }
@@ -149,7 +150,7 @@ public class EquipeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
-                Log.i("info", "onFailure " + t.getMessage());
+                Log.i("info", "falha próximos jogos: " + t.getMessage());
             }
         });
     }
@@ -173,7 +174,7 @@ public class EquipeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Times>> call, Throwable t) {
-                Log.i("info", "onFailure " + t.getMessage());
+                Log.i("info", "falha elenco: " + t.getMessage());
             }
         });
     }

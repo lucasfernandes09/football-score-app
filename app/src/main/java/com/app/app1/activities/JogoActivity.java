@@ -52,13 +52,14 @@ public class JogoActivity extends AppCompatActivity {
         vpJogo = findViewById(R.id.vpJogo);
         tabJogo = findViewById(R.id.tabJogo);
 
-        //action bar
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setElevation(0);
-
         //objetos recebidos
         jogo = getIntent().getExtras().getParcelable("jogo");
         bundle.putParcelable("jogo", jogo);
+
+        //action bar
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setTitle(jogo.getMatch_hometeam_name() + " x " + jogo.getMatch_awayteam_name());
 
         retrospectoCasa();
 
@@ -79,9 +80,9 @@ public class JogoActivity extends AppCompatActivity {
 
     private void tabsSemEstatisticas() {
         FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
-                .add("resumo", ResumoFragment.class, bundle)
-                .add("retrospecto", RetrospectoFragment.class, bundle)
-                .add("tabela", TabelaFragment.class, bundle)
+                .add("Resumo", ResumoFragment.class, bundle)
+                .add("Retrospecto", RetrospectoFragment.class, bundle)
+                .add("Tabela", TabelaFragment.class, bundle)
                 .create();
 
         FragmentStatePagerItemAdapter adapter = new FragmentStatePagerItemAdapter(
@@ -93,16 +94,17 @@ public class JogoActivity extends AppCompatActivity {
 
     private void tabs() {
         FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
-                .add("resumo", ResumoFragment.class, bundle)
-                .add("estatisticas", EstatisticasFragment.class, bundle)
-                .add("retrospecto", RetrospectoFragment.class, bundle)
-                .add("tabela", TabelaFragment.class, bundle)
+                .add("Resumo", ResumoFragment.class, bundle)
+                .add("Estatísticas", EstatisticasFragment.class, bundle)
+                .add("Retrospecto", RetrospectoFragment.class, bundle)
+                .add("Tabela", TabelaFragment.class, bundle)
                 .create();
 
         FragmentStatePagerItemAdapter adapter = new FragmentStatePagerItemAdapter(
                 getSupportFragmentManager(), pages);
 
         vpJogo.setAdapter(adapter);
+        tabJogo.setDistributeEvenly(false);
         tabJogo.setViewPager(vpJogo);
     }
 

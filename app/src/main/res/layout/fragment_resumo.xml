@@ -15,115 +15,309 @@
         tools:context=".fragments.jogo.ResumoFragment">
 
 
-        <ImageView
-            android:id="@+id/ivBadgeVis"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-        <ImageView
-            android:id="@+id/ivBadgeCasa"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_gallery" />
-
-        <TextView
-            android:id="@+id/tvNomeVis"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline10"
-            app:layout_constraintStart_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toBottomOf="@+id/ivBadgeVis" />
-
-        <TextView
-            android:id="@+id/tvNomeCasa"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
-            app:layout_constraintTop_toBottomOf="@+id/ivBadgeCasa" />
-
-        <TextView
-            android:id="@+id/tvX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="x"
-            app:layout_constraintEnd_toStartOf="@+id/tvScoreVis"
-            app:layout_constraintStart_toEndOf="@+id/tvScoreCasa"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoraPartida" />
-
-        <TextView
-            android:id="@+id/tvScoreVis"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="24dp"
-            android:text="0"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoraPartida" />
-
-        <TextView
-            android:id="@+id/tvScoreCasa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
-            android:text="0"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/tvHoraPartida" />
-
-        <TextView
-            android:id="@+id/tvHoraPartida"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvNomeLiga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:background="@android:color/white"
+            android:elevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/tvNomeCasa" />
+            <ImageView
+                android:id="@+id/ivBadgeCasa"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/tvScoreCasa"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <ImageView
+                android:id="@+id/ivBadgeVis"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                app:layout_constraintStart_toEndOf="@+id/tvScoreVis"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="3dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toBottomOf="@+id/tvHoraPartida">
+
+                <ImageView
+                    android:id="@+id/ivCompeticaoResumo"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="2dp"
+                    app:srcCompat="@drawable/ic_escudo_transparente" />
+
+                <TextView
+                    android:id="@+id/tvNomeLiga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="2dp"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="2dp"
+                    android:text="TextView"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvNomeVis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivBadgeVis"
+                app:layout_constraintStart_toStartOf="@+id/ivBadgeVis"
+                app:layout_constraintTop_toBottomOf="@+id/ivBadgeVis" />
+
+            <TextView
+                android:id="@+id/tvNomeCasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/lAtkDef"
+                app:layout_constraintEnd_toEndOf="@+id/ivBadgeCasa"
+                app:layout_constraintStart_toStartOf="@+id/ivBadgeCasa"
+                app:layout_constraintTop_toBottomOf="@+id/ivBadgeCasa" />
+
+            <TextView
+                android:id="@+id/tvScoreCasa"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/background_3"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBadgeCasa"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/ivBadgeCasa" />
+
+            <TextView
+                android:id="@+id/tvHoraPartida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvScoreVis"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/background_3"
+                android:gravity="center"
+                android:text="0"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivBadgeVis"
+                app:layout_constraintStart_toStartOf="@+id/guideline8"
+                app:layout_constraintTop_toTopOf="@+id/ivBadgeVis" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/lAtkDef"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/background_3"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNomeCasa">
+
+                <TextView
+                    android:id="@+id/tvDef2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="50%"
+                    android:textSize="12sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tvDef" />
+
+                <TextView
+                    android:id="@+id/tvDef1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="50%"
+                    android:textSize="12sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
+                    app:layout_constraintEnd_toStartOf="@+id/tvDef"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvAtk2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="50%"
+                    android:textSize="12sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tvAtk" />
+
+                <TextView
+                    android:id="@+id/tvAtk1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="50%"
+                    android:textSize="12sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
+                    app:layout_constraintEnd_toStartOf="@+id/tvAtk"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvAtk"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Ataque"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tvAtk2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tvAtk1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvDef"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="Defesa"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toStartOf="@+id/tvDef2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/tvDef1"
+                    app:layout_constraintTop_toBottomOf="@+id/pbAtk2" />
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/pbAtk1"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toStartOf="@+id/pbAtk2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAtk"
+                    app:rcBackgroundColor="#1C1C1C"
+                    app:rcProgressColor="#D50000"
+                    app:rcRadius="3dp"
+                    app:rcReverse="true"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/pbAtk2"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pbAtk1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/pbAtk1"
+                    app:rcBackgroundColor="#1C1C1C"
+                    app:rcProgressColor="#304FFE"
+                    app:rcRadius="3dp"
+                    app:rcReverse="false"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/pbDef1"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/pbDef2"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDef"
+                    app:rcBackgroundColor="#1C1C1C"
+                    app:rcProgressColor="#D50000"
+                    app:rcRadius="3dp"
+                    app:rcReverse="true"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+                <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                    android:id="@+id/pbDef2"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/pbDef1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/pbDef1"
+                    app:rcBackgroundColor="#1C1C1C"
+                    app:rcProgressColor="#304FFE"
+                    app:rcRadius="3dp"
+                    app:rcReverse="false"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.10948905" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.90" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lProbPreJogo"
@@ -133,6 +327,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_1"
+            android:elevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,6 +340,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/divider8"
                 app:layout_constraintTop_toBottomOf="@id/tableGols">
@@ -160,14 +358,16 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:text="Sim"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/textView46"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:text="Não"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                 </TableRow>
 
@@ -181,14 +381,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/tvPn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
                 </TableRow>
 
             </TableLayout>
@@ -200,6 +402,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:elevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider7"
                 app:layout_constraintTop_toBottomOf="@id/tableVitoria">
@@ -214,14 +417,16 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:text="+ de 3"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/textView41"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:text="Até 3"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
                 </TableRow>
 
                 <TableRow
@@ -234,14 +439,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/tvP3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
                 </TableRow>
 
             </TableLayout>
@@ -253,6 +460,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
+                android:elevation="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/divider6"
                 app:layout_constraintTop_toBottomOf="@id/textView17">
@@ -268,21 +476,24 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Casa" />
+                        android:text="Casa"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/textView29"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Visitante" />
+                        android:text="Visitante"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/textView28"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="Empate" />
+                        android:text="Empate"
+                        android:textStyle="italic" />
                 </TableRow>
 
                 <TableRow
@@ -295,21 +506,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/tvPe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                     <TextView
                         android:id="@+id/tvPv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10%"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textStyle="italic" />
 
                 </TableRow>
 
@@ -323,6 +537,7 @@
                 android:text="Gols:"
                 android:textAlignment="center"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/divider7"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/divider7" />
@@ -335,6 +550,7 @@
                 android:text="Vitória:"
                 android:textAlignment="center"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/divider6"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/divider6" />
@@ -343,6 +559,7 @@
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Probabilidades pré-jogo:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -355,6 +572,7 @@
                 android:layout_marginStart="16dp"
                 android:text="Ambas"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/textView19"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/divider8" />
@@ -364,8 +582,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="marcam:"
+                android:text="Marcam:"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/divider8"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView42" />
@@ -406,8 +625,6 @@
                 android:id="@+id/divider5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -416,206 +633,71 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lAtkDef"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/background_1"
-            android:elevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider">
-
-            <TextView
-                android:id="@+id/tvDef2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="50%"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvDef" />
-
-            <TextView
-                android:id="@+id/tvDef1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="50%"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
-                app:layout_constraintEnd_toStartOf="@+id/tvDef"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tvAtk2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="50%"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvAtk" />
-
-            <TextView
-                android:id="@+id/tvAtk1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="50%"
-                android:textSize="12sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
-                app:layout_constraintEnd_toStartOf="@+id/tvAtk"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tvAtk"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="Ataque"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tvAtk2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvAtk1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvDef"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:text="Defesa"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toStartOf="@+id/tvDef2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/tvDef1"
-                app:layout_constraintTop_toBottomOf="@+id/pbAtk2" />
-
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/pbAtk1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                app:layout_constraintEnd_toStartOf="@+id/pbAtk2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvAtk"
-                app:rcBackgroundColor="@android:color/black"
-                app:rcBackgroundPadding="1dp"
-                app:rcProgressColor="#D50000"
-                app:rcRadius="7dp"
-                app:rcReverse="true"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
-
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/pbAtk2"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/pbAtk1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/pbAtk1"
-                app:rcBackgroundColor="@android:color/black"
-                app:rcBackgroundPadding="1dp"
-                app:rcProgressColor="#304FFE"
-                app:rcRadius="7dp"
-                app:rcReverse="false"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
-
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/pbDef1"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/pbDef2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDef"
-                app:rcBackgroundColor="@android:color/black"
-                app:rcBackgroundPadding="1dp"
-                app:rcProgressColor="#D50000"
-                app:rcRadius="7dp"
-                app:rcReverse="true"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
-
-            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-                android:id="@+id/pbDef2"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                app:layout_constraintBottom_toBottomOf="@+id/pbDef1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/pbDef1"
-                app:rcBackgroundColor="@android:color/black"
-                app:rcBackgroundPadding="1dp"
-                app:rcProgressColor="#304FFE"
-                app:rcRadius="7dp"
-                app:rcReverse="false"></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lAcoesDeJogo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
             android:background="@drawable/background_1"
-            android:elevation="1dp"
+            android:elevation="2dp"
             app:layout_constraintBottom_toTopOf="@+id/lFormacoes"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lAtkDef">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-            <FrameLayout
-                android:id="@+id/frameLayout"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Início de Jogo'"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Fim de Jogo'"
+                android:textSize="12sp"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/rvAcoesDeJogo" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvAcoesDeJogo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:itemCount="3" />
-            </FrameLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAcoesDeJogo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13"
+                tools:itemCount="3" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lFormacoes"
             android:layout_width="0dp"
-            android:layout_height="501dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/background_1"
-            android:elevation="1dp"
+            android:elevation="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lAcoesDeJogo">
@@ -623,71 +705,70 @@
             <ImageView
                 android:id="@+id/ivCampo"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:foregroundGravity="fill_horizontal"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="@id/tvFormacaoVis"
+                android:layout_height="400dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/campo" />
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:srcCompat="@drawable/campo_futebol" />
 
             <TextView
                 android:id="@+id/tvFormacaoCasa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:text="TextView"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="8dp"
+                android:text="4-1-4-1"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/tvTitularesCasa"
+                app:layout_constraintTop_toTopOf="@+id/ivCampo" />
 
             <TextView
                 android:id="@+id/tvFormacaoVis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:text="TextView"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_marginEnd="8dp"
+                android:text="4-1-4-1"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCampo"
+                app:layout_constraintEnd_toEndOf="@+id/tvTitularesVis" />
 
             <TextView
                 android:id="@+id/tvTitularesCasa"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:text="TextView"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline5"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivCampo"
+                app:layout_constraintStart_toStartOf="@+id/ivCampo"
                 app:layout_constraintTop_toTopOf="@+id/guideline" />
 
             <TextView
                 android:id="@+id/tvTitularesVis"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:text="TextView"
+                android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ivCampo"
+                app:layout_constraintStart_toStartOf="@+id/ivCampo"
                 app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/tvSubstitutosVis"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -727,7 +808,29 @@
                 android:layout_marginTop="16dp"
                 android:text="subsCasa"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFormacaoVis" />
+                app:layout_constraintTop_toBottomOf="@+id/tvFormacaoVis" />-->
+
+            <TextView
+                android:id="@+id/tvGoleiroCasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/ivCampo"
+                app:layout_constraintStart_toStartOf="@+id/ivCampo"
+                app:layout_constraintTop_toTopOf="@+id/ivCampo" />
+
+            <TextView
+                android:id="@+id/tvGoleiroVis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@android:color/white"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCampo"
+                app:layout_constraintEnd_toEndOf="@+id/ivCampo"
+                app:layout_constraintStart_toStartOf="@+id/ivCampo" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
@@ -757,6 +860,25 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.55" />
 
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Formações"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -768,7 +890,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/background_1"
-            android:elevation="1dp"
+            android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -778,6 +900,7 @@
                 android:id="@+id/tvInfoPartida"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Informações da Partida"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -788,7 +911,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="00/00/0000"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -798,7 +921,7 @@
                 android:id="@+id/tvRodada"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="10"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -808,7 +931,7 @@
                 android:id="@+id/tvArbitro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="garciba garciba"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -818,7 +941,7 @@
                 android:id="@+id/tvEstadio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="Maracanã (fluminense)"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -828,7 +951,7 @@
                 android:id="@+id/tvd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Data:"
                 android:textSize="12sp"
@@ -840,7 +963,7 @@
                 android:id="@+id/tvr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:text="Rodada:"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -851,7 +974,7 @@
                 android:id="@+id/tva"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:text="Árbitro:"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -862,10 +985,12 @@
                 android:id="@+id/tve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="Estádio:"
                 android:textSize="12sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tva" />
 
@@ -873,49 +998,12 @@
                 android:id="@+id/divider4"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvInfoPartida" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.10948905" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.35279804" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.50" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.65" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.90" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

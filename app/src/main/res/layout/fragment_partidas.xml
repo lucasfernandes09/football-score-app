@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/colorMain"
         tools:context=".fragments.equipe.PartidasFragment">
 
         <Button
@@ -22,6 +22,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/background_click"
+            android:elevation="2dp"
             android:text="Próximas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnUltimas"
@@ -34,7 +35,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/background_click"
+            android:background="@drawable/background_2"
+            android:elevation="2dp"
             android:text="Últimas"
             app:layout_constraintEnd_toStartOf="@+id/btnProximas"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,9 +45,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPartidas"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"

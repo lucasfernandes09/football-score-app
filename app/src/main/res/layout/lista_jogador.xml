@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="1dp"
-    android:layout_marginEnd="1dp"
-    android:layout_marginBottom="1dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginBottom="4dp"
     android:background="@drawable/background_1"
-    android:elevation="1dp">
+    android:elevation="2dp"
+    android:padding="3dp">
 
     <TextView
         android:id="@+id/tvNomeJogador"
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="12sp"
+        android:textStyle="italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvNomeJogador"
         app:layout_constraintStart_toEndOf="@+id/tvNomeJogador" />
 
@@ -45,8 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
         android:text="TextView"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvNumeroJogador" />
 

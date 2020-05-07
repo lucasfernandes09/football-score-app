@@ -11,6 +11,7 @@ public class Times implements Parcelable {
     private String team_name;
     private String team_badge;
     private List<Jogador> players;
+    private List<Treinador> coaches;
 
     public Times() {
     }
@@ -20,6 +21,7 @@ public class Times implements Parcelable {
         team_name = in.readString();
         team_badge = in.readString();
         players = in.createTypedArrayList(Jogador.CREATOR);
+        coaches = in.createTypedArrayList(Treinador.CREATOR);
     }
 
     public static final Creator<Times> CREATOR = new Creator<Times>() {
@@ -66,6 +68,14 @@ public class Times implements Parcelable {
         this.players = players;
     }
 
+    public List<Treinador> getCoaches() {
+        return coaches;
+    }
+
+    public void setCoaches(List<Treinador> coaches) {
+        this.coaches = coaches;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -77,5 +87,6 @@ public class Times implements Parcelable {
         parcel.writeString(team_name);
         parcel.writeString(team_badge);
         parcel.writeTypedList(players);
+        parcel.writeTypedList(coaches);
     }
 }

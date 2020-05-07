@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity
             }, ano, mes, dia);
             datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
             datePickerDialog.setAccentColor(getResources().getColor(R.color.colorPrimary));
-            datePickerDialog.setTitle("Data");
+            datePickerDialog.setTitle("Selecione um dia");
             datePickerDialog.show(getSupportFragmentManager(), "DatePickerDialog");
         }
 
@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity
 
     public void tabs() {
         FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
-                .add("jogos", JogosFragment.class, bundle)
+                .add("Jogos", JogosFragment.class, bundle)
                 .add("Competições", CompeticoesFragment.class, bundle)
                 .create();
 
@@ -281,7 +281,7 @@ public class MainActivity extends AppCompatActivity
 
     public void tabsJogosAoVivo() {
         FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
-                .add("jogos", JogosAoVivoFragment.class, bundle)
+                .add("Jogos", JogosAoVivoFragment.class, bundle)
                 .add("Competições", CompeticoesFragment.class, bundle)
                 .create();
 
