@@ -8,6 +8,7 @@ import com.app.app1.RetrofitService;
 import com.app.app1.activities.user.LoginActivity;
 import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.app.app1.config.ConfiguracaoFirebase;
+import com.app.app1.fragments.TesteFragment;
 import com.app.app1.fragments.main.CompeticoesFragment;
 import com.app.app1.fragments.main.JogosAoVivoFragment;
 import com.app.app1.fragments.main.JogosFragment;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -41,6 +43,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
@@ -54,15 +59,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SmartTabLayout smartTabLayout;
     private ProgressBar progressBar;
     private FloatingActionButton fab;
     private List<Jogos> listaDeJogos = new ArrayList<>();
-    private List<Jogos> listaDeJogosAoVivo = new ArrayList<>();
     private String dataSelecionada = "";
     private String dataAtual = dataHoje();
     private FirebaseAuth autenticacao;
@@ -79,17 +82,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setElevation(0);
-
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
+        AppCompatDelegate.setDefaultNightMode(
+                AppCompatDelegate.MODE_NIGHT_YES
+        );
 
 
         //-----------------------------------------------------------
@@ -117,16 +114,6 @@ public class MainActivity extends AppCompatActivity
         public void run() {
             chamadaJogosAPI();
             handler.postDelayed(this, 60*1000); //60s'
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -169,37 +156,18 @@ public class MainActivity extends AppCompatActivity
         //usuário
         if(id == R.id.item_usuario) {
             if(autenticacao.getCurrentUser() != null) {
-                startActivity(new Intent(getApplicationContext(), UsuarioLogadoActivity.class));
+                startActivity(new Intent(this, UsuarioLogadoActivity.class));
             }else {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
             }
         }
-        return super.onOptionsItemSelected(item);
-    }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        //configs
+        if(id == R.id.item_config) {
+            startActivity(new Intent(this, ConfigActivity.class));
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     public void chamadaJogosAPI() {
@@ -248,11 +216,6 @@ public class MainActivity extends AppCompatActivity
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     listaDeJogosSalvos.add(ds.getValue(Jogos.class));
                 }
-                if(!listaDeJogos.isEmpty()) {
-                    Log.i("info", "não nulos");
-                    listaDeJogos.get(0).setMatch_live("1");
-                    listaDeJogos.get(1).setMatch_live("1");
-                }
                 JogosSalvos.setarJogosSalvos(listaDeJogos, listaDeJogosSalvos);
                 tabs();
                 Log.i("info", "onDataChange MainActivity");
@@ -266,7 +229,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void tabs() {
-        FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
+        FragmentPagerItems pages = FragmentPagerItems.with(this)
                 .add("Jogos", JogosFragment.class, bundle)
                 .add("Competições", CompeticoesFragment.class, bundle)
                 .create();
@@ -280,7 +243,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void tabsJogosAoVivo() {
-        FragmentPagerItems pages = FragmentPagerItems.with(getApplicationContext())
+        FragmentPagerItems pages = FragmentPagerItems.with(this)
                 .add("Jogos", JogosAoVivoFragment.class, bundle)
                 .add("Competições", CompeticoesFragment.class, bundle)
                 .create();

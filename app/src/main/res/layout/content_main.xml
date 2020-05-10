@@ -38,15 +38,14 @@
         app:stl_overlineThickness="0dp"
         app:stl_titleOffset="36dp"
         app:stl_underlineColor="#000000"
-        app:stl_underlineThickness="0dp" >
+        app:stl_underlineThickness="0dp">
 
     </com.ogaclejapan.smarttablayout.SmartTabLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>
 

@@ -11,5 +11,9 @@
         android:icon="@drawable/ic_calendario_24dp"
         android:title="calendario"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/item_config"
+        android:title="Configurações"
+        app:showAsAction="never" />
 
 </menu>
