@@ -19,7 +19,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:text="TextView"
-        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +29,6 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="12sp"
-        android:textStyle="italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvNomeJogador"
         app:layout_constraintStart_toEndOf="@+id/tvNomeJogador" />
 
@@ -60,10 +59,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
         android:text="TextView"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvVermelhoJogador"
+        app:layout_constraintStart_toStartOf="@+id/tvGolsJogador"
         app:layout_constraintTop_toBottomOf="@+id/tvVermelhoJogador" />
 
     <TextView
@@ -72,6 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
+        android:drawableTop="@drawable/ic_cartao_yellow"
+        android:drawablePadding="2dp"
+        android:gravity="center"
         android:text="TextView"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/tvVermelhoJogador"
@@ -83,6 +85,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
+        android:drawableTop="@drawable/ic_cartao_red"
+        android:drawablePadding="2dp"
+        android:gravity="center"
         android:text="TextView"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +99,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:gravity="center_vertical"
+        android:drawableTop="@drawable/ic_bola_futebol"
+        android:gravity="center"
         android:text="TextView"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/tvAmareloJogador"

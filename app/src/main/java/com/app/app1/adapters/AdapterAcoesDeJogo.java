@@ -40,13 +40,13 @@ public class AdapterAcoesDeJogo extends RecyclerView.Adapter<AdapterAcoesDeJogo.
         //atribuir icone
         switch (acoesDoJogo.getType()) {
             case "marcadores":
-                icon = R.drawable.ic_bola;
+                icon = R.drawable.ic_bola_futebol;
                 break;
             case "cartaoVermelho":
-                icon = R.drawable.ic_cartao_vermelho;
+                icon = R.drawable.ic_cartao_red;
                 break;
             case "substituição":
-                icon = R.drawable.ic_menu_share;
+                icon = R.drawable.ic_substituicao;
         }
 
         //separar casa/vis e definir icone

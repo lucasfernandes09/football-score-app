@@ -1,6 +1,7 @@
 package com.app.app1.fragments.jogo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -99,6 +100,8 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
                         //background
                         clRestrospectoVis.setBackgroundResource(R.drawable.background_click);
                         clRestrospectoCasa.setBackgroundResource(R.drawable.background_2);
+                        tvUJCasa.setTextColor(getResources().getColor(R.color.colorMain2));
+                        tvUJVis.setTextColor(getResources().getColor(R.color.colorText));
                     }
                 }
             });
@@ -114,6 +117,8 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
                         //background
                         clRestrospectoCasa.setBackgroundResource(R.drawable.background_click);
                         clRestrospectoVis.setBackgroundResource(R.drawable.background_2);
+                        tvUJVis.setTextColor(getResources().getColor(R.color.colorMain2));
+                        tvUJCasa.setTextColor(getResources().getColor(R.color.colorText));
                     }
                 }
             });

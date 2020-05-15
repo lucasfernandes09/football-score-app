@@ -9,20 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ConfigActivity"></activity>
-        <activity android:name=".activities.user.AlterarSenhaActivity" />
+        <activity android:name=".activities.ConfigActivity"
+            android:label="Configurações" />
+        <activity android:name=".activities.user.AlterarSenhaActivity"
+            android:label="Alterar Senha"/>
         <activity android:name=".activities.user.UsuarioLogadoActivity" />
-        <activity android:name=".activities.user.LoginActivity" />
-        <activity android:name=".activities.user.CadastroUsuarioActivity" />
+        <activity android:name=".activities.user.LoginActivity"
+            android:label="Login" />
+        <activity android:name=".activities.user.CadastroUsuarioActivity"
+            android:label="Cadastro"/>
         <activity android:name=".activities.EquipeActivity" />
         <activity android:name=".activities.JogosCompeticaoActivity" />
-        <activity
-            android:name=".activities.JogoActivity"
-            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.JogoActivity" />
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

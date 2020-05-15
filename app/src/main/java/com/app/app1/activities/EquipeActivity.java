@@ -63,6 +63,10 @@ public class EquipeActivity extends AppCompatActivity {
         vpEquipe = findViewById(R.id.vpEquipe);
         tabEquipe = findViewById(R.id.tabEquipe);
 
+        //configs iniciais
+        String idUsuario = UsuarioFirebase.getIdUsuario();
+        jogosRef = ConfiguracaoFirebase.getFirebaseDatabase().child("usuarios").child(idUsuario).child("listaDeJogos");
+
         //recuperar objetos enviados de ResumoFragment(JogoActivity)
         jogo = getIntent().getExtras().getParcelable("jogo");
         home = getIntent().getExtras().getBoolean("home");
@@ -180,8 +184,6 @@ public class EquipeActivity extends AppCompatActivity {
     }
 
     public void recuperarJogosSalvos() {
-        String idUsuario = UsuarioFirebase.getIdUsuario();
-        jogosRef = ConfiguracaoFirebase.getFirebaseDatabase().child("usuarios").child(idUsuario).child("listaDeJogos");
         eventListener = jogosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -205,7 +207,7 @@ public class EquipeActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         //para o listener dessa activity não ficar executando
-        if(UsuarioFirebase.getUsuarioAtual() != null) {
+        if(eventListener != null) {
             jogosRef.removeEventListener(eventListener);
         }
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp"
+    android:height="16dp"
+    android:viewportWidth="350"
+    android:viewportHeight="350"
+    android:tint="#FFD600">
+    <path
+        android:fillColor="#FFAB00"
+        android:name="Retângulo Arredondado 1"
+        android:pathData="m84 0h186c5.5 0 10 4.6 10 10.3v329.5c0 5.7 -4.5 10.3 -10 10.3h-186c-5.5 0 -10 -4.6 -10 -10.3v-329.5c0 -5.7 4.5 -10.3 10 -10.3z" />
+</vector>

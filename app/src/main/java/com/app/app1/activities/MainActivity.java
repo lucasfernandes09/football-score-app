@@ -1,6 +1,7 @@
 package com.app.app1.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.app.app1.R;
@@ -8,7 +9,6 @@ import com.app.app1.RetrofitService;
 import com.app.app1.activities.user.LoginActivity;
 import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.app.app1.config.ConfiguracaoFirebase;
-import com.app.app1.fragments.TesteFragment;
 import com.app.app1.fragments.main.CompeticoesFragment;
 import com.app.app1.fragments.main.JogosAoVivoFragment;
 import com.app.app1.fragments.main.JogosFragment;
@@ -22,13 +22,9 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,13 +35,9 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
@@ -54,6 +46,7 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -80,23 +73,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setElevation(0);
-        setSupportActionBar(toolbar);
+        //actionBar
+        Objects.requireNonNull(getSupportActionBar()).setElevation(0);
 
-        AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES
-        );
-
-
-        //-----------------------------------------------------------
         //referenciação
         progressBar = findViewById(R.id.progressBar);
         smartTabLayout = findViewById(R.id.viewPagerTab);
         viewPager = findViewById(R.id.viewPager);
         fab = findViewById(R.id.fab);
 
-        configClicks();
+        //modo noturno
+        SharedPreferences preferences = getSharedPreferences(ConfigActivity.ARQUIVO_PREFERENCIA, 0);
+        if(preferences.contains("modoAtual")) {
+            int modoAtual = preferences.getInt("modoAtual", 1);
+            AppCompatDelegate.setDefaultNightMode(modoAtual);
+        }
+
+        configClicksAoVivo();
         fab.setOnClickListener(onClickAoVivo);
 
         bundle = new Bundle();
@@ -149,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
             }, ano, mes, dia);
             datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
             datePickerDialog.setAccentColor(getResources().getColor(R.color.colorPrimary));
+            if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) { datePickerDialog.setThemeDark(true); }
             datePickerDialog.setTitle("Selecione um dia");
             datePickerDialog.show(getSupportFragmentManager(), "DatePickerDialog");
         }
@@ -255,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
         smartTabLayout.setViewPager(viewPager);
     }
 
-    public void configClicks() {
+    public void configClicksAoVivo() {
         onClickAoVivo = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -269,7 +263,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tabs();
-                fab.setImageResource(R.drawable.ic_aovivo);
+                fab.setImageResource(R.drawable.ic_relogio_24dp);
                 fab.setOnClickListener(onClickAoVivo);
             }
         };

@@ -83,8 +83,11 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
                 public void onClick(View view) {
                     listaDeJogos = listaDeUltimosJogos;
                     rvPartidas.setAdapter(new AdapterJogos(listaDeUltimosJogos, PartidasFragment.this, nomeEquipe));
+                    //background
                     btnUltimas.setBackgroundResource(R.drawable.background_2);
                     btnProximas.setBackgroundResource(R.drawable.background_click);
+                    btnUltimas.setTextColor(getResources().getColor(R.color.colorMain2));
+                    btnProximas.setTextColor(getResources().getColor(R.color.colorText));
                 }
             });
 
@@ -94,8 +97,11 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
                 public void onClick(View view) {
                     listaDeJogos = listaDeProximosJogos;
                     rvPartidas.setAdapter(new AdapterJogos(listaDeProximosJogos, PartidasFragment.this, nomeEquipe));
+                    //background
                     btnProximas.setBackgroundResource(R.drawable.background_2);
                     btnUltimas.setBackgroundResource(R.drawable.background_click);
+                    btnProximas.setTextColor(getResources().getColor(R.color.colorMain2));
+                    btnUltimas.setTextColor(getResources().getColor(R.color.colorText));
                 }
             });
         }

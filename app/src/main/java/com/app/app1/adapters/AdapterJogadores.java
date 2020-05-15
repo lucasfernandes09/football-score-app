@@ -79,20 +79,19 @@ public class AdapterJogadores extends RecyclerView.Adapter<AdapterJogadores.MyVi
             player_goals = itemView.findViewById(R.id.tvGolsJogador);
             player_yellow_cards = itemView.findViewById(R.id.tvAmareloJogador);
             player_red_cards = itemView.findViewById(R.id.tvVermelhoJogador);
-
         }
     }
 
     public String traduzirPosicao(String posicaoJogador) {
         switch (posicaoJogador) {
             case "Goalkeepers":
-                return "Goleiro";
+                return "goleiro";
             case "Defenders":
-                return "Defensor";
+                return "defensor";
             case "Midfielders":
-                return "Meia";
+                return "meia";
             case "Forwards":
-                return "Atacante";
+                return "atacante";
             default:
                 return "";
         }

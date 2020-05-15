@@ -27,6 +27,7 @@
             android:id="@+id/tvPartidasSalvas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:background="@color/colorMain"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"

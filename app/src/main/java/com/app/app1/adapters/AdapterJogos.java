@@ -55,7 +55,7 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
 
         holder.match_hometeam_name.setText(jogo.getMatch_hometeam_name());
         holder.match_awayteam_name.setText(jogo.getMatch_awayteam_name());
-        holder.match_time.setText(jogo.getMatch_time() + "\n" +jogo.getMatch_date());
+        holder.match_time.setText(jogo.getMatch_time());
 
         holder.cbSalvarJogo.setOnCheckedChangeListener(null);
         holder.cbSalvarJogo.setChecked(jogo.getSelecionado());
@@ -82,6 +82,15 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
         return this.listaDeJogos.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView match_time, match_hometeam_name, match_awayteam_name, match_hometeam_score, match_awayteam_score;
@@ -126,13 +135,14 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
                     if(retrospecto) {
                         holder.cbSalvarJogo.setClickable(false);
                         setarDrawables(holder, jogo);
+                    }else {
+                        holder.cbSalvarJogo.setClickable(true);
+                        holder.match_hometeam_score.setText(jogo.getMatch_hometeam_score());
+                        holder.match_awayteam_score.setText(jogo.getMatch_awayteam_score());
                     }
-                    holder.match_hometeam_score.setText(jogo.getMatch_hometeam_score());
-                    holder.match_awayteam_score.setText(jogo.getMatch_awayteam_score());
                     break;
 
                 case "Postponed":
-                    holder.cbSalvarJogo.setVisibility(View.INVISIBLE);
                     holder.match_awayteam_score.setText("Adiado");
                     holder.match_hometeam_score.setText("");
                     break;

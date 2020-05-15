@@ -10,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorMain2">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView20"
@@ -59,29 +58,18 @@
         android:id="@+id/tvLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorMain2"
         android:drawableStart="@drawable/ic_usuario_azul"
         android:drawablePadding="20dp"
+        android:filterTouchesWhenObscured="true"
+        android:focusableInTouchMode="true"
         android:onClick="login"
         android:padding="20dp"
         android:text="Login" />
 
-    <TextView
-        android:id="@+id/tvConfigsNotificação"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorMain2"
-        android:drawableStart="@drawable/ic_notificacao"
-        android:drawableEnd="@drawable/ic_em_breve"
-        android:drawablePadding="20dp"
-        android:padding="20dp"
-        android:text="Configurações de notificação" />
-
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/switchMN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorMain2"
         android:drawableStart="@drawable/ic_noturno"
         android:drawablePadding="20dp"
         android:padding="20dp"
@@ -89,35 +77,43 @@
         android:textColor="?android:attr/textColorSecondary" />
 
     <TextView
+        android:id="@+id/tvConfigsNotificação"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_notificacao"
+        android:drawablePadding="20dp"
+        android:padding="20dp"
+        android:text="Configurações de notificação"
+        android:textColor="#7BCACACA" />
+
+    <TextView
         android:id="@+id/tvIdioma"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorMain2"
         android:drawableStart="@drawable/ic_idioma"
         android:drawablePadding="20dp"
         android:padding="20dp"
-        android:text="Idioma" />
+        android:text="Idioma"
+        android:textColor="#7BCACACA" />
 
     <TextView
         android:id="@+id/tvCompartilharApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorMain2"
         android:drawableStart="@drawable/ic_menu_share"
-        android:drawableEnd="@drawable/ic_em_breve"
         android:drawablePadding="20dp"
         android:padding="20dp"
-        android:text="Compartilhar app" />
+        android:text="Compartilhar app"
+        android:textColor="#7BCACACA" />
 
     <TextView
         android:id="@+id/tvAvaliarGP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorMain2"
         android:drawableStart="@drawable/ic_avaliar"
-        android:drawableEnd="@drawable/ic_em_breve"
         android:drawablePadding="20dp"
         android:padding="20dp"
-        android:text="Avaliar na google play" />
+        android:text="Avaliar na google play"
+        android:textColor="#7BCACACA" />
 
 </LinearLayout>
