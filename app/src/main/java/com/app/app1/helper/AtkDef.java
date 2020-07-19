@@ -9,18 +9,18 @@ import java.util.ArrayList;
 public class AtkDef {
 
     //ATK
-    private static float apvNoGol1, fNoGol1, fNoGol2;
-    private static float apvFfora1, fFora1, fFora2;
-    private static float apvAPerigosos1, aPerigosos1, aPerigosos2;
-    private static float tGols, gFeitos1, gFeitos2;
+    private float apvNoGol1, fNoGol1, fNoGol2;
+    private float apvFfora1, fFora1, fFora2;
+    private float apvAPerigosos1, aPerigosos1, aPerigosos2;
+    private float tGols, gFeitos1, gFeitos2;
     //DEF
-    private static float apvFBloqueadas1, fBloqueadas1, fBloqueadas2;
-    private static float apvDefGoleiro1, DefGoleiro1, DefGoleiro2;
-    private static float apvDesarmes1 = 0, desarmes1, desarmes2;
-    private static float golsNaoSofridos1, golsNaoSofridos2;
+    private float apvFBloqueadas1, fBloqueadas1, fBloqueadas2;
+    private float apvDefGoleiro1, DefGoleiro1, DefGoleiro2;
+    private float apvDesarmes1 = 0, desarmes1, desarmes2;
+    private float golsNaoSofridos1, golsNaoSofridos2;
 
 
-    public static ArrayList<Float> getAtkDef(Jogos jogo) {
+    public ArrayList<Float> getAtkDef(Jogos jogo) {
         recuperarEstatisticas(jogo);
 
         //gols
@@ -35,23 +35,29 @@ public class AtkDef {
         float apvGNaoSofridos1 = golsNaoSofridos1 / tGols;
 
         //Média ATK
-        float atk1 = (apvNoGol1 + apvFfora1 + apvAPerigosos1 + apvGFeitos1)/4;
-        float atk2 = 1 - atk1;
+        Float atk1 = (apvNoGol1 + apvFfora1 + apvAPerigosos1 + apvGFeitos1)/4;
+        Float atk2 = 1 - atk1;
 
         //Média DEF
-        float def1 = (apvFBloqueadas1 + apvDefGoleiro1 + apvGNaoSofridos1)/3;
-        float def2 = 1 - def1;
+        Float def1 = (apvFBloqueadas1 + apvDefGoleiro1 + apvGNaoSofridos1)/3;
+        Float def2 = 1 - def1;
 
-        ArrayList<Float> listaDeTermos = new ArrayList<>();
-        listaDeTermos.add(atk1*100);
-        listaDeTermos.add(atk2*100);
-        listaDeTermos.add(def1*100);
-        listaDeTermos.add(def2*100);
+        //verifica se tem algum termo NaN (not a number in float)
+        ArrayList<Float> listaDeTermos;
+        if(atk1.isNaN() || atk2.isNaN() || def1.isNaN() || def2.isNaN()) {
+            listaDeTermos = null;
+        }else {
+            listaDeTermos = new ArrayList<>();
+            listaDeTermos.add(atk1*100);
+            listaDeTermos.add(atk2*100);
+            listaDeTermos.add(def1*100);
+            listaDeTermos.add(def2*100);
+        }
 
         return listaDeTermos;
     }
 
-    public static void recuperarEstatisticas(Jogos jogo) {
+    public void recuperarEstatisticas(Jogos jogo) {
         for (int i=0; i<jogo.getStatistics().size(); i++) {
             float home = Float.parseFloat(jogo.getStatistics().get(i).getHome().replace("%", ""));
             float away = Float.parseFloat(jogo.getStatistics().get(i).getAway().replace("%", ""));

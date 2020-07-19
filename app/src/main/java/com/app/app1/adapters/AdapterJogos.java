@@ -26,6 +26,8 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
     private String nomeEquipe;
     private Typeface bold = Typeface.defaultFromStyle(Typeface.BOLD);
     private Boolean retrospecto = false;
+    private String hora;
+
 
     public AdapterJogos(List<Jogos> listaDeJogos, JogoListener jogoListener, String nomeEquipe) {
         this.listaDeJogos = listaDeJogos;
@@ -51,11 +53,10 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Jogos jogo = this.listaDeJogos.get(position);
 
-        seAoVivo(holder, jogo);
-
         holder.match_hometeam_name.setText(jogo.getMatch_hometeam_name());
         holder.match_awayteam_name.setText(jogo.getMatch_awayteam_name());
-        holder.match_time.setText(jogo.getMatch_time());
+
+        seAoVivo(holder, jogo);
 
         holder.cbSalvarJogo.setOnCheckedChangeListener(null);
         holder.cbSalvarJogo.setChecked(jogo.getSelecionado());
@@ -64,6 +65,7 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 if(UsuarioFirebase.getUsuarioAtual() == null) {
                     Toast.makeText(holder.cbSalvarJogo.getContext(), "Faça login para salvar partidas.", Toast.LENGTH_SHORT).show();
+                    holder.cbSalvarJogo.setChecked(false);
                 }else {
                     jogo.setSelecionado(checked);
                     //atualiza lista de jogos salvos
@@ -91,6 +93,7 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
     public long getItemId(int position) {
         return position;
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView match_time, match_hometeam_name, match_awayteam_name, match_hometeam_score, match_awayteam_score;
@@ -129,6 +132,10 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
             holder.match_awayteam_score.setText(jogo.getMatch_awayteam_score());
             holder.match_awayteam_score.setTypeface(bold);
         }else {
+            holder.match_time.setText(jogo.getMatch_status());
+            holder.match_hometeam_score.setText(jogo.getMatch_hometeam_score());
+            holder.match_awayteam_score.setText(jogo.getMatch_awayteam_score());
+
             switch (jogo.getMatch_status()) {
                 case "Finished":
                     //faz alterações caso seja uma lista de retrospecto

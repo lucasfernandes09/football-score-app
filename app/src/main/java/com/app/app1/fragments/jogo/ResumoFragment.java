@@ -48,7 +48,7 @@ public class ResumoFragment extends Fragment {
     private ImageView ivBadgeCasa, ivBadgeVis, ivCampo, ivCompeticaoResumo;
     private TextView tvNomeLiga, tvHoraPartida, getTvNomeLiga, tvScoreCasa, tvScoreVis, tvNomeCasa, tvNomeVis, tvFormacaoCasa, tvFormacaoVis;
     private TextView tvTitularesCasa, tvTitularesVis, tvSubstitutosCasa, tvSubstitutosVis, tvForaDoJogoCasa, tvForaDoJogoVis, tvDataR, tvRodada, tvArbitro, tvEstadio;
-    private TextView tvGoleiroCasa, tvGoleiroVis;
+    private TextView tvGoleiroCasa, tvGoleiroVis, tvFimDeJogo;
     private RecyclerView rvAcoesDeJogo;
     private View lAcoesDeJogo, lFormacoes;
     private ConstraintLayout lAtkDef;
@@ -74,6 +74,7 @@ public class ResumoFragment extends Fragment {
         tvNomeCasa = view.findViewById(R.id.tvNomeCasa); tvNomeVis = view.findViewById(R.id.tvNomeVis);
         tvFormacaoCasa = view.findViewById(R.id.tvFormacaoCasa); tvFormacaoVis = view.findViewById(R.id.tvFormacaoVis);
         tvGoleiroCasa = view.findViewById(R.id.tvGoleiroCasa); tvGoleiroVis = view.findViewById(R.id.tvGoleiroVis);
+        tvFimDeJogo = view.findViewById(R.id.tvFimDeJogo);
         rvAcoesDeJogo = view.findViewById(R.id.rvAcoesDeJogo);
         ivCampo = view.findViewById(R.id.ivCampo);
         tvTitularesCasa = view.findViewById(R.id.tvTitularesCasa); tvTitularesVis = view.findViewById(R.id.tvTitularesVis);
@@ -129,10 +130,14 @@ public class ResumoFragment extends Fragment {
         if(jogo.getMatch_live().equals("1")) {
             tvHoraPartida.setText(jogo.getMatch_status() + "'");
             tvHoraPartida.setTextColor(Color.GREEN);
+            tvScoreCasa.setText(jogo.getMatch_hometeam_score());
+            tvScoreVis.setText(jogo.getMatch_awayteam_score());
+            tvFimDeJogo.setVisibility(View.GONE);
+            exibirAtkDef();
         }else{
             tvHoraPartida.setText(jogo.getMatch_time());
+            tvFimDeJogo.setVisibility(View.VISIBLE);
             eventoRealizado();
-
         }
     }
 
@@ -152,29 +157,37 @@ public class ResumoFragment extends Fragment {
     }
 
     public void exibirAtkDef() {
-        //progressBars
-        ArrayList<Float> listaDeTermos = AtkDef.getAtkDef(jogo);
-        Float atk1 = listaDeTermos.get(0);
-        Float atk2 = listaDeTermos.get(1);
-        Float def1 = listaDeTermos.get(2);
-        Float def2 = listaDeTermos.get(3);
+        ArrayList<Float> listaDeTermos = new AtkDef().getAtkDef(jogo);
 
-        pbAtk1.setMax(100); pbAtk1.setProgress(atk1);
-        pbAtk2.setMax(100); pbAtk2.setProgress(atk2);
-        pbDef1.setMax(100); pbDef1.setProgress(def1);
-        pbDef2.setMax(100); pbDef2.setProgress(def2);
+        if(listaDeTermos == null) {
+            lAtkDef.setVisibility(View.GONE);
+        }else {
+            lAtkDef.setVisibility(View.VISIBLE);
 
-        //textViews
-        DecimalFormat df = new DecimalFormat("#00");
-        String a1 = df.format(atk1) + "%";
-        String a2 = df.format(atk2) + "%";
-        String d1 = df.format(def1) + "%";
-        String d2 = df.format(def2) + "%";
+            //progressBars
+            Float atk1 = listaDeTermos.get(0);
+            Float atk2 = listaDeTermos.get(1);
+            Float def1 = listaDeTermos.get(2);
+            Float def2 = listaDeTermos.get(3);
 
-        tvAtk1.setText(a1);
-        tvAtk2.setText(a2);
-        tvDef1.setText(d1);
-        tvDef2.setText(d2);
+            pbAtk1.setMax(100); pbAtk1.setProgress(atk1);
+            pbAtk2.setMax(100); pbAtk2.setProgress(atk2);
+            pbDef1.setMax(100); pbDef1.setProgress(def1);
+            pbDef2.setMax(100); pbDef2.setProgress(def2);
+
+            //textViews
+            DecimalFormat df = new DecimalFormat("###");
+            String a1 = df.format(atk1) + "%";
+            String a2 = df.format(atk2) + "%";
+            String d1 = df.format(def1) + "%";
+            String d2 = df.format(def2) + "%";
+
+            tvAtk1.setText(a1);
+            tvAtk2.setText(a2);
+            tvDef1.setText(d1);
+            tvDef2.setText(d2);
+        }
+
     }
 
     public void acoesDeJogo() {

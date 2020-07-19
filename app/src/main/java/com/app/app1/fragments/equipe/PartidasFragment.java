@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ import java.util.List;
 
 
 public class PartidasFragment extends Fragment implements AdapterJogos.JogoListener {
-    private List<Jogos> listaDeJogos, listaDeUltimosJogos, listaDeProximosJogos;
+    private List<Jogos> listaDeJogos, listaDeUltimosJogos, listaDeProximosJogos, listaDeProximosJogosFinal;
     private RecyclerView rvPartidas;
     private AdapterJogos adapterJogos;
     private Button btnUltimas, btnProximas;
@@ -77,6 +76,14 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
             listaDeJogos = listaDeUltimosJogos;
             exibirPartidas();
 
+            //partidas finalizadas em proximas partidas
+            listaDeProximosJogosFinal = new ArrayList<>();
+            for(Jogos jogo : listaDeProximosJogos) {
+                if(!jogo.getMatch_status().equals("Finished")) {
+                    listaDeProximosJogosFinal.add(jogo);
+                }
+            }
+
             //clique últimas partidas
             btnUltimas.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,8 +102,8 @@ public class PartidasFragment extends Fragment implements AdapterJogos.JogoListe
             btnProximas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listaDeJogos = listaDeProximosJogos;
-                    rvPartidas.setAdapter(new AdapterJogos(listaDeProximosJogos, PartidasFragment.this, nomeEquipe));
+                    listaDeJogos = listaDeProximosJogosFinal;
+                    rvPartidas.setAdapter(new AdapterJogos(listaDeProximosJogosFinal, PartidasFragment.this, nomeEquipe));
                     //background
                     btnProximas.setBackgroundResource(R.drawable.background_2);
                     btnUltimas.setBackgroundResource(R.drawable.background_click);

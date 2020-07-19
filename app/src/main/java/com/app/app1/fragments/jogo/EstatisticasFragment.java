@@ -98,9 +98,10 @@ public class EstatisticasFragment extends Fragment {
         pbEC1.setMax(100); pbEC1.setProgress((chutesGol1/chutes1)*100);
         pbEC2.setMax(100); pbEC2.setProgress((chutesGol2/chutes2)*100);
 
-        DecimalFormat df = new DecimalFormat("#00");
+        DecimalFormat df = new DecimalFormat("###");
         String ec1 = df.format((chutesGol1/chutes1)*100) + "%";
         String ec2 = df.format((chutesGol2/chutes2)*100) + "%";
+
         tvEC1.setText(ec1);
         tvEC2.setText(ec2);
     }

@@ -46,8 +46,7 @@ public class EquipeActivity extends AppCompatActivity {
     private List<Jogos> listaDeUltimosJogos, listaDeProximosJogos, listaDeJogosSalvos;
     private Jogos jogo = new Jogos();
     private Boolean home;
-    private String team_id;
-    private String nomeEquipe;
+    private String team_id, nomeEquipe;
     private List<Times> listaDeElenco;
     private Bundle bundle = new Bundle();
     private DatabaseReference jogosRef;
@@ -64,8 +63,7 @@ public class EquipeActivity extends AppCompatActivity {
         tabEquipe = findViewById(R.id.tabEquipe);
 
         //configs iniciais
-        String idUsuario = UsuarioFirebase.getIdUsuario();
-        jogosRef = ConfiguracaoFirebase.getFirebaseDatabase().child("usuarios").child(idUsuario).child("listaDeJogos");
+
 
         //recuperar objetos enviados de ResumoFragment(JogoActivity)
         jogo = getIntent().getExtras().getParcelable("jogo");
@@ -145,8 +143,12 @@ public class EquipeActivity extends AppCompatActivity {
                     Log.i("info", "erro na resposta: " + response.message());
                 } else {
                     listaDeProximosJogos = response.body();
+
                     bundle.putParcelableArrayList("listaDeProximosJogos", (ArrayList<Jogos>) listaDeProximosJogos);
                     if(UsuarioFirebase.getUsuarioAtual() != null) {
+                        String idUsuario = UsuarioFirebase.getIdUsuario();
+                        jogosRef = ConfiguracaoFirebase.getFirebaseDatabase().child("usuarios").child(idUsuario).child("listaDeJogos");
+                        Log.i("info", "user not null");
                         recuperarJogosSalvos();
                     }
                 }
