@@ -58,6 +58,7 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
 
         seAoVivo(holder, jogo);
 
+        //checkBox
         holder.cbSalvarJogo.setOnCheckedChangeListener(null);
         holder.cbSalvarJogo.setChecked(jogo.getSelecionado());
         holder.cbSalvarJogo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -123,7 +124,6 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
         void jogoClick(int position);
     }
 
-
     public void seAoVivo(MyViewHolder holder, Jogos jogo) {
         if(jogo.getMatch_live().equals("1")) {
             configLabelTempo(holder, jogo);
@@ -132,7 +132,7 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
             holder.match_awayteam_score.setText(jogo.getMatch_awayteam_score());
             holder.match_awayteam_score.setTypeface(bold);
         }else {
-            holder.match_time.setText(jogo.getMatch_status());
+            holder.match_time.setText(jogo.getMatch_time());
             holder.match_hometeam_score.setText(jogo.getMatch_hometeam_score());
             holder.match_awayteam_score.setText(jogo.getMatch_awayteam_score());
 

@@ -1,6 +1,10 @@
 package com.app.app1.helper;
 
+
+import com.app.app1.model.Jogos;
+
 import java.util.Calendar;
+import java.util.List;
 
 public class DatasUtil {
     private static Calendar calendar = Calendar.getInstance();
@@ -26,5 +30,16 @@ public class DatasUtil {
             ano += 1;
         }
         return ano + "-" + (mes+3) + "-" + dia;
+    }
+
+    public static List<Jogos> configData(List<Jogos> listaDeJogos) {
+        int nIniciais;
+
+        for(int i=0; i<listaDeJogos.size(); i++) {
+            nIniciais = Integer.parseInt(listaDeJogos.get(i).getMatch_time().substring(0,2));
+            nIniciais -= 4;
+            listaDeJogos.get(i).setMatch_time(nIniciais + ":" + listaDeJogos.get(i).getMatch_time().substring(3,5));
+        }
+        return listaDeJogos;
     }
 }

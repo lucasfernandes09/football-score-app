@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         //toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         configClicksAoVivo();
+
         fab.setOnClickListener(onClickAoVivo);
 
         bundle = new Bundle();
@@ -145,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             }, ano, mes, dia);
             datePickerDialog.setVersion(DatePickerDialog.Version.VERSION_2);
             datePickerDialog.setAccentColor(getResources().getColor(R.color.colorPrimary));
+            //modo noturno calendário
             if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) { datePickerDialog.setThemeDark(true); }
             datePickerDialog.setTitle("Selecione um dia");
             datePickerDialog.show(getSupportFragmentManager(), "DatePickerDialog");
@@ -177,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     Log.i("info", "erro na resposta: " + response.message());
                 } else {
-                    listaDeJogos = response.body();
+                    listaDeJogos = DatasUtil.configData(response.body());
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
                     progressBar.setVisibility(View.GONE);
 
@@ -186,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
                     }else {
                         recuperarJogosSalvos();
                     }
-                    //estudar método onResponse
                 }
             }
 
@@ -194,7 +196,6 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
                 Log.i("info", "onFailure " + t.getMessage());
                 progressBar.setVisibility(View.GONE);
-                //tabsSemEvento();
                 listaDeJogos.clear();
                 bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
                 tabs();
@@ -215,7 +216,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 JogosSalvos.setarJogosSalvos(listaDeJogos, listaDeJogosSalvos);
                 tabs();
-                Log.i("info", "onDataChange MainActivity");
             }
 
             @Override
