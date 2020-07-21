@@ -6,4 +6,6 @@
     <color name="colorBackground">#1C1C1C</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorMain2">#2C2C2C</color>
+
+    <color name="colorRed">#D50000</color>
 </resources>

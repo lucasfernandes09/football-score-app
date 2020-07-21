@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.app.app1"
         minSdkVersion 21
@@ -63,4 +63,7 @@ dependencies {
     //divider
     implementation 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 
+    //circle progressBar
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
+    
 }

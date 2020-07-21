@@ -30,6 +30,8 @@ import com.app.app1.model.Marcadores;
 import com.app.app1.model.Predicoes;
 import com.app.app1.model.lineup.LineupJogador;
 import com.app.app1.model.substituicoes.Substituicao;
+import com.github.lzyzsd.circleprogress.ArcProgress;
+import com.github.lzyzsd.circleprogress.DonutProgress;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -54,9 +56,10 @@ public class ResumoFragment extends Fragment {
     private ConstraintLayout lAtkDef;
     private Boolean home;
     private List<Jogos> listaDeJogosSalvos = new ArrayList<>();
-    private TextView tvAtk1, tvAtk2, tvDef1, tvDef2, tvPc, tvPe, tvPv, tvP3, tvPmais3, tvPs, tvPn;
+    private TextView tvAtk1, tvAtk2, tvDef1, tvDef2;
     private RoundCornerProgressBar pbAtk1, pbAtk2, pbDef1, pbDef2;
     private List<Predicoes> listaDePredicao;
+    private ArcProgress pC, pE, pV, p3, pMais3, pS, pN;
 
 
     public ResumoFragment() {
@@ -86,8 +89,8 @@ public class ResumoFragment extends Fragment {
         pbAtk1 = view.findViewById(R.id.pbAtk1); pbAtk2 = view.findViewById(R.id.pbAtk2); pbDef1 = view.findViewById(R.id.pbDef1); pbDef2 = view.findViewById(R.id.pbDef2);
         lAtkDef = view.findViewById(R.id.lAtkDef);
         tvDataR = view.findViewById(R.id.tvDataR); tvRodada = view.findViewById(R.id.tvRodada); tvArbitro = view.findViewById(R.id.tvArbitro); tvEstadio = view.findViewById(R.id.tvEstadio);
-        tvPc = view.findViewById(R.id.tvPc); tvPe = view.findViewById(R.id.tvPe); tvPv = view.findViewById(R.id.tvPv); tvP3 = view.findViewById(R.id.tvP3); tvPmais3 = view.findViewById(R.id.tvPmais3);
-        tvPs = view.findViewById(R.id.tvPs); tvPn = view.findViewById(R.id.tvPn);
+        pC = view.findViewById(R.id.pC); pE = view.findViewById(R.id.pE); pV = view.findViewById(R.id.pV);
+        p3 = view.findViewById(R.id.p3); pMais3 = view.findViewById(R.id.pMais3); pS = view.findViewById(R.id.pS); pN = view.findViewById(R.id.pN);
 
         //objetos recebidos de JogoActivity
         jogo = getArguments().getParcelable("jogo");
@@ -354,7 +357,6 @@ public class ResumoFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             int c = 0;
-            //receber lista e verificar até chegar
             while (c<1) {
                 listaDePredicao = getArguments().getParcelableArrayList("listaDePredicao");
                 if(listaDePredicao != null) {
@@ -367,34 +369,32 @@ public class ResumoFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            tvPc.setText(listaDePredicao.get(0).getProb_HW() + "%");
-            tvPe.setText(listaDePredicao.get(0).getProb_D() + "%");
-            tvPv.setText(listaDePredicao.get(0).getProb_AW() + "%");
-            tvP3.setText(listaDePredicao.get(0).getProb_U_3() + "%");
-            tvPmais3.setText(listaDePredicao.get(0).getProb_O_3() + "%");
-            tvPs.setText(listaDePredicao.get(0).getProb_bts() + "%");
-            tvPn.setText(listaDePredicao.get(0).getProb_ots() + "%");
+            pC.setProgress(listaDePredicao.get(0).getProb_HW());
+            pE.setProgress(listaDePredicao.get(0).getProb_D());
+            pV.setProgress(listaDePredicao.get(0).getProb_AW());
+            p3.setProgress(listaDePredicao.get(0).getProb_U_3());
+            pMais3.setProgress(listaDePredicao.get(0).getProb_O_3());
+            pS.setProgress(listaDePredicao.get(0).getProb_bts());
+            pN.setProgress(listaDePredicao.get(0).getProb_ots());
         }
     }
 
-    //listener casa
     private View.OnClickListener listenerCasa = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             home = true;
-            Intent intent = new Intent(getActivity(), EquipeActivity.class);  //getActivity() é o contexto
+            Intent intent = new Intent(getActivity(), EquipeActivity.class);
             intent.putExtra("jogo", jogo);
             intent.putExtra("home", home);
             startActivity(intent);
         }
     };
 
-    //listener vis
     private View.OnClickListener listenerVis = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             home = false;
-            Intent intent = new Intent(getActivity(), EquipeActivity.class);  //getActivity() é o contexto
+            Intent intent = new Intent(getActivity(), EquipeActivity.class);
             intent.putExtra("jogo", jogo);
             intent.putExtra("home", home);
             startActivity(intent);
