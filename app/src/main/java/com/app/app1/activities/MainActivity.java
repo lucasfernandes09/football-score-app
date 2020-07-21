@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.app.app1.R;
-import com.app.app1.RetrofitService;
+import com.app.app1.helper.DatasUtil;
+import com.app.app1.services.RetrofitService;
 import com.app.app1.activities.user.LoginActivity;
 import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.app.app1.config.ConfiguracaoFirebase;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private List<Jogos> listaDeJogos = new ArrayList<>();
     private String dataSelecionada = "";
-    private String dataAtual = dataHoje();
+    private String dataAtual = DatasUtil.dataHoje();
     private FirebaseAuth autenticacao;
     private DatabaseReference firebaseDatabase;
     private List<Jogos> listaDeJogosSalvos = new ArrayList<>();
@@ -269,15 +270,6 @@ public class MainActivity extends AppCompatActivity {
                 fab.setOnClickListener(onClickAoVivo);
             }
         };
-    }
-
-    public String dataHoje() {
-        Calendar calendar = Calendar.getInstance();
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH);
-        int ano = calendar.get(Calendar.YEAR);
-        String dataHoje = ano + "-" + (mes+1) + "-" + dia;
-        return  dataHoje;
     }
 
 }

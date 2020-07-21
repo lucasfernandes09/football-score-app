@@ -7,19 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 
 import com.app.app1.R;
-import com.app.app1.RecyclerItemClickListener;
 import com.app.app1.adapters.AdapterJogos;
 import com.app.app1.model.Jogos;
-import com.app.app1.model.Marcadores;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class ListaDeJogosActivity extends AppCompatActivity implements AdapterJogos.JogoListener {

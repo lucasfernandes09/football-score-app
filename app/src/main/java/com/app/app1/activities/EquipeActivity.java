@@ -1,18 +1,16 @@
 package com.app.app1.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
 import com.app.app1.R;
-import com.app.app1.RetrofitService;
+import com.app.app1.helper.DatasUtil;
+import com.app.app1.services.RetrofitService;
 import com.app.app1.config.ConfiguracaoFirebase;
 import com.app.app1.fragments.equipe.EquipeFragment;
 import com.app.app1.fragments.equipe.ElencoFragment;
@@ -53,7 +51,6 @@ public class EquipeActivity extends AppCompatActivity {
     private ValueEventListener eventListener;
     private FragmentStatePagerItemAdapter statePagerItemAdapter;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,10 +104,9 @@ public class EquipeActivity extends AppCompatActivity {
         tabEquipe.setViewPager(vpEquipe);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void chamadaUtimosJogos() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data2MesesAtras(), dataHoje(), team_id);
+        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(DatasUtil.data2MesesAtras(), DatasUtil.dataHoje(), team_id);
 
         requestUltimosJogos.enqueue(new Callback<List<Jogos>>() {
             @Override
@@ -131,10 +127,9 @@ public class EquipeActivity extends AppCompatActivity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void chamadaProximosJogos() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestProximosJogos = service.listarJogosDaEquipe(dataHoje(), dataEm2Meses(), team_id);
+        Call<List<Jogos>> requestProximosJogos = service.listarJogosDaEquipe(DatasUtil.dataHoje(), DatasUtil.dataEm2Meses(), team_id);
 
         requestProximosJogos.enqueue(new Callback<List<Jogos>>() {
             @Override
@@ -214,26 +209,6 @@ public class EquipeActivity extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O) //se api min não for 26 vai crashar
-    public String dataHoje() {
-        LocalDate ld = LocalDate.now();
-        return  ld.toString();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String dataEm2Meses() {
-        LocalDate ld = LocalDate.now().plusMonths(2);
-        return  ld.toString();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public String data2MesesAtras() {
-        LocalDate ld = LocalDate.now().minusMonths(2);
-        return  ld.toString();
-    }
-
-
-    //finalizar a activity ao pressionar btn back
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

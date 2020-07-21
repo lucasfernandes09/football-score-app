@@ -1,4 +1,4 @@
-package com.app.app1;
+package com.app.app1.services;
 
 
 import com.app.app1.model.Jogos;

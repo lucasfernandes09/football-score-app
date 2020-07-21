@@ -9,7 +9,8 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.app.app1.R;
-import com.app.app1.RetrofitService;
+import com.app.app1.helper.DatasUtil;
+import com.app.app1.services.RetrofitService;
 import com.app.app1.fragments.jogo.EstatisticasFragment;
 import com.app.app1.fragments.jogo.ResumoFragment;
 import com.app.app1.fragments.jogo.RetrospectoFragment;
@@ -110,7 +111,7 @@ public class JogoActivity extends AppCompatActivity {
 
     public void retrospectoCasa() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data2MesesAtras(), dataHoje(),
+        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(DatasUtil.data2MesesAtras(), DatasUtil.dataHoje(),
                 jogo.getMatch_hometeam_id());
 
         requestUltimosJogos.enqueue(new Callback<List<Jogos>>() {
@@ -135,7 +136,7 @@ public class JogoActivity extends AppCompatActivity {
 
     public void retrospectoVis() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(data2MesesAtras(), dataHoje(),
+        Call<List<Jogos>> requestUltimosJogos = service.listarJogosDaEquipe(DatasUtil.data2MesesAtras(), DatasUtil.dataHoje(),
                 jogo.getMatch_awayteam_id());
 
         requestUltimosJogos.enqueue(new Callback<List<Jogos>>() {
@@ -183,7 +184,7 @@ public class JogoActivity extends AppCompatActivity {
 
     public void jogosDaCompeticao() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
-        Call<List<Jogos>> requestJogosDaCompeticao = service.listarJogosDaCompeticao(dataHoje(), dataHoje(),
+        Call<List<Jogos>> requestJogosDaCompeticao = service.listarJogosDaCompeticao(DatasUtil.dataHoje(), DatasUtil.dataHoje(),
                 jogo.getLeague_id());
 
         requestJogosDaCompeticao.enqueue(new Callback<List<Jogos>>() {
@@ -227,29 +228,6 @@ public class JogoActivity extends AppCompatActivity {
         });
     }
 
-
-    public String dataHoje() {
-        Calendar calendar = Calendar.getInstance();
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH);
-        int ano = calendar.get(Calendar.YEAR);
-        String dataHoje = ano + "-" + (mes+1) + "-" + dia;
-        return  dataHoje;
-    }
-
-    public String data2MesesAtras() {
-        Calendar calendar = Calendar.getInstance();
-        int dia = calendar.get(Calendar.DAY_OF_MONTH);
-        int mes = calendar.get(Calendar.MONTH);
-        int ano = calendar.get(Calendar.YEAR);
-        if(mes==0) { //janeiro
-            ano -=1;
-        }
-        String dataHoje = ano + "-" + (mes-1) + "-" + dia;
-        return  dataHoje;
-    }
-
-    //finalizar a activity ao pressionar btn back
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
