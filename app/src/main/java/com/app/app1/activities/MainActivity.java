@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SmartTabLayout smartTabLayout;
-    private ProgressBar progressBar;
     private FloatingActionButton fab;
     private List<Jogos> listaDeJogos = new ArrayList<>();
     private String dataSelecionada = "";
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         //referenciação
-        progressBar = findViewById(R.id.progressBar);
         smartTabLayout = findViewById(R.id.viewPagerTab);
         viewPager = findViewById(R.id.viewPager);
         fab = findViewById(R.id.fab);
@@ -182,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     listaDeJogos = DatasUtil.configData(response.body());
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
-                    //progressBar.setVisibility(View.GONE);
 
                     //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
@@ -196,7 +193,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
                 Log.i("info", "onFailure " + t.getMessage());
-                //progressBar.setVisibility(View.GONE);
                 listaDeJogos.clear();
                 bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
                 tabs();

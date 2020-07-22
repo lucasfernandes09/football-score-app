@@ -7,7 +7,8 @@
     android:layout_marginEnd="16dp"
     android:background="@drawable/background_1"
     android:elevation="2dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/textView25"
@@ -40,35 +41,39 @@
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/pC"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
                 custom:arc_bottom_text="Casa"
                 custom:arc_finished_color="@color/colorRed"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorRed"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/pE"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
                 custom:arc_bottom_text="Empate"
+                custom:arc_bottom_text_size="8sp"
                 custom:arc_finished_color="@color/colorText"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorText"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/pV"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
-                custom:arc_bottom_text="Visitante"
+                custom:arc_bottom_text="Vis"
                 custom:arc_finished_color="@color/colorAccent"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorAccent"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
         </TableRow>
@@ -96,24 +101,26 @@
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/p3"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
                 custom:arc_bottom_text="Até 3"
                 custom:arc_finished_color="@color/colorRed"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorRed"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/pMais3"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
                 custom:arc_bottom_text="+ de 3"
                 custom:arc_finished_color="@color/colorAccent"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorAccent"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
         </TableRow>
@@ -141,24 +148,26 @@
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/pS"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
                 custom:arc_bottom_text="Sim"
                 custom:arc_finished_color="@color/colorRed"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorRed"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
             <com.github.lzyzsd.circleprogress.ArcProgress
                 android:id="@+id/pN"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="8dp"
                 custom:arc_bottom_text="Não"
                 custom:arc_finished_color="@color/colorAccent"
+                custom:arc_suffix_text_padding="-5dp"
                 custom:arc_text_color="@color/colorAccent"
-                custom:arc_text_size="32sp"
+                custom:arc_text_size="20sp"
                 custom:arc_unfinished_color="@android:color/darker_gray" />
 
         </TableRow>

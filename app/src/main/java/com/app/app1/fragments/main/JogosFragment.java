@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,9 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         tvSemEventos = view.findViewById(R.id.tvSemEventos);
         pbJogos = view.findViewById(R.id.pbJogos);
 
+        Log.i("infoFrag", "chamou <<");
+        pbJogos.setVisibility(View.VISIBLE);
+
         listaDeJogos = getArguments().getParcelableArrayList("listaDeJogos");
 
         verificarLista();
@@ -62,6 +66,7 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         if(listaDeJogos != null) {
             if(listaDeJogos.isEmpty()) {
                 tvSemEventos.setVisibility(View.VISIBLE);
+                pbJogos.setVisibility(View.GONE);
             }else {
                 comparator();
                 exibirJogos();
@@ -104,13 +109,13 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public void exibirJogos() {
-        pbJogos.setVisibility(View.GONE);
         adapterJogos = new AdapterJogos(listaDeJogos, JogosFragment.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvJogos.setLayoutManager(layoutManager);
         //rvJogos.addItemDecoration(new DividerItemDecoration(rvJogos.getContext(), LinearLayoutManager.VERTICAL));
         rvJogos.setHasFixedSize(true);
         rvJogos.setAdapter(adapterJogos);
+        pbJogos.setVisibility(View.GONE);
     }
 
     @Override

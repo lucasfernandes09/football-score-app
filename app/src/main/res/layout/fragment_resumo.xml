@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="50%"
+                    android:text="00%"
                     android:textSize="12sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="50%"
+                    android:text="00%"
                     android:textSize="12sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvDef"
                     app:layout_constraintEnd_toStartOf="@+id/tvDef"
@@ -187,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:text="50%"
+                    android:text="00%"
                     android:textSize="12sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="50%"
+                    android:text="00%"
                     android:textSize="12sp"
                     app:layout_constraintBaseline_toBaselineOf="@+id/tvAtk"
                     app:layout_constraintEnd_toStartOf="@+id/tvAtk"
@@ -426,7 +426,7 @@
                 app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider"
-                app:srcCompat="@drawable/campo_futebol" />
+                app:srcCompat="@drawable/img_campo_futebol" />
 
             <TextView
                 android:id="@+id/tvFormacaoCasa"

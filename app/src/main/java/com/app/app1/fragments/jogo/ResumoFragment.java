@@ -163,11 +163,7 @@ public class ResumoFragment extends Fragment {
     public void exibirAtkDef() {
         ArrayList<Float> listaDeTermos = new AtkDef().getAtkDef(jogo);
 
-        if(listaDeTermos == null) {
-            lAtkDef.setVisibility(View.GONE);
-        }else {
-            lAtkDef.setVisibility(View.VISIBLE);
-
+        if(listaDeTermos != null) {
             //progressBars
             Float atk1 = listaDeTermos.get(0);
             Float atk2 = listaDeTermos.get(1);
