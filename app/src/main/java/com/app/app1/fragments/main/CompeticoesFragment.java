@@ -23,10 +23,10 @@ import java.util.List;
 
 
 public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.JogoListener {
+
     private RecyclerView rvCompeticoes;
     private ArrayList<Jogos> listaDeCompeticoes = new ArrayList<>();
     private List<Jogos> listaDeCompeticoesFinal = new ArrayList<>();
-
 
     public CompeticoesFragment() {
         // Required empty public constructor

@@ -96,7 +96,8 @@ public class ResumoFragment extends Fragment {
         jogo = getArguments().getParcelable("jogo");
 
         //badges (Picasso)
-        Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa); Picasso.get().load(jogo.getTeam_away_badge()).into(ivBadgeVis);
+        Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa);
+        Picasso.get().load(jogo.getTeam_away_badge()).into(ivBadgeVis);
         Picasso.get().load(jogo.getLeague_logo()).into(ivCompeticaoResumo);
 
         seAoVivo();
@@ -217,9 +218,7 @@ public class ResumoFragment extends Fragment {
     }
 
     public void marcadores() {
-        if(jogo.getGoalscorer() == null) {
-            return;
-        }else {
+        if(jogo.getGoalscorer() != null) {
             listaMarcadores = (ArrayList<Marcadores>) jogo.getGoalscorer();
             for(Marcadores marcador : listaMarcadores) {
                 if(marcador.getHome_scorer().equals("")) {
@@ -232,41 +231,36 @@ public class ResumoFragment extends Fragment {
     }
 
     public void cartoesVermelhos() {
-        if(jogo.getCards() == null) {
-            return;
-        }else {
+        if(jogo.getCards() != null) {
             listaCartoes = (ArrayList<Cartoes>) jogo.getCards();
-        }
-
-        for(int i=0; i<listaCartoes.size(); i++) {
-            Cartoes cartao = listaCartoes.get(i);
-            if(cartao.getCard().equals("red card") && !cartao.getHome_fault().equals("")) {
-                listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getHome_fault(), cartao.getTime(),
-                        true, "cartaoVermelho"));
-            }else {
-                if(cartao.getCard().equals("red card") && !cartao.getAway_fault().equals("")) {
-                    listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getAway_fault(), cartao.getTime(),
-                            false, "cartaoVermelho"));
+            for (int i = 0; i < listaCartoes.size(); i++) {
+                Cartoes cartao = listaCartoes.get(i);
+                if (cartao.getCard().equals("red card") && !cartao.getHome_fault().equals("")) {
+                    listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getHome_fault(), cartao.getTime(),
+                            true, "cartaoVermelho"));
+                } else {
+                    if (cartao.getCard().equals("red card") && !cartao.getAway_fault().equals("")) {
+                        listaAcoesDeJogo.add(new AcoesDoJogo(cartao.getAway_fault(), cartao.getTime(),
+                                false, "cartaoVermelho"));
+                    }
                 }
             }
         }
     }
 
     public void substituicoes() {
-        if(jogo.getSubstitutions() == null) {
-            return;
-        }else {
-        listaSubsHome = (ArrayList<Substituicao>) jogo.getSubstitutions().getHome();
-        listaSubsAway = (ArrayList<Substituicao>) jogo.getSubstitutions().getAway();
-        }
+        if(jogo.getSubstitutions() != null) {
+            listaSubsHome = (ArrayList<Substituicao>) jogo.getSubstitutions().getHome();
+            listaSubsAway = (ArrayList<Substituicao>) jogo.getSubstitutions().getAway();
 
-        for(int i=0; i<listaSubsHome.size(); i++) {
-            listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsHome.get(i).getSubstitution(), listaSubsHome.get(i).getTime(),
-                    true, "substituição"));
-        }
-        for(int i=0; i<listaSubsAway.size(); i++) {
-            listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsAway.get(i).getSubstitution(), listaSubsAway.get(i).getTime(),
-                    false, "substituição"));
+            for (int i=0; i<listaSubsHome.size(); i++) {
+                listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsHome.get(i).getSubstitution(), listaSubsHome.get(i).getTime(),
+                        true, "substituição"));
+            }
+            for (int i=0; i<listaSubsAway.size(); i++) {
+                listaAcoesDeJogo.add(new AcoesDoJogo(listaSubsAway.get(i).getSubstitution(), listaSubsAway.get(i).getTime(),
+                        false, "substituição"));
+            }
         }
     }
 

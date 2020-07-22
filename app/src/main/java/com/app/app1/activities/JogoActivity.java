@@ -34,6 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class JogoActivity extends AppCompatActivity {
+
     private Jogos jogo = new Jogos();
     private List<Jogos> listaDeJogosDaCompeticao = new ArrayList<>();
     private List<Jogos> listaDeUltimosJogosCasa = new ArrayList<>();
@@ -43,7 +44,6 @@ public class JogoActivity extends AppCompatActivity {
     private ViewPager vpJogo;
     private SmartTabLayout tabJogo;
     private Bundle bundle = new Bundle();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,6 @@ public class JogoActivity extends AppCompatActivity {
                     listaDeUltimosJogosCasa = response.body();
                     Collections.reverse(listaDeUltimosJogosCasa);
                     bundle.putParcelableArrayList("listaDeUltimosJogosCasa", (ArrayList<Jogos>) listaDeUltimosJogosCasa);
-                    Log.i("info", "restrospecto casa" + listaDeUltimosJogosCasa.size());
                 }
             }
 
@@ -148,7 +147,6 @@ public class JogoActivity extends AppCompatActivity {
                     listaDeUltimosJogosVis = response.body();
                     Collections.reverse(listaDeUltimosJogosVis);
                     bundle.putParcelableArrayList("listaDeUltimosJogosVis", (ArrayList<Jogos>) listaDeUltimosJogosVis);
-                    Log.i("info", "restrospecto vis" + listaDeUltimosJogosVis.size());
                 }
             }
 
@@ -170,7 +168,6 @@ public class JogoActivity extends AppCompatActivity {
                     Log.i("info", "erro na resposta: " + response.message());
                 }else {
                     listaTabela = response.body();
-                    Log.i("info", "lalla" + listaTabela.get(0).getTeam_name());
                     bundle.putParcelableArrayList("tabela",(ArrayList<Tabela>) listaTabela);
                 }
             }
@@ -217,7 +214,6 @@ public class JogoActivity extends AppCompatActivity {
                 }else {
                     listaDePredicao = response.body();
                     bundle.putParcelableArrayList("listaDePredicao", (ArrayList<Predicoes>) listaDePredicao);
-                    Log.i("info", "lista de predição!" + listaDePredicao.get(0).getProb_HW());
                 }
             }
 

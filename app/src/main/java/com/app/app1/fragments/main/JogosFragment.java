@@ -1,6 +1,5 @@
 package com.app.app1.fragments.main;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app.app1.R;
@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+
 public class JogosFragment extends Fragment implements AdapterJogos.JogoListener {
 
     private RecyclerView rvJogos;
@@ -35,6 +36,8 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     private ArrayList<Jogos> listaDeJogos;
     private Jogos jogo = new Jogos();
     private TextView tvSemEventos;
+    private ProgressBar pbJogos;
+
     public JogosFragment() {
         // Required empty public constructor
     }
@@ -46,6 +49,7 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         //referenciação
         rvJogos = view.findViewById(R.id.rvJogos);
         tvSemEventos = view.findViewById(R.id.tvSemEventos);
+        pbJogos = view.findViewById(R.id.pbJogos);
 
         listaDeJogos = getArguments().getParcelableArrayList("listaDeJogos");
 
@@ -100,6 +104,7 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public void exibirJogos() {
+        pbJogos.setVisibility(View.GONE);
         adapterJogos = new AdapterJogos(listaDeJogos, JogosFragment.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvJogos.setLayoutManager(layoutManager);

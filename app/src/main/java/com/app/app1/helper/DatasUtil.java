@@ -37,7 +37,7 @@ public class DatasUtil {
 
         for(int i=0; i<listaDeJogos.size(); i++) {
             nIniciais = Integer.parseInt(listaDeJogos.get(i).getMatch_time().substring(0,2));
-            nIniciais -= 4;
+            nIniciais -= 5;
             listaDeJogos.get(i).setMatch_time(nIniciais + ":" + listaDeJogos.get(i).getMatch_time().substring(3,5));
         }
         return listaDeJogos;

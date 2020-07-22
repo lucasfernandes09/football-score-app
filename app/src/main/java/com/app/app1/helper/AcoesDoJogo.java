@@ -1,15 +1,24 @@
 package com.app.app1.helper;
 
+import android.util.Log;
+
 public class AcoesDoJogo {
 
-    String name;
-    String time;
-    boolean home;
-    String type;
+    private String name;
+    private String time;
+    private boolean home;
+    private String type;
 
     public AcoesDoJogo(String name, String time, boolean home, String type) {
         this.name = name;
-        this.time = time;
+
+        //ordenar as strings antes de 10'
+        if(time.length() < 2) {
+            this.time = "0" + time;
+        }else {
+            this.time = time;
+        }
+
         this.home = home;
         this.type = type;
     }

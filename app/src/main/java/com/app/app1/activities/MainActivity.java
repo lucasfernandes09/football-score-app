@@ -182,8 +182,9 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     listaDeJogos = DatasUtil.configData(response.body());
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
-                    progressBar.setVisibility(View.GONE);
+                    //progressBar.setVisibility(View.GONE);
 
+                    //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
                         tabs();
                     }else {
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
                 Log.i("info", "onFailure " + t.getMessage());
-                progressBar.setVisibility(View.GONE);
+                //progressBar.setVisibility(View.GONE);
                 listaDeJogos.clear();
                 bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
                 tabs();
@@ -236,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(statePagerItemAdapter);
         smartTabLayout.setViewPager(viewPager);
-        Log.i("info", "abc");
     }
 
     public void tabsJogosAoVivo() {
