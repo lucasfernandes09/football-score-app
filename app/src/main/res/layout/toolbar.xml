@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="54dp"
-        android:fontFamily="@font/allerta"
         android:text="@string/app_name"
         android:textColor="#FFFFFF"
         android:textSize="16sp" />

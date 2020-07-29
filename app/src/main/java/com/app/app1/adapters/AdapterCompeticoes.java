@@ -47,6 +47,16 @@ public class AdapterCompeticoes extends RecyclerView.Adapter<AdapterCompeticoes.
         return this.listaDeCompeticoes.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tvNomeCompeticao;
         TextView tvQtdCompeticao;

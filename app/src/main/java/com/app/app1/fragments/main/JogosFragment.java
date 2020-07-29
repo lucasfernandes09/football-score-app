@@ -37,8 +37,9 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     private RecyclerView rvJogos;
     private AdapterJogos adapterJogos;
     private ArrayList<Jogos> listaDeJogos = new ArrayList<>();
+    private ArrayList<Jogos> listaDeJogosFinal = new ArrayList<>();
     private Jogos jogo = new Jogos();
-    private TextView tvSemEventos;
+    private TextView tvInfoJogos;
     private Handler handler = new Handler();
 
     public JogosFragment() {
@@ -51,7 +52,7 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         final View view = inflater.inflate(R.layout.fragment_jogos, container, false);
         //referenciação
         rvJogos = view.findViewById(R.id.rvJogos);
-        tvSemEventos = view.findViewById(R.id.tvSemEventos);
+        tvInfoJogos = view.findViewById(R.id.tvInfoJogos);
 
         listaDeJogos = getArguments().getParcelableArrayList("listaDeJogos");
 
@@ -61,9 +62,8 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public void verificarLista() {
-        if(listaDeJogos.isEmpty()) {
-            tvSemEventos.setVisibility(View.VISIBLE);
-        }else {
+        if(listaDeJogos != null) {
+            listaDeJogosFinal = listaDeJogos;
             comparator();
             exibirJogos();
         }
@@ -76,11 +76,11 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
                 return j1.getMatch_time().compareTo(j2.getMatch_time());
             }
         };
-        Collections.sort(listaDeJogos, comparator);
+        Collections.sort(listaDeJogosFinal, comparator);
     }
 
     public void exibirJogos() {
-        adapterJogos = new AdapterJogos(listaDeJogos, JogosFragment.this);
+        adapterJogos = new AdapterJogos(listaDeJogosFinal, JogosFragment.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvJogos.setLayoutManager(layoutManager);
         rvJogos.setHasFixedSize(true);
@@ -97,9 +97,45 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
 
     @Override
     public void jogoClick(int position) {
-        jogo = listaDeJogos.get(position);
+        jogo = listaDeJogosFinal.get(position);
         Intent intent = new Intent(getContext(), JogoActivity.class);
         intent.putExtra("jogo", jogo);
         startActivity(intent);
     }
+
+    public class JogosAoVivo extends AsyncTask<Void, Void, Void> {
+        private ArrayList<Jogos> listaDeJogosAoVivo = new ArrayList<>();
+        private boolean aoVivo;
+
+        public JogosAoVivo(boolean aoVivo) {
+            this.aoVivo = aoVivo;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if(aoVivo) {
+                for(Jogos jogo : listaDeJogos) {
+                    if(jogo.getMatch_live().equals("1")) {
+                        listaDeJogosAoVivo.add(jogo);
+                    }
+                }
+                listaDeJogosFinal = listaDeJogosAoVivo;
+            }else {
+                listaDeJogosFinal = listaDeJogos;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapterJogos.notifyDataSetChanged();
+        }
+    }
+
 }

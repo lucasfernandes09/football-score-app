@@ -16,7 +16,7 @@
         android:background="@drawable/background_2"
         android:text="Cadastrar-se"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/colorMain2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />

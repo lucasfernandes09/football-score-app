@@ -7,7 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorBackground</item>
         <!-- font -->
-        <item name="android:fontFamily">@font/allerta</item>
+        <item name="android:fontFamily">@font/play</item>
 
     </style>
 

@@ -1,5 +1,6 @@
 package com.app.app1.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,7 +12,6 @@ import com.app.app1.activities.user.LoginActivity;
 import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.app.app1.config.ConfiguracaoFirebase;
 import com.app.app1.fragments.main.CompeticoesFragment;
-import com.app.app1.fragments.main.JogosAoVivoFragment;
 import com.app.app1.fragments.main.JogosFragment;
 import com.app.app1.helper.JogosSalvos;
 import com.app.app1.helper.UsuarioFirebase;
@@ -34,24 +34,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManagerNonConfig;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -69,15 +63,14 @@ public class MainActivity extends AppCompatActivity {
     private List<Jogos> listaDeJogos = new ArrayList<>();
     private String dataSelecionada = "";
     private String dataAtual = DatasUtil.dataHoje();
+    private TextView tvSemEventos;
     private FirebaseAuth autenticacao;
     private DatabaseReference firebaseDatabase;
     private List<Jogos> listaDeJogosSalvos = new ArrayList<>();
     private Handler handler;
     private Bundle bundle;
-    private FragmentStatePagerItemAdapter statePagerItemAdapter;
-    private FragmentPagerItems pages;
     private FragmentPagerItemAdapter adapter;
-    private View.OnClickListener onClickAoVivo, onClick;
+    private View.OnClickListener onClickAoVivo, onClickPadrao;
     private ProgressBar progressBar;
 
     @Override
@@ -95,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressBar);
+        tvSemEventos = findViewById(R.id.tvSemEventos);
 
         //modo noturno
         SharedPreferences preferences = getSharedPreferences(ConfigActivity.ARQUIVO_PREFERENCIA, 0);
@@ -102,10 +96,6 @@ public class MainActivity extends AppCompatActivity {
             int modoAtual = preferences.getInt("modoAtual", 1);
             AppCompatDelegate.setDefaultNightMode(modoAtual);
         }
-
-        configClicksAoVivo();
-
-        fab.setOnClickListener(onClickAoVivo);
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         firebaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -116,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
 
         handler = new Handler();
         handler.postDelayed(new AtualizarDados(), 60*1000);
+
+        configClicksAoVivo();
+        fab.setOnClickListener(onClickAoVivo);
     }
 
     private final class AtualizarDados implements Runnable {
@@ -151,9 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                     dataSelecionada = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                     if(!dataSelecionada.equals(dataAtual)) {
+                        progressBar.setVisibility(View.VISIBLE);
+                        tvSemEventos.setVisibility(View.GONE);
                         dataAtual = dataSelecionada;
                         callJogosAPI();
-                        Log.i("infoData", ">>" + "onDataSet calendario");
+                        Log.i("infoData", "onDataSet calendario");
                     }
                 }
             }, ano, mes, dia);
@@ -196,8 +191,10 @@ public class MainActivity extends AppCompatActivity {
                     if(response.body() != null) {
                         listaDeJogos = DatasUtil.configData(response.body());
                     }
+
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
                     progressBar.setVisibility(View.GONE);
+
 
                     //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
@@ -211,10 +208,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
                 Log.i("info", "onFailure " + t.getMessage());
-                progressBar.setVisibility(View.GONE);
-                listaDeJogos.clear();
-                bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
-                tabs();
+                configSemEventos();
             }
         });
     }
@@ -245,7 +239,6 @@ public class MainActivity extends AppCompatActivity {
                         if (f2 instanceof JogosFragment) {
                             ((JogosFragment)f2).atualizarLista(listaDeJogos);
                         }
-
                     }else {
                         recuperarJogosSalvos();
                     }
@@ -255,9 +248,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
                 Log.i("info", "onFailure " + t.getMessage());
-                progressBar.setVisibility(View.GONE);
-                listaDeJogos.clear();
-                bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
             }
         });
     }
@@ -287,59 +277,66 @@ public class MainActivity extends AppCompatActivity {
     public void tabs() {
         smartTabLayout.setVisibility(View.VISIBLE);
 
-        /*pages = FragmentPagerItems.with(this)
-                .add("Competições", CompeticoesFragment.class, bundle)
-                .add("Jogos", JogosFragment.class, bundle)
-                .create();
-
-        statePagerItemAdapter = new FragmentStatePagerItemAdapter(
-                getSupportFragmentManager(), pages);
-
-        viewPager.setAdapter(statePagerItemAdapter);
-        smartTabLayout.setViewPager(viewPager);*/
-
         adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add("Competições", CompeticoesFragment.class, bundle)
                 .add("Jogos", JogosFragment.class, bundle)
                 .create());
 
-
         viewPager.setAdapter(adapter);
         smartTabLayout.setViewPager(viewPager);
     }
 
-    public void tabsJogosAoVivo() {
-        FragmentPagerItems pages = FragmentPagerItems.with(this)
-                .add("Jogos", JogosAoVivoFragment.class, bundle)
-                .add("Competições", CompeticoesFragment.class, bundle)
-                .create();
-
-        statePagerItemAdapter = new FragmentStatePagerItemAdapter(
-                getSupportFragmentManager(), pages);
-
-        viewPager.setAdapter(statePagerItemAdapter);
-        smartTabLayout.setViewPager(viewPager);
-    }
-
     public void configClicksAoVivo() {
+
         onClickAoVivo = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tabsJogosAoVivo();
+                if(listaDeJogos != null) {
+
+                    Fragment f1 = adapter.getPage(0);
+                    if (f1 instanceof CompeticoesFragment) {
+                        ((CompeticoesFragment)f1).new CompeticoesAoVivo(true).execute();
+                    }
+
+                    Fragment f2 = adapter.getPage(1);
+                    if (f2 instanceof JogosFragment) {
+                        ((JogosFragment)f2).new JogosAoVivo(true).execute();
+                    }
+                }
+
                 fab.setImageResource(R.drawable.ic_fechar);
-                fab.setOnClickListener(onClick);
+                fab.setOnClickListener(onClickPadrao);
             }
         };
 
-        onClick = new View.OnClickListener() {
+        onClickPadrao = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tabs();
+                if(listaDeJogos != null) {
+                    /*Fragment f1 = adapter.getPage(0);
+                if (f1 instanceof CompeticoesFragment) {
+                    ((CompeticoesFragment)f1).new CompeticoesAoVivo(false).execute();
+                }
+
+                Fragment f2 = adapter.getPage(1);
+                if (f2 instanceof JogosFragment) {
+                    ((JogosFragment)f2).new JogosAoVivo(false).execute();
+                }*/
+                }
+
                 fab.setImageResource(R.drawable.ic_relogio_24dp);
                 fab.setOnClickListener(onClickAoVivo);
             }
         };
+    }
+
+    public void configSemEventos() {
+        progressBar.setVisibility(View.GONE);
+        tvSemEventos.setVisibility(View.VISIBLE);
+        bundle.clear();
+        listaDeJogos = null;
+        tabs();
     }
 
 }

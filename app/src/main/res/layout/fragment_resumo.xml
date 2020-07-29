@@ -425,7 +425,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:layout_constraintTop_toBottomOf="@id/textView22"
                 app:srcCompat="@drawable/img_campo_futebol" />
 
             <TextView
@@ -574,20 +574,12 @@
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="Formações"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -598,7 +590,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/background_1"
             android:elevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -609,9 +601,10 @@
             <TextView
                 android:id="@+id/tvInfoPartida"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="16dp"
                 android:text="Informações da Partida"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -625,7 +618,7 @@
                 android:text="00/00/0000"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider4" />
+                app:layout_constraintTop_toBottomOf="@id/tvInfoPartida" />
 
             <TextView
                 android:id="@+id/tvRodada"
@@ -667,7 +660,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider4" />
+                app:layout_constraintTop_toBottomOf="@id/tvInfoPartida" />
 
             <TextView
                 android:id="@+id/tvr"
@@ -703,15 +696,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tva" />
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfoPartida" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

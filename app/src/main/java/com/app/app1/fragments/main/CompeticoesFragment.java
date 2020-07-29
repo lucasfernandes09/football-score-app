@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +18,11 @@ import com.app.app1.R;
 import com.app.app1.activities.JogosCompeticaoActivity;
 import com.app.app1.adapters.AdapterCompeticoes;
 import com.app.app1.model.Jogos;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -27,7 +31,8 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     private RecyclerView rvCompeticoes;
     private ArrayList<Jogos> listaDeCompeticoes = new ArrayList<>();
     private List<Jogos> listaDeCompeticoesFinal = new ArrayList<>();
-    private TextView tvSemCompeticao;
+    private TextView tvInfoCompet;
+    private AdapterCompeticoes adapterCompeticoes;
 
     public CompeticoesFragment() {
         // Required empty public constructor
@@ -39,7 +44,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         View view = inflater.inflate(R.layout.fragment_competicoes, container, false);
         //referenciação
         rvCompeticoes = view.findViewById(R.id.rvCompeticoes);
-        tvSemCompeticao = view.findViewById(R.id.tvSemCompeticao);
+        tvInfoCompet = view.findViewById(R.id.tvInfoCompet);
 
         //lista de competições é uma lista de jogos
         listaDeCompeticoes = getArguments().getParcelableArrayList("listaDeJogos");
@@ -50,15 +55,13 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     }
 
     public void verificarLista() {
-        if(listaDeCompeticoes.isEmpty()){
-            tvSemCompeticao.setVisibility(View.VISIBLE);
-        }else {
-            organizarListagem();
+        if(listaDeCompeticoes != null) {
+            organizarListagem(listaDeCompeticoes);
             exibirCompeticoes();
         }
     }
 
-    public void organizarListagem() {
+    public void organizarListagem(List<Jogos> listaDeCompeticoes) {
         for (int i = 0; i < listaDeCompeticoes.size(); i++) {
             listaDeCompeticoes.get(i).setQtdCompeticao(1);
             for (int j = i + 1; j < listaDeCompeticoes.size(); j++) {
@@ -75,10 +78,21 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
                 listaDeCompeticoesFinal.add(listaDeCompeticoes.get(i));
             }
         }
+        comparator();
+    }
+
+    public void comparator() {
+        Comparator<Jogos> comparator = new Comparator<Jogos>() {
+            @Override
+            public int compare(Jogos j1, Jogos j2) {
+                return j1.getLeague_name().compareTo(j2.getLeague_name());
+            }
+        };
+        Collections.sort(listaDeCompeticoesFinal, comparator);
     }
 
     public void exibirCompeticoes() {
-        AdapterCompeticoes adapterCompeticoes = new AdapterCompeticoes(listaDeCompeticoesFinal, this);
+        adapterCompeticoes = new AdapterCompeticoes(listaDeCompeticoesFinal, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvCompeticoes.setLayoutManager(layoutManager);
         rvCompeticoes.setHasFixedSize(true);
@@ -86,7 +100,10 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     }
 
     public void atualizarLista(List<Jogos> listaDeJogos) {
+        listaDeCompeticoesFinal.clear();
         listaDeCompeticoes = (ArrayList<Jogos>) listaDeJogos;
+        organizarListagem(listaDeCompeticoes);
+        adapterCompeticoes.notifyDataSetChanged();
     }
 
     @Override
@@ -103,4 +120,42 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         intent.putParcelableArrayListExtra("listaDeJogosDeUmaCompeticao", listaDeJogosDeUmaCompeticao);
         startActivity(intent);
     }
+
+
+    public class CompeticoesAoVivo extends AsyncTask<Void, Void, Void> {
+        private List<Jogos> listaDeJogosAoVivo = new ArrayList<>();
+        private boolean aoVivo;
+
+        public CompeticoesAoVivo(boolean aoVivo) {
+            this.aoVivo = aoVivo;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if(aoVivo) {
+                //competições ao vivo
+                for(Jogos jogo : listaDeCompeticoes) {
+                    if(jogo.getMatch_live().equals("1")) {
+                        listaDeJogosAoVivo.add(jogo);
+                    }
+                }
+                organizarListagem(listaDeJogosAoVivo);
+            }else {
+                organizarListagem(listaDeCompeticoes);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            adapterCompeticoes.notifyDataSetChanged();
+        }
+    }
+
 }

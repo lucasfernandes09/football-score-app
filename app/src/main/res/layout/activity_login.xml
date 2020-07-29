@@ -13,7 +13,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/background_2"
         android:text="Entrar"
+        android:textColor="@color/colorMain2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,23 +51,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:onClick="esqueceuSenha"
+        android:padding="4dp"
         android:text="Esqueceu a senha?"
         android:textColor="@color/colorAccent"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textIL2" />
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Entre para salvar seus jogos favoritos!"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textIL1"
@@ -76,7 +68,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmailL"
@@ -112,11 +104,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_4"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"

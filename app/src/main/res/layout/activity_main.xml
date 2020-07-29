@@ -23,6 +23,14 @@
         android:layout_gravity="center"
         android:visibility="visible" />
 
+    <TextView
+        android:id="@+id/tvSemEventos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Sem eventos hoje"
+        android:visibility="gone" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

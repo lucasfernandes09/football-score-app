@@ -24,6 +24,7 @@
             android:id="@+id/rvJogos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,11 +34,10 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
-            android:id="@+id/tvSemEventos"
+            android:id="@+id/tvInfoJogos"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center"
-            android:text="Não há eventos hoje."
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
