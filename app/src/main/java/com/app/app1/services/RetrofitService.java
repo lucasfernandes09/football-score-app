@@ -16,7 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
-    String API_KEY = "7bdd7ba3d0d3c049979d967114714d34bd58757fdd74d962adc129404e6f4822";
+    String API_KEY = "4c160f9aaea5fe6bd75cfb998529917f77657f9b9853e42372bda344b6171ced";
 
     @GET("?action=get_events&APIkey=" + API_KEY)
     Call<List<Jogos>> listarJogos(@Query("from") String from,

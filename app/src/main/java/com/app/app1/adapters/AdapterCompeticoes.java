@@ -37,7 +37,9 @@ public class AdapterCompeticoes extends RecyclerView.Adapter<AdapterCompeticoes.
         Jogos competicao = this.listaDeCompeticoes.get(position);
         holder.tvNomeCompeticao.setText(competicao.getLeague_name());
         holder.tvQtdCompeticao.setText(String.valueOf(competicao.getQtdCompeticao()));
-        Picasso.get().load(competicao.getCountry_logo()).into(holder.ivCountry);
+        if(!competicao.getCountry_logo().isEmpty()) {
+            Picasso.get().load(competicao.getCountry_logo()).into(holder.ivCountry);
+        }
     }
 
     @Override

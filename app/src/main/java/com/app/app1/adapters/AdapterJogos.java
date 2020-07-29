@@ -58,26 +58,7 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
 
         seAoVivo(holder, jogo);
 
-        //checkBox
-        holder.cbSalvarJogo.setOnCheckedChangeListener(null);
-        holder.cbSalvarJogo.setChecked(jogo.getSelecionado());
-        holder.cbSalvarJogo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                if(UsuarioFirebase.getUsuarioAtual() == null) {
-                    Toast.makeText(holder.cbSalvarJogo.getContext(), "Faça login para salvar partidas.", Toast.LENGTH_SHORT).show();
-                    holder.cbSalvarJogo.setChecked(false);
-                }else {
-                    jogo.setSelecionado(checked);
-                    //atualiza lista de jogos salvos
-                    if(jogo.getSelecionado()) {
-                        jogo.salvarJogo();
-                    }else {
-                        jogo.removerJogoSalvo();
-                    }
-                }
-            }
-        });
+        checkBox(holder, jogo);
     }
 
     @Override
@@ -122,6 +103,28 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
 
     public interface JogoListener {
         void jogoClick(int position);
+    }
+
+    public void checkBox(MyViewHolder holder, Jogos jogo) {
+        holder.cbSalvarJogo.setOnCheckedChangeListener(null);
+        holder.cbSalvarJogo.setChecked(jogo.getSelecionado());
+        holder.cbSalvarJogo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                if(UsuarioFirebase.getUsuarioAtual() == null) {
+                    Toast.makeText(holder.cbSalvarJogo.getContext(), "Faça login para salvar partidas.", Toast.LENGTH_SHORT).show();
+                    holder.cbSalvarJogo.setChecked(false);
+                }else {
+                    jogo.setSelecionado(checked);
+                    //atualiza lista de jogos salvos
+                    if(jogo.getSelecionado()) {
+                        jogo.salvarJogo();
+                    }else {
+                        jogo.removerJogoSalvo();
+                    }
+                }
+            }
+        });
     }
 
     public void seAoVivo(MyViewHolder holder, Jogos jogo) {

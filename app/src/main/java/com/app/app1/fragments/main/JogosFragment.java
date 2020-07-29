@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,16 +29,17 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 
 public class JogosFragment extends Fragment implements AdapterJogos.JogoListener {
 
     private RecyclerView rvJogos;
     private AdapterJogos adapterJogos;
-    private ArrayList<Jogos> listaDeJogos;
+    private ArrayList<Jogos> listaDeJogos = new ArrayList<>();
     private Jogos jogo = new Jogos();
     private TextView tvSemEventos;
-    private ProgressBar pbJogos;
+    private Handler handler = new Handler();
 
     public JogosFragment() {
         // Required empty public constructor
@@ -50,10 +52,6 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         //referenciação
         rvJogos = view.findViewById(R.id.rvJogos);
         tvSemEventos = view.findViewById(R.id.tvSemEventos);
-        pbJogos = view.findViewById(R.id.pbJogos);
-
-        Log.i("infoFrag", "chamou <<");
-        pbJogos.setVisibility(View.VISIBLE);
 
         listaDeJogos = getArguments().getParcelableArrayList("listaDeJogos");
 
@@ -63,36 +61,9 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public void verificarLista() {
-        if(listaDeJogos != null) {
-            if(listaDeJogos.isEmpty()) {
-                tvSemEventos.setVisibility(View.VISIBLE);
-                pbJogos.setVisibility(View.GONE);
-            }else {
-                comparator();
-                exibirJogos();
-            }
+        if(listaDeJogos.isEmpty()) {
+            tvSemEventos.setVisibility(View.VISIBLE);
         }else {
-            ReceberJogosAsyncTask receberJogos = new ReceberJogosAsyncTask();
-            receberJogos.execute();
-        }
-    }
-
-    public class ReceberJogosAsyncTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            int c = 0;
-            while(c < 1) {
-                listaDeJogos = getArguments().getParcelableArrayList("listaDeJogos");
-                if(listaDeJogos != null) {
-                    c = 1;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
             comparator();
             exibirJogos();
         }
@@ -112,10 +83,16 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         adapterJogos = new AdapterJogos(listaDeJogos, JogosFragment.this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvJogos.setLayoutManager(layoutManager);
-        //rvJogos.addItemDecoration(new DividerItemDecoration(rvJogos.getContext(), LinearLayoutManager.VERTICAL));
         rvJogos.setHasFixedSize(true);
         rvJogos.setAdapter(adapterJogos);
-        pbJogos.setVisibility(View.GONE);
+    }
+
+    public void atualizarLista(List<Jogos> listaDeJogos) {
+        for(int i=0; i<listaDeJogos.size(); i++) {
+            if(listaDeJogos.get(i).getMatch_live().equals("1")) {
+                adapterJogos.notifyItemChanged(i);
+            }
+        }
     }
 
     @Override
@@ -124,6 +101,5 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         Intent intent = new Intent(getContext(), JogoActivity.class);
         intent.putExtra("jogo", jogo);
         startActivity(intent);
-
     }
 }

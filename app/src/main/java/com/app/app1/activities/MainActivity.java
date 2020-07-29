@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -39,11 +40,18 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentManagerNonConfig;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.Menu;
 import android.widget.ProgressBar;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -67,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
     private Handler handler;
     private Bundle bundle;
     private FragmentStatePagerItemAdapter statePagerItemAdapter;
+    private FragmentPagerItems pages;
+    private FragmentPagerItemAdapter adapter;
     private View.OnClickListener onClickAoVivo, onClick;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         smartTabLayout = findViewById(R.id.viewPagerTab);
         viewPager = findViewById(R.id.viewPager);
         fab = findViewById(R.id.fab);
+        progressBar = findViewById(R.id.progressBar);
 
         //modo noturno
         SharedPreferences preferences = getSharedPreferences(ConfigActivity.ARQUIVO_PREFERENCIA, 0);
@@ -95,21 +107,22 @@ public class MainActivity extends AppCompatActivity {
 
         fab.setOnClickListener(onClickAoVivo);
 
-        bundle = new Bundle();
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         firebaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
 
-        tabs();
+        bundle = new Bundle();
+
+        callJogosAPI();
 
         handler = new Handler();
-        handler.post(new AtualizarDados());
+        handler.postDelayed(new AtualizarDados(), 60*1000);
     }
 
     private final class AtualizarDados implements Runnable {
         @Override
         public void run() {
-            chamadaJogosAPI();
-            handler.postDelayed(this, 60*1000); //60s'
+            handler.postDelayed(this, 60*1000); //60s
+            updateJogosAPI();
         }
     }
 
@@ -139,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
                     dataSelecionada = year + "-" + (monthOfYear+1) + "-" + dayOfMonth;
                     if(!dataSelecionada.equals(dataAtual)) {
                         dataAtual = dataSelecionada;
-                        chamadaJogosAPI();
+                        callJogosAPI();
+                        Log.i("infoData", ">>" + "onDataSet calendario");
                     }
                 }
             }, ano, mes, dia);
@@ -168,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void chamadaJogosAPI() {
+    public void callJogosAPI() {
         RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
         Call<List<Jogos>> request = service.listarJogos(dataAtual, dataAtual);
 
@@ -178,8 +192,12 @@ public class MainActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     Log.i("info", "erro na resposta: " + response.message());
                 } else {
-                    listaDeJogos = DatasUtil.configData(response.body());
+
+                    if(response.body() != null) {
+                        listaDeJogos = DatasUtil.configData(response.body());
+                    }
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
+                    progressBar.setVisibility(View.GONE);
 
                     //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
@@ -193,9 +211,53 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Jogos>> call, Throwable t) {
                 Log.i("info", "onFailure " + t.getMessage());
+                progressBar.setVisibility(View.GONE);
                 listaDeJogos.clear();
                 bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
                 tabs();
+            }
+        });
+    }
+
+    public void updateJogosAPI() {
+        RetrofitService service = RetrofitService.retrofit.create(RetrofitService.class);
+        Call<List<Jogos>> request = service.listarJogos(dataAtual, dataAtual);
+
+        request.enqueue(new Callback<List<Jogos>>() {
+            @Override
+            public void onResponse(Call<List<Jogos>> call, Response<List<Jogos>> response) {  //onResponse e onFailure são rodados na main thread
+                if (!response.isSuccessful()) {
+                    Log.i("info", "erro na resposta: " + response.message());
+                } else {
+
+                    if(response.body() != null) {
+                        listaDeJogos = DatasUtil.configData(response.body());
+                    }
+
+                    //verrifica se há user logado para recuperar jogos salvos
+                    if(UsuarioFirebase.getUsuarioAtual() == null) {
+                        //recupera a instancia atual dos fragments(smartTabLayout)
+                        Fragment f1 = adapter.getPage(0);
+                        if (f1 instanceof CompeticoesFragment) {
+                            ((CompeticoesFragment)f1).atualizarLista(listaDeJogos);
+                        }
+                        Fragment f2 = adapter.getPage(1);
+                        if (f2 instanceof JogosFragment) {
+                            ((JogosFragment)f2).atualizarLista(listaDeJogos);
+                        }
+
+                    }else {
+                        recuperarJogosSalvos();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Jogos>> call, Throwable t) {
+                Log.i("info", "onFailure " + t.getMessage());
+                progressBar.setVisibility(View.GONE);
+                listaDeJogos.clear();
+                bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos); //lista vazia
             }
         });
     }
@@ -223,15 +285,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tabs() {
-        FragmentPagerItems pages = FragmentPagerItems.with(this)
-                .add("Jogos", JogosFragment.class, bundle)
+        smartTabLayout.setVisibility(View.VISIBLE);
+
+        /*pages = FragmentPagerItems.with(this)
                 .add("Competições", CompeticoesFragment.class, bundle)
+                .add("Jogos", JogosFragment.class, bundle)
                 .create();
 
         statePagerItemAdapter = new FragmentStatePagerItemAdapter(
                 getSupportFragmentManager(), pages);
 
         viewPager.setAdapter(statePagerItemAdapter);
+        smartTabLayout.setViewPager(viewPager);*/
+
+        adapter = new FragmentPagerItemAdapter(
+                getSupportFragmentManager(), FragmentPagerItems.with(this)
+                .add("Competições", CompeticoesFragment.class, bundle)
+                .add("Jogos", JogosFragment.class, bundle)
+                .create());
+
+
+        viewPager.setAdapter(adapter);
         smartTabLayout.setViewPager(viewPager);
     }
 

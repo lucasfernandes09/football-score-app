@@ -1,6 +1,5 @@
 package com.app.app1.helper;
 
-import android.util.Log;
 
 public class AcoesDoJogo {
 

@@ -142,6 +142,10 @@ public class Jogos implements Parcelable {
     }
 
     public String getMatch_time() {
+        //ordenar as strings
+        if(this.match_time.length() < 5) {
+            this.match_time = "0" + match_time;
+        }
         return match_time;
     }
 

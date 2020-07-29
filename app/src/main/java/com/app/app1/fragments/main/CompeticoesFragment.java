@@ -1,6 +1,5 @@
 package com.app.app1.fragments.main;
 
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.app1.R;
 import com.app.app1.activities.JogosCompeticaoActivity;
@@ -27,6 +27,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     private RecyclerView rvCompeticoes;
     private ArrayList<Jogos> listaDeCompeticoes = new ArrayList<>();
     private List<Jogos> listaDeCompeticoesFinal = new ArrayList<>();
+    private TextView tvSemCompeticao;
 
     public CompeticoesFragment() {
         // Required empty public constructor
@@ -38,6 +39,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         View view = inflater.inflate(R.layout.fragment_competicoes, container, false);
         //referenciação
         rvCompeticoes = view.findViewById(R.id.rvCompeticoes);
+        tvSemCompeticao = view.findViewById(R.id.tvSemCompeticao);
 
         //lista de competições é uma lista de jogos
         listaDeCompeticoes = getArguments().getParcelableArrayList("listaDeJogos");
@@ -48,31 +50,9 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     }
 
     public void verificarLista() {
-        if(listaDeCompeticoes != null) {
-            organizarListagem();
-            exibirCompeticoes();
+        if(listaDeCompeticoes.isEmpty()){
+            tvSemCompeticao.setVisibility(View.VISIBLE);
         }else {
-            ReceberJogosAsyncTask receberJogos = new ReceberJogosAsyncTask();
-            receberJogos.execute();
-        }
-    }
-
-    public class ReceberJogosAsyncTask extends AsyncTask<Void, Void, Void>{
-        @Override
-        protected Void doInBackground(Void... voids) {
-            int c = 0;
-            while(c < 1) {
-                listaDeCompeticoes = getArguments().getParcelableArrayList("listaDeJogos");
-                if(listaDeCompeticoes != null) {
-                    c = 1;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
             organizarListagem();
             exibirCompeticoes();
         }
@@ -105,6 +85,10 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         rvCompeticoes.setAdapter(adapterCompeticoes);
     }
 
+    public void atualizarLista(List<Jogos> listaDeJogos) {
+        listaDeCompeticoes = (ArrayList<Jogos>) listaDeJogos;
+    }
+
     @Override
     public void jogoClick(int position) {
         //enviar apenas jogos desta competição clicada
@@ -115,7 +99,6 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
                 listaDeJogosDeUmaCompeticao.add(listaDeCompeticoes.get(i));
             }
         }
-        //intent
         Intent intent = new Intent(getContext(), JogosCompeticaoActivity.class);
         intent.putParcelableArrayListExtra("listaDeJogosDeUmaCompeticao", listaDeJogosDeUmaCompeticao);
         startActivity(intent);
