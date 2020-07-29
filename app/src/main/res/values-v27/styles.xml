@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
@@ -10,5 +9,7 @@
         <!-- a partir API 27+ -->
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:navigationBarColor">@color/background_material_light</item>
+        <!-- font -->
+        <item name="android:fontFamily">@font/allerta</item>
     </style>
 </resources>
