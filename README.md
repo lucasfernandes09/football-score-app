@@ -7,8 +7,6 @@ Football Score
 
 Para acessar mais imagens clique [aqui](ScreenShots)
 
----
-
 # Sobre o projeto
 Resultados e dados de partidas de futebol passadas, futuras ou ao vivo e com opção de salvar seus jogos favoritos. **Dark Theme** :new_moon_with_face:
 
