@@ -2,6 +2,7 @@ package com.app.app1.adapters;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -171,7 +172,13 @@ public class AdapterJogos extends RecyclerView.Adapter<AdapterJogos.MyViewHolder
         }else{
             if(jogo.getMatch_status().equals("Finished")) {
                 holder.match_time.setText("Final");
-            }else{
+            }else if (jogo.getMatch_status().contains("Extra")) {
+                holder.match_time.setText(jogo.getMatch_status().replace("Extra time", "") + "'");
+            }else if (jogo.getMatch_status().contains("Break")) {
+                holder.match_time.setText("Prorrog.");
+            }else if(jogo.getMatch_status().contains("Penal")) {
+                holder.match_time.setText("Penais");
+            } else{
                 holder.match_time.setText(jogo.getMatch_status() + "'");
                 holder.match_time.setTextColor(Color.GREEN);
             }

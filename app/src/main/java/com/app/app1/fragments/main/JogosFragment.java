@@ -88,11 +88,20 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public void atualizarLista(List<Jogos> listaDeJogos) {
-        for(int i=0; i<listaDeJogos.size(); i++) {
+        listaDeJogosFinal = (ArrayList<Jogos>) listaDeJogos;
+        comparator();
+        rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
+
+        /*for(int i=0; i<listaDeJogos.size(); i++) {
             if(listaDeJogos.get(i).getMatch_live().equals("1")) {
+                Log.i("info", listaDeJogos.get(i).getMatch_status());
+                //adapterJogos.notifyItemRemoved(i);
+                //adapterJogos.notifyItemInserted(i);
+                //listaDeJogosFinal.set(i, listaDeJogos.get(i));
                 adapterJogos.notifyItemChanged(i);
+                //adapterJogos.notifyDataSetChanged();
             }
-        }
+        }*/
     }
 
     @Override
@@ -134,7 +143,16 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            adapterJogos.notifyDataSetChanged();
+            if(aoVivo) {
+                if(listaDeJogosAoVivo.isEmpty()) {
+                    tvInfoJogos.setVisibility(View.VISIBLE);
+                }else {
+                    tvInfoJogos.setVisibility(View.GONE);
+                    rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
+                }
+            }else {
+                rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
+            }
         }
     }
 

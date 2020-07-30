@@ -100,15 +100,15 @@ public class MainActivity extends AppCompatActivity {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         firebaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
 
+        configClicksAoVivo();
+        fab.setOnClickListener(onClickAoVivo);
+
         bundle = new Bundle();
 
         callJogosAPI();
 
         handler = new Handler();
         handler.postDelayed(new AtualizarDados(), 60*1000);
-
-        configClicksAoVivo();
-        fab.setOnClickListener(onClickAoVivo);
     }
 
     private final class AtualizarDados implements Runnable {
@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     if(response.body() != null) {
                         listaDeJogos = DatasUtil.configData(response.body());
                     }
+                    Log.i("info", "updateJogos ");
 
                     //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
@@ -288,7 +289,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void configClicksAoVivo() {
-
         onClickAoVivo = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -314,15 +314,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(listaDeJogos != null) {
-                    /*Fragment f1 = adapter.getPage(0);
-                if (f1 instanceof CompeticoesFragment) {
-                    ((CompeticoesFragment)f1).new CompeticoesAoVivo(false).execute();
-                }
 
-                Fragment f2 = adapter.getPage(1);
-                if (f2 instanceof JogosFragment) {
-                    ((JogosFragment)f2).new JogosAoVivo(false).execute();
-                }*/
+                    Fragment f1 = adapter.getPage(0);
+                    if (f1 instanceof CompeticoesFragment) {
+                        ((CompeticoesFragment)f1).new CompeticoesAoVivo(false).execute();
+                    }
+
+                    Fragment f2 = adapter.getPage(1);
+                    if (f2 instanceof JogosFragment) {
+                        ((JogosFragment)f2).new JogosAoVivo(false).execute();
+                    }
                 }
 
                 fab.setImageResource(R.drawable.ic_relogio_24dp);

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.app.app1.R;
@@ -100,8 +101,8 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     }
 
     public void atualizarLista(List<Jogos> listaDeJogos) {
-        listaDeCompeticoesFinal.clear();
         listaDeCompeticoes = (ArrayList<Jogos>) listaDeJogos;
+        listaDeCompeticoesFinal.clear();
         organizarListagem(listaDeCompeticoes);
         adapterCompeticoes.notifyDataSetChanged();
     }
@@ -139,8 +140,10 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
                         listaDeJogosAoVivo.add(jogo);
                     }
                 }
+                listaDeCompeticoesFinal.clear();
                 organizarListagem(listaDeJogosAoVivo);
             }else {
+                listaDeCompeticoesFinal.clear();
                 organizarListagem(listaDeCompeticoes);
             }
             return null;
@@ -154,7 +157,16 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            adapterCompeticoes.notifyDataSetChanged();
+            if(aoVivo) {
+                if(listaDeJogosAoVivo.isEmpty()) {
+                    tvInfoCompet.setVisibility(View.VISIBLE);
+                }else {
+                    tvInfoCompet.setVisibility(View.GONE);
+                    rvCompeticoes.setAdapter(new AdapterCompeticoes(listaDeCompeticoesFinal, CompeticoesFragment.this));
+                }
+            }else {
+                rvCompeticoes.setAdapter(new AdapterCompeticoes(listaDeCompeticoesFinal, CompeticoesFragment.this));
+            }
         }
     }
 

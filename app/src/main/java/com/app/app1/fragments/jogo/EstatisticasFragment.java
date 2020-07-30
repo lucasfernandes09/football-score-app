@@ -102,10 +102,10 @@ public class EstatisticasFragment extends Fragment {
         String ec1 = df.format((chutesGol1/chutes1)*100) + "%";
         String ec2 = df.format((chutesGol2/chutes2)*100) + "%";
 
-        if(ec1.equals("NaN")) {
+        if(ec1.equals("NaN%")) {
             ec1 = "0%";
         }
-        if(ec2.equals("NaN")) {
+        if(ec2.equals("NaN%")) {
             ec2 = "0%";
         }
 

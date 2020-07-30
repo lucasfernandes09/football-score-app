@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_ProbPreJogo"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
@@ -11,14 +12,14 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/tvProb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Probabilidades Pré-Jogo"
+        android:text="Probabilidades Pré-Jogo (Não Disponível)"
         android:textStyle="bold" />
 
     <TextView

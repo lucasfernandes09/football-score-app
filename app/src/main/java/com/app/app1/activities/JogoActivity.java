@@ -2,13 +2,16 @@ package com.app.app1.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.app.app1.R;
+import com.app.app1.fragments.main.CompeticoesFragment;
 import com.app.app1.helper.DatasUtil;
 import com.app.app1.services.RetrofitService;
 import com.app.app1.fragments.jogo.EstatisticasFragment;
@@ -44,6 +47,7 @@ public class JogoActivity extends AppCompatActivity {
     private ViewPager vpJogo;
     private SmartTabLayout tabJogo;
     private Bundle bundle = new Bundle();
+    private FragmentStatePagerItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +74,13 @@ public class JogoActivity extends AppCompatActivity {
 
         jogosDaCompeticao();
 
-        predicoes();
-
         if(jogo.getMatch_status().equals("") || jogo.getMatch_status().equals("Postponed")) {  //ainda não realizado
             tabsSemEstatisticas();
         }else {
             tabs();
         }
+
+        predicoes();
     }
 
     private void tabsSemEstatisticas() {
@@ -86,7 +90,7 @@ public class JogoActivity extends AppCompatActivity {
                 .add("Tabela", TabelaFragment.class, bundle)
                 .create();
 
-        FragmentStatePagerItemAdapter adapter = new FragmentStatePagerItemAdapter(
+        adapter = new FragmentStatePagerItemAdapter(
                 getSupportFragmentManager(), pages);
 
         vpJogo.setAdapter(adapter);
@@ -101,7 +105,7 @@ public class JogoActivity extends AppCompatActivity {
                 .add("Tabela", TabelaFragment.class, bundle)
                 .create();
 
-        FragmentStatePagerItemAdapter adapter = new FragmentStatePagerItemAdapter(
+        adapter = new FragmentStatePagerItemAdapter(
                 getSupportFragmentManager(), pages);
 
         vpJogo.setAdapter(adapter);
@@ -213,7 +217,11 @@ public class JogoActivity extends AppCompatActivity {
                     Log.i("info", "erro na resposta: " + response.message());
                 }else {
                     listaDePredicao = response.body();
-                    bundle.putParcelableArrayList("listaDePredicao", (ArrayList<Predicoes>) listaDePredicao);
+
+                    Fragment f1 = adapter.getPage(0);
+                    if (f1 instanceof ResumoFragment) {
+                        ((ResumoFragment)f1).probPreJogo(listaDePredicao);
+                    }
                 }
             }
 

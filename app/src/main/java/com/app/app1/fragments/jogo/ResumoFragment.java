@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -50,7 +51,7 @@ public class ResumoFragment extends Fragment {
     private ImageView ivBadgeCasa, ivBadgeVis, ivCampo, ivCompeticaoResumo;
     private TextView tvNomeLiga, tvHoraPartida, getTvNomeLiga, tvScoreCasa, tvScoreVis, tvNomeCasa, tvNomeVis, tvFormacaoCasa, tvFormacaoVis;
     private TextView tvTitularesCasa, tvTitularesVis, tvSubstitutosCasa, tvSubstitutosVis, tvForaDoJogoCasa, tvForaDoJogoVis, tvDataR, tvRodada, tvArbitro, tvEstadio;
-    private TextView tvGoleiroCasa, tvGoleiroVis, tvFimDeJogo;
+    private TextView tvGoleiroCasa, tvGoleiroVis, tvFimDeJogo, tvProb;
     private RecyclerView rvAcoesDeJogo;
     private View lAcoesDeJogo, lFormacoes;
     private ConstraintLayout lAtkDef;
@@ -60,7 +61,6 @@ public class ResumoFragment extends Fragment {
     private RoundCornerProgressBar pbAtk1, pbAtk2, pbDef1, pbDef2;
     private List<Predicoes> listaDePredicao;
     private ArcProgress pC, pE, pV, p3, pMais3, pS, pN;
-
 
     public ResumoFragment() {
         // Required empty public constructor
@@ -91,6 +91,7 @@ public class ResumoFragment extends Fragment {
         tvDataR = view.findViewById(R.id.tvDataR); tvRodada = view.findViewById(R.id.tvRodada); tvArbitro = view.findViewById(R.id.tvArbitro); tvEstadio = view.findViewById(R.id.tvEstadio);
         pC = view.findViewById(R.id.pC); pE = view.findViewById(R.id.pE); pV = view.findViewById(R.id.pV);
         p3 = view.findViewById(R.id.p3); pMais3 = view.findViewById(R.id.pMais3); pS = view.findViewById(R.id.pS); pN = view.findViewById(R.id.pN);
+        tvProb = view.findViewById(R.id.tvProb);
 
         //objetos recebidos de JogoActivity
         jogo = getArguments().getParcelable("jogo");
@@ -124,15 +125,15 @@ public class ResumoFragment extends Fragment {
         tvEstadio.setText(jogo.getMatch_stadium());
 
         //probs pré-jogo
-        ProbPreJogoAsyncTask probPreJogo = new ProbPreJogoAsyncTask();
-        probPreJogo.execute();
+        //ProbPreJogoAsyncTask probPreJogo = new ProbPreJogoAsyncTask();
+        //probPreJogo.execute();
 
         return view;
     }
 
     public void seAoVivo() {
         if(jogo.getMatch_live().equals("1")) {
-            tvHoraPartida.setText(jogo.getMatch_status() + "'");
+            configLabelTempo();
             tvHoraPartida.setTextColor(Color.GREEN);
             tvScoreCasa.setText(jogo.getMatch_hometeam_score());
             tvScoreVis.setText(jogo.getMatch_awayteam_score());
@@ -142,6 +143,18 @@ public class ResumoFragment extends Fragment {
             tvHoraPartida.setText(jogo.getMatch_time());
             tvFimDeJogo.setVisibility(View.VISIBLE);
             eventoRealizado();
+        }
+    }
+
+    public void configLabelTempo() {
+        if(jogo.getMatch_status().contains("Extra")) {
+            tvHoraPartida.setText(jogo.getMatch_status().replace("Extra time", "") + "'");
+        }else if (jogo.getMatch_status().contains("Break")) {
+            tvHoraPartida.setText("Prorrog.");
+        }else if (jogo.getMatch_status().contains("Penal")) {
+            tvHoraPartida.setText("Penais");
+        } else {
+            tvHoraPartida.setText(jogo.getMatch_status() + "'");
         }
     }
 
@@ -343,7 +356,7 @@ public class ResumoFragment extends Fragment {
             return escalacaoFinal;
     }
 
-    public class ProbPreJogoAsyncTask extends AsyncTask<Void, Void, Void> {
+    /*public class ProbPreJogoAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
             int c = 0;
@@ -367,6 +380,18 @@ public class ResumoFragment extends Fragment {
             pS.setProgress(listaDePredicao.get(0).getProb_bts());
             pN.setProgress(listaDePredicao.get(0).getProb_ots());
         }
+    }*/
+
+    public void probPreJogo(List<Predicoes> listaDePredicao) {
+        tvProb.setText("Probabilidades Pré-Jogo");
+
+        pC.setProgress(listaDePredicao.get(0).getProb_HW());
+        pE.setProgress(listaDePredicao.get(0).getProb_D());
+        pV.setProgress(listaDePredicao.get(0).getProb_AW());
+        p3.setProgress(listaDePredicao.get(0).getProb_U_3());
+        pMais3.setProgress(listaDePredicao.get(0).getProb_O_3());
+        pS.setProgress(listaDePredicao.get(0).getProb_bts());
+        pN.setProgress(listaDePredicao.get(0).getProb_ots());
     }
 
     private View.OnClickListener listenerCasa = new View.OnClickListener() {

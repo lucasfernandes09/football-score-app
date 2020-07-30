@@ -41,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         //btn back action bar
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Login");
+        getSupportActionBar().setElevation(0);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override

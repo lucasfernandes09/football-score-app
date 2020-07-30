@@ -41,6 +41,7 @@ public class ConfigActivity extends AppCompatActivity {
 
         //actionBar
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0);
 
 
         configIniciais();
