@@ -40,7 +40,8 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     private ArrayList<Jogos> listaDeJogosFinal = new ArrayList<>();
     private Jogos jogo = new Jogos();
     private TextView tvInfoJogos;
-    private Handler handler = new Handler();
+    protected ArrayList<Jogos> listaDeJogosAoVivo = new ArrayList<>();
+    protected boolean aoVivo = false;
 
     public JogosFragment() {
         // Required empty public constructor
@@ -88,7 +89,12 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public void atualizarLista(List<Jogos> listaDeJogos) {
-        listaDeJogosFinal = (ArrayList<Jogos>) listaDeJogos;
+        if(aoVivo) {
+            getJogosAoVivo(listaDeJogos);
+            listaDeJogosFinal = listaDeJogosAoVivo;
+        }else {
+            listaDeJogosFinal = (ArrayList<Jogos>) listaDeJogos;
+        }
         comparator();
         rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
 
@@ -113,21 +119,15 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
     }
 
     public class JogosAoVivo extends AsyncTask<Void, Void, Void> {
-        private ArrayList<Jogos> listaDeJogosAoVivo = new ArrayList<>();
-        private boolean aoVivo;
 
         public JogosAoVivo(boolean aoVivo) {
-            this.aoVivo = aoVivo;
+            JogosFragment.this.aoVivo = aoVivo;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
             if(aoVivo) {
-                for(Jogos jogo : listaDeJogos) {
-                    if(jogo.getMatch_live().equals("1")) {
-                        listaDeJogosAoVivo.add(jogo);
-                    }
-                }
+                getJogosAoVivo(listaDeJogosFinal);
                 listaDeJogosFinal = listaDeJogosAoVivo;
             }else {
                 listaDeJogosFinal = listaDeJogos;
@@ -138,6 +138,7 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
+            rvJogos.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -152,6 +153,17 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
                 }
             }else {
                 rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
+            }
+
+            rvJogos.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void getJogosAoVivo(List<Jogos> listaDeJogos) {
+        listaDeJogosAoVivo.clear();
+        for(Jogos jogo : listaDeJogos) {
+            if(jogo.getMatch_live().equals("1")) {
+                listaDeJogosAoVivo.add(jogo);
             }
         }
     }

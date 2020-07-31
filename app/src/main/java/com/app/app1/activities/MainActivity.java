@@ -292,6 +292,7 @@ public class MainActivity extends AppCompatActivity {
         onClickAoVivo = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("info", "click ao vivo "+ listaDeJogos.size());
                 if(listaDeJogos != null) {
 
                     Fragment f1 = adapter.getPage(0);
@@ -340,5 +341,10 @@ public class MainActivity extends AppCompatActivity {
         tabs();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("info", "onPause MainActivity"  + " <<");
+    }
 }
 

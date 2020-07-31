@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.app.app1.R;
 import com.app.app1.adapters.AdapterTabela;
@@ -26,6 +27,7 @@ public class TabelaFragment extends Fragment {
     private List<Tabela> listaTabela;
     private List<Jogos> listaDeJogosDaCompeticao;
     private RecyclerView rvTabela;
+    private TextView tvNaoTab;
 
 
     public TabelaFragment() {
@@ -38,6 +40,7 @@ public class TabelaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tabela, container, false);
         //referenciação
         rvTabela = view.findViewById(R.id.rvTabela);
+        tvNaoTab = view.findViewById(R.id.tvNaoTab);
 
         //tabela
         RecuperarTabelaAsyncTask recuperarTabela = new RecuperarTabelaAsyncTask();
@@ -65,6 +68,7 @@ public class TabelaFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            tvNaoTab.setVisibility(View.GONE);
             tabelaAoVivo();
         }
     }

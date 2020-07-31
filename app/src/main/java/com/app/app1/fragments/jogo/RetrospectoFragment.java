@@ -29,7 +29,7 @@ import java.util.List;
 public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoListener {
     private List<Jogos> listaDeJogos, listaDeUltimosJogosCasa, listaDeUltimosJogosVis;
     private Jogos jogo = new Jogos();
-    private TextView tvUJCasa, tvUJVis;
+    private TextView tvUJCasa, tvUJVis, tvNaoRetros;
     private ImageView ivUJBadgeCasa, ivUJBadgeVis;
     private RecyclerView rvRetrospecto;
     private AdapterJogos adapterJogos;
@@ -44,7 +44,7 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_retrospecto, container, false);
         //referenciação
-        tvUJCasa = view.findViewById(R.id.tvUJCasa); tvUJVis = view.findViewById(R.id.tvUJVis);
+        tvUJCasa = view.findViewById(R.id.tvUJCasa); tvUJVis = view.findViewById(R.id.tvUJVis); tvNaoRetros = view.findViewById(R.id.tvNaoRetros);
         ivUJBadgeCasa = view.findViewById(R.id.ivUJBadgeCasa); ivUJBadgeVis = view.findViewById(R.id.ivUJBadgeVis);
         rvRetrospecto = view.findViewById(R.id.rvRetrospecto);
         clRestrospectoCasa = view.findViewById(R.id.clRestrospectoCasa); clRestrospectoVis = view.findViewById(R.id.clRestrospectoVis);
@@ -84,8 +84,9 @@ public class RetrospectoFragment extends Fragment implements AdapterJogos.JogoLi
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {  //esse método executa na UI Thread
+        protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            tvNaoRetros.setVisibility(View.GONE);
             listaDeJogos = listaDeUltimosJogosCasa;
             exibirJogos();
 

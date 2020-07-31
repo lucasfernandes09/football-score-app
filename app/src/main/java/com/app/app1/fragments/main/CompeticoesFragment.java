@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.app.app1.R;
 import com.app.app1.activities.JogosCompeticaoActivity;
 import com.app.app1.adapters.AdapterCompeticoes;
+import com.app.app1.adapters.AdapterJogos;
 import com.app.app1.model.Jogos;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -133,6 +134,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
 
         @Override
         protected Void doInBackground(Void... voids) {
+            listaDeCompeticoesFinal.clear();
             if(aoVivo) {
                 //competições ao vivo
                 for(Jogos jogo : listaDeCompeticoes) {
@@ -140,10 +142,8 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
                         listaDeJogosAoVivo.add(jogo);
                     }
                 }
-                listaDeCompeticoesFinal.clear();
                 organizarListagem(listaDeJogosAoVivo);
             }else {
-                listaDeCompeticoesFinal.clear();
                 organizarListagem(listaDeCompeticoes);
             }
             return null;
@@ -152,6 +152,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         @Override
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
+            rvCompeticoes.setVisibility(View.INVISIBLE);
         }
 
         @Override
@@ -167,7 +168,26 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
             }else {
                 rvCompeticoes.setAdapter(new AdapterCompeticoes(listaDeCompeticoesFinal, CompeticoesFragment.this));
             }
+
+            rvCompeticoes.setVisibility(View.VISIBLE);
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i("info", "onPause CompeticoesFrag"  + " <<");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("info", "onStop CompeticoesFrag"  + " <<");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.i("info", "onDestroyView CompeticoesFrag"  + " <<");
+    }
 }

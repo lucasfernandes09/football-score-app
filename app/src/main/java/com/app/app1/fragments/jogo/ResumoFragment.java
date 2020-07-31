@@ -59,7 +59,7 @@ public class ResumoFragment extends Fragment {
     private List<Jogos> listaDeJogosSalvos = new ArrayList<>();
     private TextView tvAtk1, tvAtk2, tvDef1, tvDef2;
     private RoundCornerProgressBar pbAtk1, pbAtk2, pbDef1, pbDef2;
-    private List<Predicoes> listaDePredicao;
+    private List<Predicoes> listaDePredicao = new ArrayList<>();
     private ArcProgress pC, pE, pV, p3, pMais3, pS, pN;
 
     public ResumoFragment() {
@@ -124,10 +124,6 @@ public class ResumoFragment extends Fragment {
         tvArbitro.setText(jogo.getMatch_referee());
         tvEstadio.setText(jogo.getMatch_stadium());
 
-        //probs pré-jogo
-        //ProbPreJogoAsyncTask probPreJogo = new ProbPreJogoAsyncTask();
-        //probPreJogo.execute();
-
         return view;
     }
 
@@ -153,6 +149,8 @@ public class ResumoFragment extends Fragment {
             tvHoraPartida.setText("Prorrog.");
         }else if (jogo.getMatch_status().contains("Penal")) {
             tvHoraPartida.setText("Penais");
+        }else if (jogo.getMatch_status().contains("Half")) {
+            tvHoraPartida.setText("Intervalo");
         } else {
             tvHoraPartida.setText(jogo.getMatch_status() + "'");
         }
@@ -177,6 +175,8 @@ public class ResumoFragment extends Fragment {
         ArrayList<Float> listaDeTermos = new AtkDef().getAtkDef(jogo);
 
         if(listaDeTermos != null) {
+            lAtkDef.setVisibility(View.VISIBLE);
+
             //progressBars
             Float atk1 = listaDeTermos.get(0);
             Float atk2 = listaDeTermos.get(1);
@@ -199,6 +199,8 @@ public class ResumoFragment extends Fragment {
             tvAtk2.setText(a2);
             tvDef1.setText(d1);
             tvDef2.setText(d2);
+        }else {
+            lAtkDef.setVisibility(View.GONE);
         }
 
     }
@@ -356,33 +358,8 @@ public class ResumoFragment extends Fragment {
             return escalacaoFinal;
     }
 
-    /*public class ProbPreJogoAsyncTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids) {
-            int c = 0;
-            while (c<1) {
-                listaDePredicao = getArguments().getParcelableArrayList("listaDePredicao");
-                if(listaDePredicao != null) {
-                    c = 1;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            pC.setProgress(listaDePredicao.get(0).getProb_HW());
-            pE.setProgress(listaDePredicao.get(0).getProb_D());
-            pV.setProgress(listaDePredicao.get(0).getProb_AW());
-            p3.setProgress(listaDePredicao.get(0).getProb_U_3());
-            pMais3.setProgress(listaDePredicao.get(0).getProb_O_3());
-            pS.setProgress(listaDePredicao.get(0).getProb_bts());
-            pN.setProgress(listaDePredicao.get(0).getProb_ots());
-        }
-    }*/
-
     public void probPreJogo(List<Predicoes> listaDePredicao) {
+        this.listaDePredicao = listaDePredicao;
         tvProb.setText("Probabilidades Pré-Jogo");
 
         pC.setProgress(listaDePredicao.get(0).getProb_HW());
