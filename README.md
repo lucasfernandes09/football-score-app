@@ -25,6 +25,7 @@ A função principal do app é pontuar através dos termos de Ataque e Defesa as
 * ProgressBar e Circle ProgessBar, o qual indica a probabilidades pré jogo
 
 ## Instale o app
+[footballscore.apk](https://drive.google.com/file/d/1gVY-C6f9fHvsS0925sCJ_zAUP3wsC-8E/view?usp=sharing)
 
 ## Funcionalidades
 * para fazer Login, se cadastrar ou recuperar a senha, aperte no ícone de "usúario"
