@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.app.app1.R;
-import com.app.app1.fragments.main.AoVivoFragment;
 import com.app.app1.helper.DatasUtil;
 import com.app.app1.services.RetrofitService;
 import com.app.app1.activities.user.LoginActivity;
@@ -60,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SmartTabLayout smartTabLayout;
+    private FloatingActionButton fab;
     private List<Jogos> listaDeJogos = new ArrayList<>();
-    private List<Jogos> listaRetornada = new ArrayList<>();
     private String dataSelecionada = "";
     private String dataAtual = DatasUtil.dataHoje();
     private TextView tvSemEventos;
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         //referenciação
         smartTabLayout = findViewById(R.id.viewPagerTab);
         viewPager = findViewById(R.id.viewPager);
+        fab = findViewById(R.id.fab);
         progressBar = findViewById(R.id.progressBar);
         tvSemEventos = findViewById(R.id.tvSemEventos);
 
@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         firebaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
+
+        configClicksAoVivo();
+        fab.setOnClickListener(onClickAoVivo);
 
         bundle = new Bundle();
 
@@ -145,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         tvSemEventos.setVisibility(View.GONE);
                         dataAtual = dataSelecionada;
                         callJogosAPI();
+                        Log.i("infoData", "onDataSet calendario");
                     }
                 }
             }, ano, mes, dia);
@@ -185,14 +189,12 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     if(response.body() != null) {
-                        listaRetornada = DatasUtil.configData(response.body());
-                        configLista(listaRetornada);
-                        Log.i("info", ">> " + listaRetornada.size());
+                        listaDeJogos = DatasUtil.configData(response.body());
                     }
 
-                    bundle.clear();
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
                     progressBar.setVisibility(View.GONE);
+
 
                     //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
@@ -223,9 +225,9 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     if(response.body() != null) {
-                        listaRetornada = DatasUtil.configData(response.body());
-                        configLista(listaRetornada);
+                        listaDeJogos = DatasUtil.configData(response.body());
                     }
+                    Log.i("info", "updateJogos ");
 
                     //verrifica se há user logado para recuperar jogos salvos
                     if(UsuarioFirebase.getUsuarioAtual() == null) {
@@ -280,11 +282,55 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add("Competições", CompeticoesFragment.class, bundle)
                 .add("Jogos", JogosFragment.class, bundle)
-                .add("Ao Vivo", AoVivoFragment.class, bundle)
                 .create());
 
         viewPager.setAdapter(adapter);
         smartTabLayout.setViewPager(viewPager);
+    }
+
+    public void configClicksAoVivo() {
+        onClickAoVivo = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("info", "click ao vivo "+ listaDeJogos.size());
+                if(listaDeJogos != null) {
+
+                    Fragment f1 = adapter.getPage(0);
+                    if (f1 instanceof CompeticoesFragment) {
+                        ((CompeticoesFragment)f1).new CompeticoesAoVivo(true).execute();
+                    }
+
+                    Fragment f2 = adapter.getPage(1);
+                    if (f2 instanceof JogosFragment) {
+                        ((JogosFragment)f2).new JogosAoVivo(true).execute();
+                    }
+                }
+
+                fab.setImageResource(R.drawable.ic_fechar);
+                fab.setOnClickListener(onClickPadrao);
+            }
+        };
+
+        onClickPadrao = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(listaDeJogos != null) {
+
+                    Fragment f1 = adapter.getPage(0);
+                    if (f1 instanceof CompeticoesFragment) {
+                        ((CompeticoesFragment)f1).new CompeticoesAoVivo(false).execute();
+                    }
+
+                    Fragment f2 = adapter.getPage(1);
+                    if (f2 instanceof JogosFragment) {
+                        ((JogosFragment)f2).new JogosAoVivo(false).execute();
+                    }
+                }
+
+                fab.setImageResource(R.drawable.ic_relogio_24dp);
+                fab.setOnClickListener(onClickAoVivo);
+            }
+        };
     }
 
     public void configSemEventos() {
@@ -295,22 +341,10 @@ public class MainActivity extends AppCompatActivity {
         tabs();
     }
 
-    public void configLista(List<Jogos> listaRetornada) {
-        listaDeJogos.clear();
-
-        if(listaRetornada.size() >= 90) {
-            listaDeJogos.addAll(listaRetornada.subList(0, 90));
-        }else {
-            listaDeJogos = listaRetornada;
-        }
-    }
-
-    public List<Jogos> getListaDeJogos() {
-        return listaDeJogos;
-    }
-
-    public void setListaDeJogos(List<Jogos> listaDeJogos) {
-        this.listaDeJogos = listaDeJogos;
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("info", "onPause MainActivity"  + " <<");
     }
 }
 

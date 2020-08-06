@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import com.app.app1.R;
 import com.app.app1.activities.user.LoginActivity;
 import com.app.app1.activities.user.UsuarioLogadoActivity;
 import com.app.app1.config.ConfiguracaoFirebase;
-import com.app.app1.fragments.BottomSheetFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
@@ -49,6 +47,7 @@ public class ConfigActivity extends AppCompatActivity {
         configIniciais();
         configLogin();
         configModoNoturno();
+
     }
 
     public void configIniciais() {
