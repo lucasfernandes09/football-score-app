@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private SmartTabLayout smartTabLayout;
     private FloatingActionButton fab;
     private List<Jogos> listaDeJogos = new ArrayList<>();
+    private List<Jogos> listaRetornada = new ArrayList<>();
     private String dataSelecionada = "";
     private String dataAtual = DatasUtil.dataHoje();
     private TextView tvSemEventos;
@@ -189,7 +190,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     if(response.body() != null) {
-                        listaDeJogos = DatasUtil.configData(response.body());
+                        listaRetornada = DatasUtil.configData(response.body());
+                        configLista(listaRetornada);
                     }
 
                     bundle.putParcelableArrayList("listaDeJogos", (ArrayList<Jogos>) listaDeJogos);
@@ -225,7 +227,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     if(response.body() != null) {
-                        listaDeJogos = DatasUtil.configData(response.body());
+                        listaRetornada = DatasUtil.configData(response.body());
+                        configLista(listaRetornada);
                     }
                     Log.i("info", "updateJogos ");
 
@@ -339,6 +342,16 @@ public class MainActivity extends AppCompatActivity {
         bundle.clear();
         listaDeJogos = null;
         tabs();
+    }
+
+    public void configLista(List<Jogos> listaRetornada) {
+        listaDeJogos = new ArrayList<>();
+
+        if(listaRetornada.size() >= 90) {
+            listaDeJogos.addAll(listaRetornada.subList(0, 90));
+        }else {
+            listaDeJogos = listaRetornada;
+        }
     }
 
     @Override

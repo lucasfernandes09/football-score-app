@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -66,6 +67,7 @@ public class ResumoFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -97,9 +99,11 @@ public class ResumoFragment extends Fragment {
         jogo = getArguments().getParcelable("jogo");
 
         //badges (Picasso)
-        Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa);
-        Picasso.get().load(jogo.getTeam_away_badge()).into(ivBadgeVis);
-        Picasso.get().load(jogo.getLeague_logo()).into(ivCompeticaoResumo);
+        if(jogo.getTeam_home_badge() != null && jogo.getTeam_away_badge() != null && jogo.getLeague_logo() != null) {
+            Picasso.get().load(jogo.getTeam_home_badge()).into(ivBadgeCasa);
+            Picasso.get().load(jogo.getTeam_away_badge()).into(ivBadgeVis);
+            Picasso.get().load(jogo.getLeague_logo()).into(ivCompeticaoResumo);
+        }
 
         seAoVivo();
 
@@ -360,7 +364,6 @@ public class ResumoFragment extends Fragment {
 
     public void probPreJogo(List<Predicoes> listaDePredicao) {
         this.listaDePredicao = listaDePredicao;
-        tvProb.setText("Probabilidades Pré-Jogo");
 
         pC.setProgress(listaDePredicao.get(0).getProb_HW());
         pE.setProgress(listaDePredicao.get(0).getProb_D());

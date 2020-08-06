@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Probabilidades Pré-Jogo (Não Disponível)"
+        android:text="Probabilidades Pré-Jogo"
         android:textStyle="bold" />
 
     <TextView

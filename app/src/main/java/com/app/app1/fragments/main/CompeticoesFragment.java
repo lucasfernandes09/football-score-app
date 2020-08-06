@@ -64,6 +64,8 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     }
 
     public void organizarListagem(List<Jogos> listaDeCompeticoes) {
+        listaDeCompeticoesFinal = new ArrayList<>();
+
         for (int i = 0; i < listaDeCompeticoes.size(); i++) {
             listaDeCompeticoes.get(i).setQtdCompeticao(1);
             for (int j = i + 1; j < listaDeCompeticoes.size(); j++) {
