@@ -118,47 +118,6 @@ public class JogosFragment extends Fragment implements AdapterJogos.JogoListener
         startActivity(intent);
     }
 
-    public class JogosAoVivo extends AsyncTask<Void, Void, Void> {
-
-        public JogosAoVivo(boolean aoVivo) {
-            JogosFragment.this.aoVivo = aoVivo;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            if(aoVivo) {
-                getJogosAoVivo(listaDeJogosFinal);
-                listaDeJogosFinal = listaDeJogosAoVivo;
-            }else {
-                listaDeJogosFinal = listaDeJogos;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-            super.onProgressUpdate(values);
-            rvJogos.setVisibility(View.INVISIBLE);
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            if(aoVivo) {
-                if(listaDeJogosAoVivo.isEmpty()) {
-                    tvInfoJogos.setVisibility(View.VISIBLE);
-                }else {
-                    tvInfoJogos.setVisibility(View.GONE);
-                    rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
-                }
-            }else {
-                rvJogos.setAdapter(new AdapterJogos(listaDeJogosFinal, JogosFragment.this));
-            }
-
-            rvJogos.setVisibility(View.VISIBLE);
-        }
-    }
-
     public void getJogosAoVivo(List<Jogos> listaDeJogos) {
         listaDeJogosAoVivo.clear();
         for(Jogos jogo : listaDeJogos) {

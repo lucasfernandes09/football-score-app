@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
     private List<Jogos> listaDeCompeticoesFinal = new ArrayList<>();
     private TextView tvInfoCompet;
     private AdapterCompeticoes adapterCompeticoes;
+    private Intent intent;
 
     public CompeticoesFragment() {
         // Required empty public constructor
@@ -118,7 +120,7 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
                 listaDeJogosDeUmaCompeticao.add(listaDeCompeticoes.get(i));
             }
         }
-        Intent intent = new Intent(getContext(), JogosCompeticaoActivity.class);
+        intent = new Intent(getContext(), JogosCompeticaoActivity.class);
         intent.putParcelableArrayListExtra("listaDeJogosDeUmaCompeticao", listaDeJogosDeUmaCompeticao);
         startActivity(intent);
     }
@@ -185,9 +187,4 @@ public class CompeticoesFragment extends Fragment implements AdapterCompeticoes.
         Log.i("info", "onStop CompeticoesFrag"  + " <<");
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.i("info", "onDestroyView CompeticoesFrag"  + " <<");
-    }
 }
