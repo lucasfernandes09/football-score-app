@@ -19,11 +19,13 @@ A função principal do app é pontuar através dos termos de Ataque e Defesa as
 * Retrofit para acessar a API usada no projeto
 * AsyncTask para ajudar a gerenciar os dados das partidas constantemente
 * Firebase para salvar os jogos dos usúarios e gerenciar o sistema de cadastro
+* Shared Preferences para salvar o estado do dark theme
 * DateTimePicker para navegar entre os dias
 * Picasso para carregar as badges dos times
 * ProgressBar e Circle ProgessBar, o qual indica a probabilidades pré jogo
 
 ## Instale o app
+[footballscore.apk](https://drive.google.com/file/d/1gVY-C6f9fHvsS0925sCJ_zAUP3wsC-8E/view?usp=sharing)
 
 ## Funcionalidades
 * para fazer Login, se cadastrar ou recuperar a senha, aperte no ícone de "usúario"
